@@ -11,6 +11,9 @@
 		D87CACCE21C996B20068E020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCC21C996B20068E020 /* Main.storyboard */; };
 		D87CACD021C996B40068E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCF21C996B40068E020 /* Assets.xcassets */; };
 		D87CACD321C996B40068E020 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D87CACD121C996B40068E020 /* LaunchScreen.storyboard */; };
+		D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACE821C99C600068E020 /* PropertyDecodingTests.swift */; };
+		D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACEA21C9A4520068E020 /* LocationDecodingTests.swift */; };
+		D87CACEE21C9A4C80068E020 /* ImageDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACED21C9A4C80068E020 /* ImageDecodingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +35,9 @@
 		D87CACD421C996B40068E020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D87CACD921C996B40068E020 /* RealEstateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealEstateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87CACDF21C996B40068E020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D87CACE821C99C600068E020 /* PropertyDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyDecodingTests.swift; sourceTree = "<group>"; };
+		D87CACEA21C9A4520068E020 /* LocationDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDecodingTests.swift; sourceTree = "<group>"; };
+		D87CACED21C9A4C80068E020 /* ImageDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDecodingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +91,20 @@
 		D87CACDC21C996B40068E020 /* RealEstateTests */ = {
 			isa = PBXGroup;
 			children = (
+				D87CACEC21C9A4990068E020 /* Model */,
 				D87CACDF21C996B40068E020 /* Info.plist */,
 			);
 			path = RealEstateTests;
+			sourceTree = "<group>";
+		};
+		D87CACEC21C9A4990068E020 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D87CACE821C99C600068E020 /* PropertyDecodingTests.swift */,
+				D87CACEA21C9A4520068E020 /* LocationDecodingTests.swift */,
+				D87CACED21C9A4C80068E020 /* ImageDecodingTests.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +160,7 @@
 					};
 					D87CACD821C996B40068E020 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 						TestTargetID = D87CACC421C996B20068E020;
 					};
 				};
@@ -199,6 +217,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
+				D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */,
+				D87CACEE21C9A4C80068E020 /* ImageDecodingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +408,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = RealEstateTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -396,6 +418,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chupryk.RealEstateTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RealEstate.app/RealEstate";
@@ -407,6 +430,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = RealEstateTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
