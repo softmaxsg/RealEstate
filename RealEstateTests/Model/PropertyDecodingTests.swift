@@ -3,19 +3,28 @@
 //
 
 import XCTest
+@testable import RealEstate
 
-class PropertyDecodingTests: XCTestCase {
+class PropertyDecodingTests: XCTestCase, DecodingTester {
+    
+    typealias Object = Property
 
-    func testNormalDecoding() {
-        XCTFail()
-    }
+    let expectedObject = Property.random()
+    let requiredFields = ["id", "title", "price", "location"]
     
-    func testOptionalFields() {
-        XCTFail()
+    func testFullDecoding() {
+        performFullDecodingTest()
     }
-    
+
     func testRequiredFields() {
-        XCTFail()
+        performRequiredFieldsTest()
+    }
+
+    func testOptionalFields() {
+        let json = fullJSON.removingValue(forKey: "images")
+        let decodedObject = try? JSONDecoder().decode(Property.self, from: json)
+        XCTAssertNotNil(decodedObject, "Field `images` is optional")
+        XCTAssertEqual(decodedObject!.images, [], "Missed field `images` has to be mapped to an empty array")
     }
 
 }

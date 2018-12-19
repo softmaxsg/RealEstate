@@ -17,6 +17,9 @@
 		D87CACF521C9AD720068E020 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACF421C9AD720068E020 /* Image.swift */; };
 		D87CACF721C9ADB10068E020 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACF621C9ADB10068E020 /* Location.swift */; };
 		D87CACF921C9AE280068E020 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACF821C9AE280068E020 /* Property.swift */; };
+		D87CACFE21C9C6420068E020 /* Property+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACFD21C9C6420068E020 /* Property+Helpers.swift */; };
+		D87CAD0021C9C6760068E020 /* Image+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACFF21C9C6760068E020 /* Image+Helpers.swift */; };
+		D87CAD0221C9C6DA0068E020 /* Location+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD0121C9C6DA0068E020 /* Location+Helpers.swift */; };
 		D87CAD0421C9C7BB0068E020 /* JSONDecoder+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD0321C9C7BB0068E020 /* JSONDecoder+Helpers.swift */; };
 		D87CAD0621C9C82B0068E020 /* Dictionary+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD0521C9C82B0068E020 /* Dictionary+Helpers.swift */; };
 		D87CAD0821C9CEE00068E020 /* DecodingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD0721C9CEE00068E020 /* DecodingTester.swift */; };
@@ -48,6 +51,9 @@
 		D87CACF421C9AD720068E020 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		D87CACF621C9ADB10068E020 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		D87CACF821C9AE280068E020 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		D87CACFD21C9C6420068E020 /* Property+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Property+Helpers.swift"; sourceTree = "<group>"; };
+		D87CACFF21C9C6760068E020 /* Image+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Helpers.swift"; sourceTree = "<group>"; };
+		D87CAD0121C9C6DA0068E020 /* Location+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+Helpers.swift"; sourceTree = "<group>"; };
 		D87CAD0321C9C7BB0068E020 /* JSONDecoder+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Helpers.swift"; sourceTree = "<group>"; };
 		D87CAD0521C9C82B0068E020 /* Dictionary+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Helpers.swift"; sourceTree = "<group>"; };
 		D87CAD0721C9CEE00068E020 /* DecodingTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTester.swift; sourceTree = "<group>"; };
@@ -144,6 +150,9 @@
 		D87CACFC21C9C62F0068E020 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D87CACFD21C9C6420068E020 /* Property+Helpers.swift */,
+				D87CACFF21C9C6760068E020 /* Image+Helpers.swift */,
+				D87CAD0121C9C6DA0068E020 /* Location+Helpers.swift */,
 				D87CAD0321C9C7BB0068E020 /* JSONDecoder+Helpers.swift */,
 				D87CAD0521C9C82B0068E020 /* Dictionary+Helpers.swift */,
 				D87CAD0721C9CEE00068E020 /* DecodingTester.swift */,
@@ -269,7 +278,10 @@
 				D87CAD0A21CA69CE0068E020 /* JSONPresentable.swift in Sources */,
 				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
 				D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */,
+				D87CACFE21C9C6420068E020 /* Property+Helpers.swift in Sources */,
 				D87CACEE21C9A4C80068E020 /* ImageDecodingTests.swift in Sources */,
+				D87CAD0221C9C6DA0068E020 /* Location+Helpers.swift in Sources */,
+				D87CAD0021C9C6760068E020 /* Image+Helpers.swift in Sources */,
 				D87CAD0421C9C7BB0068E020 /* JSONDecoder+Helpers.swift in Sources */,
 				D87CAD0621C9C82B0068E020 /* Dictionary+Helpers.swift in Sources */,
 			);

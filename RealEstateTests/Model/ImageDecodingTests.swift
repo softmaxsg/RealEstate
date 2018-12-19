@@ -3,15 +3,21 @@
 //
 
 import XCTest
+@testable import RealEstate
 
-class ImageDecodingTests: XCTestCase {
+class ImageDecodingTests: XCTestCase, DecodingTester {
 
-    func testNormalDecoding() {
-        XCTFail()
+    typealias Object = Image
+    
+    let expectedObject = Image.random()
+    let requiredFields = ["id", "url"]
+    
+    func testFullDecoding() {
+        performFullDecodingTest()
     }
     
     func testRequiredFields() {
-        XCTFail()
+        performRequiredFieldsTest()
     }
-    
+
 }

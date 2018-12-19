@@ -3,15 +3,21 @@
 //
 
 import XCTest
+@testable import RealEstate
 
-class LocationDecodingTests: XCTestCase {
+class LocationDecodingTests: XCTestCase, DecodingTester {
 
-    func testNormalDecoding() {
-        XCTFail()
+    typealias Object = Location
+    
+    let expectedObject = Location.random()
+    let requiredFields = ["address", "latitude", "longitude"]
+    
+    func testFullDecoding() {
+        performFullDecodingTest()
     }
     
     func testRequiredFields() {
-        XCTFail()
+        performRequiredFieldsTest()
     }
 
 }
