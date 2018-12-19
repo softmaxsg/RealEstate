@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct Location: Equatable, Decodable {
+struct Location: Equatable {
     
     struct Coordinate: Equatable {
         
@@ -15,14 +15,24 @@ struct Location: Equatable, Decodable {
 
     let address: String
     let coordinate: Coordinate
-    
-    init(address: String, coordinate: Coordinate) {
-        self.address = address
-        self.coordinate = coordinate
-    }
 
+}
+
+extension Location: Decodable {
+
+    enum CodingKeys: String, CodingKey {
+        case address
+        case latitude
+        case longitude
+    }
+    
     init(from decoder: Decoder) throws {
-        fatalError()
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        address = try values.decode(String.self, forKey: .address)
+        coordinate = Coordinate(
+            latitude: try values.decode(Double.self, forKey: .latitude),
+            longitude: try values.decode(Double.self, forKey: .longitude)
+        )
     }
 
 }
