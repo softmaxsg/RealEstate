@@ -24,6 +24,10 @@
 		D87CAD0621C9C82B0068E020 /* Dictionary+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD0521C9C82B0068E020 /* Dictionary+Helpers.swift */; };
 		D87CAD0821C9CEE00068E020 /* DecodingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD0721C9CEE00068E020 /* DecodingTester.swift */; };
 		D87CAD0A21CA69CE0068E020 /* JSONPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD0921CA69CE0068E020 /* JSONPresentable.swift */; };
+		D87CAD0F21CA74B20068E020 /* PropertiesGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD0E21CA74B20068E020 /* PropertiesGateway.swift */; };
+		D87CAD1121CA752E0068E020 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */; };
+		D87CAD1321CA77630068E020 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1221CA77630068E020 /* Result.swift */; };
+		D87CAD1721CA799A0068E020 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1621CA799A0068E020 /* ResultTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,8 @@
 		D87CAD0521C9C82B0068E020 /* Dictionary+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Helpers.swift"; sourceTree = "<group>"; };
 		D87CAD0721C9CEE00068E020 /* DecodingTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTester.swift; sourceTree = "<group>"; };
 		D87CAD0921CA69CE0068E020 /* JSONPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPresentable.swift; sourceTree = "<group>"; };
+		D87CAD1221CA77630068E020 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		D87CAD1621CA799A0068E020 /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		D87CACC721C996B20068E020 /* RealEstate */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD1421CA795E0068E020 /* Core */,
 				D87CACF221C9AD300068E020 /* Gateway */,
 				D87CACC821C996B20068E020 /* AppDelegate.swift */,
 				D87CACCC21C996B20068E020 /* Main.storyboard */,
@@ -112,6 +119,7 @@
 		D87CACDC21C996B40068E020 /* RealEstateTests */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD1521CA79870068E020 /* Core */,
 				D87CACEC21C9A4990068E020 /* Model */,
 				D87CACDF21C996B40068E020 /* Info.plist */,
 			);
@@ -159,6 +167,22 @@
 				D87CAD0921CA69CE0068E020 /* JSONPresentable.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D87CAD1421CA795E0068E020 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD1221CA77630068E020 /* Result.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D87CAD1521CA79870068E020 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD1621CA799A0068E020 /* ResultTests.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +290,7 @@
 				D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */,
 				D87CACF721C9ADB10068E020 /* Location.swift in Sources */,
 				D87CACF921C9AE280068E020 /* Property.swift in Sources */,
+				D87CAD1321CA77630068E020 /* Result.swift in Sources */,
 				D87CACF521C9AD720068E020 /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +303,7 @@
 				D87CAD0A21CA69CE0068E020 /* JSONPresentable.swift in Sources */,
 				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
 				D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */,
+				D87CAD1721CA799A0068E020 /* ResultTests.swift in Sources */,
 				D87CACFE21C9C6420068E020 /* Property+Helpers.swift in Sources */,
 				D87CACEE21C9A4C80068E020 /* ImageDecodingTests.swift in Sources */,
 				D87CAD0221C9C6DA0068E020 /* Location+Helpers.swift in Sources */,
