@@ -42,6 +42,7 @@
 		D87CAD5121CC0BEC0068E020 /* PropertiesViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5021CC0BEC0068E020 /* PropertiesViewMock.swift */; };
 		D87CAD5321CC0D620068E020 /* PropertyItemViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5221CC0D620068E020 /* PropertyItemViewMock.swift */; };
 		D87CAD5521CC0E200068E020 /* PropertiesGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */; };
+		D87CAD5721CC0F200068E020 /* PropertiesPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5621CC0F200068E020 /* PropertiesPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		D87CAD5021CC0BEC0068E020 /* PropertiesViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewMock.swift; sourceTree = "<group>"; };
 		D87CAD5221CC0D620068E020 /* PropertyItemViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyItemViewMock.swift; sourceTree = "<group>"; };
 		D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesGatewayMock.swift; sourceTree = "<group>"; };
+		D87CAD5621CC0F200068E020 /* PropertiesPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +285,7 @@
 			children = (
 				D87CAD5021CC0BEC0068E020 /* PropertiesViewMock.swift */,
 				D87CAD5221CC0D620068E020 /* PropertyItemViewMock.swift */,
+				D87CAD5621CC0F200068E020 /* PropertiesPresenterTests.swift */,
 			);
 			path = PropertiesList;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 			files = (
 				D87CAD0821C9CEE00068E020 /* DecodingTester.swift in Sources */,
 				D87CAD0A21CA69CE0068E020 /* JSONPresentable.swift in Sources */,
+				D87CAD5721CC0F200068E020 /* PropertiesPresenterTests.swift in Sources */,
 				D87CAD2021CBB11B0068E020 /* URLSessionMock.swift in Sources */,
 				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
 				D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */,
