@@ -5,7 +5,7 @@
 import XCTest
 @testable import RealEstate
 
-class ImageDecodingTests: XCTestCase, DecodingTester {
+final class ImageDecodingTests: XCTestCase, DecodingTester {
 
     typealias Object = Image
     

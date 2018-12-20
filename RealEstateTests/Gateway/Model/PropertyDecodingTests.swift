@@ -5,7 +5,7 @@
 import XCTest
 @testable import RealEstate
 
-class PropertyDecodingTests: XCTestCase, DecodingTester {
+final class PropertyDecodingTests: XCTestCase, DecodingTester {
     
     typealias Object = Property
 
