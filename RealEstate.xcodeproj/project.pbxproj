@@ -29,8 +29,12 @@
 		D87CAD1321CA77630068E020 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1221CA77630068E020 /* Result.swift */; };
 		D87CAD1721CA799A0068E020 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1621CA799A0068E020 /* ResultTests.swift */; };
 		D87CAD1921CBAF920068E020 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1821CBAF920068E020 /* Cancellable.swift */; };
+		D87CAD1E21CBB09A0068E020 /* PropertiesGatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1D21CBB09A0068E020 /* PropertiesGatewayTests.swift */; };
+		D87CAD2021CBB11B0068E020 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1F21CBB11B0068E020 /* URLSessionMock.swift */; };
 		D87CAD2221CBB69A0068E020 /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2121CBB69A0068E020 /* URLSessionDataTaskProtocol.swift */; };
+		D87CAD2421CBB7B90068E020 /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */; };
 		D87CAD2721CBC73B0068E020 /* JSONDecoderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2621CBC73B0068E020 /* JSONDecoderProtocol.swift */; };
+		D87CAD2921CBCCD80068E020 /* JSONDecoderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,12 +69,17 @@
 		D87CAD0521C9C82B0068E020 /* Dictionary+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Helpers.swift"; sourceTree = "<group>"; };
 		D87CAD0721C9CEE00068E020 /* DecodingTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTester.swift; sourceTree = "<group>"; };
 		D87CAD0921CA69CE0068E020 /* JSONPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPresentable.swift; sourceTree = "<group>"; };
+		D87CAD0E21CA74B20068E020 /* PropertiesGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesGateway.swift; sourceTree = "<group>"; };
 		D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		D87CAD1221CA77630068E020 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		D87CAD1621CA799A0068E020 /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		D87CAD1821CBAF920068E020 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		D87CAD1D21CBB09A0068E020 /* PropertiesGatewayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesGatewayTests.swift; sourceTree = "<group>"; };
+		D87CAD1F21CBB11B0068E020 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		D87CAD2121CBB69A0068E020 /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
+		D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
 		D87CAD2621CBC73B0068E020 /* JSONDecoderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderProtocol.swift; sourceTree = "<group>"; };
+		D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +189,7 @@
 		D87CAD0D21CA747D0068E020 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD0E21CA74B20068E020 /* PropertiesGateway.swift */,
 				D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */,
 				D87CAD2121CBB69A0068E020 /* URLSessionDataTaskProtocol.swift */,
 			);
@@ -207,9 +217,21 @@
 		D87CAD1B21CBB06D0068E020 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD1C21CBB0820068E020 /* Networking */,
 				D87CACEC21C9A4990068E020 /* Model */,
 			);
 			path = Gateway;
+			sourceTree = "<group>";
+		};
+		D87CAD1C21CBB0820068E020 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD1D21CBB09A0068E020 /* PropertiesGatewayTests.swift */,
+				D87CAD1F21CBB11B0068E020 /* URLSessionMock.swift */,
+				D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */,
+				D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +344,7 @@
 				D87CACF921C9AE280068E020 /* Property.swift in Sources */,
 				D87CAD1321CA77630068E020 /* Result.swift in Sources */,
 				D87CACF521C9AD720068E020 /* Image.swift in Sources */,
+				D87CAD0F21CA74B20068E020 /* PropertiesGateway.swift in Sources */,
 				D87CAD2721CBC73B0068E020 /* JSONDecoderProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,13 +355,17 @@
 			files = (
 				D87CAD0821C9CEE00068E020 /* DecodingTester.swift in Sources */,
 				D87CAD0A21CA69CE0068E020 /* JSONPresentable.swift in Sources */,
+				D87CAD2021CBB11B0068E020 /* URLSessionMock.swift in Sources */,
 				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
 				D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */,
 				D87CAD1721CA799A0068E020 /* ResultTests.swift in Sources */,
 				D87CACFE21C9C6420068E020 /* Property+Helpers.swift in Sources */,
+				D87CAD2421CBB7B90068E020 /* URLSessionDataTaskMock.swift in Sources */,
 				D87CACEE21C9A4C80068E020 /* ImageDecodingTests.swift in Sources */,
+				D87CAD2921CBCCD80068E020 /* JSONDecoderMock.swift in Sources */,
 				D87CAD0221C9C6DA0068E020 /* Location+Helpers.swift in Sources */,
 				D87CAD0021C9C6760068E020 /* Image+Helpers.swift in Sources */,
+				D87CAD1E21CBB09A0068E020 /* PropertiesGatewayTests.swift in Sources */,
 				D87CAD0421C9C7BB0068E020 /* JSONDecoder+Helpers.swift in Sources */,
 				D87CAD0621C9C82B0068E020 /* Dictionary+Helpers.swift in Sources */,
 			);
