@@ -119,8 +119,8 @@
 		D87CACDC21C996B40068E020 /* RealEstateTests */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD1B21CBB06D0068E020 /* Gateway */,
 				D87CAD1521CA79870068E020 /* Core */,
-				D87CACEC21C9A4990068E020 /* Model */,
 				D87CACDF21C996B40068E020 /* Info.plist */,
 			);
 			path = RealEstateTests;
@@ -183,6 +183,14 @@
 				D87CAD1621CA799A0068E020 /* ResultTests.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		D87CAD1B21CBB06D0068E020 /* Gateway */ = {
+			isa = PBXGroup;
+			children = (
+				D87CACEC21C9A4990068E020 /* Model */,
+			);
+			path = Gateway;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
