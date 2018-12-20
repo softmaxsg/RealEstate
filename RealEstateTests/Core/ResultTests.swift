@@ -7,6 +7,8 @@ import XCTest
 
 class ResultTests: XCTestCase {
 
+    enum MockError: Error { case some }
+
     func testInitializationWithSuccessValue() {
         let expectedValue = UUID()
         let result = Result(value: expectedValue)
@@ -19,7 +21,6 @@ class ResultTests: XCTestCase {
     }
     
     func testInitializationWithFailureValue() {
-        enum MockError: Error { case some }
         let result = Result<Void>(error: MockError.some)
         switch result {
         case .failure(let error as MockError):
@@ -29,4 +30,15 @@ class ResultTests: XCTestCase {
         }
     }
 
+    func testValueProperty() {
+        let expectedValue = UUID()
+        let result = Result.success(expectedValue)
+        XCTAssertEqual(result.value, expectedValue)
+    }
+    
+    func testErrorProperty() {
+        let result = Result<Void>.failure(MockError.some)
+        XCTAssertEqual(result.error as! MockError, MockError.some)
+    }
+    
 }
