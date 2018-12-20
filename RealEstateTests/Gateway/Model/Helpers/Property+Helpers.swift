@@ -13,7 +13,7 @@ extension Property {
             title: UUID().uuidString,
             price: Decimal(Int.random(in: 1...Int.max)),
             location: Location.random(),
-            images: Array(repeating: 0, count: Int.random(in: 1...10)).map { _ in Image.random() }
+            images: Array(repeating: 0, count: Int.random(in: 0...10)).map { _ in Image.random() }
         )
     }
 
