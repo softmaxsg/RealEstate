@@ -43,8 +43,8 @@ final class PropertiesGateway: PropertiesGatewayProtocol {
             }
 
             do {
-                let properties = try jsonDecoder.decode([Property].self, from: data)
-                handler(.success(properties))
+                let properties = try jsonDecoder.decode(PropertiesResponse.self, from: data)
+                handler(.success(properties.items))
             } catch let decodingError {
                 handler(.failure(decodingError))
             }

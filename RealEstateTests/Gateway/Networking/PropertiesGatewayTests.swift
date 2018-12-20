@@ -96,12 +96,12 @@ extension PropertiesGatewayTests {
     }
     
     private func mockedDecoder(expectedData: Data, result: [Property]?, expectation: XCTestExpectation, file: StaticString = #file, line: UInt = #line) -> JSONDecoderProtocol {
-        return JSONDecoderMock<[Property]> { data in
+        return JSONDecoderMock<PropertiesResponse> { data in
             XCTAssertEqual(data, expectedData, file: file, line: line)
             expectation.fulfill()
 
             guard let result = result else { throw MockError.jsonDecoder }
-            return result
+            return PropertiesResponse(items: result)
         }
     }
     
