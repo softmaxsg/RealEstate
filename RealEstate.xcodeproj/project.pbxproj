@@ -35,6 +35,13 @@
 		D87CAD2421CBB7B90068E020 /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */; };
 		D87CAD2721CBC73B0068E020 /* JSONDecoderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2621CBC73B0068E020 /* JSONDecoderProtocol.swift */; };
 		D87CAD2921CBCCD80068E020 /* JSONDecoderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */; };
+		D87CAD4721CBFCE10068E020 /* PropertiesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD4621CBFCE10068E020 /* PropertiesPresenter.swift */; };
+		D87CAD4921CBFCFB0068E020 /* PropertiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD4821CBFCFB0068E020 /* PropertiesView.swift */; };
+		D87CAD4B21CBFE350068E020 /* PropertyItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD4A21CBFE350068E020 /* PropertyItemView.swift */; };
+		D87CAD4D21CC05790068E020 /* PropertyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD4C21CC05790068E020 /* PropertyItem.swift */; };
+		D87CAD5121CC0BEC0068E020 /* PropertiesViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5021CC0BEC0068E020 /* PropertiesViewMock.swift */; };
+		D87CAD5321CC0D620068E020 /* PropertyItemViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5221CC0D620068E020 /* PropertyItemViewMock.swift */; };
+		D87CAD5521CC0E200068E020 /* PropertiesGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +87,13 @@
 		D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
 		D87CAD2621CBC73B0068E020 /* JSONDecoderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderProtocol.swift; sourceTree = "<group>"; };
 		D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderMock.swift; sourceTree = "<group>"; };
+		D87CAD4621CBFCE10068E020 /* PropertiesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesPresenter.swift; sourceTree = "<group>"; };
+		D87CAD4821CBFCFB0068E020 /* PropertiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesView.swift; sourceTree = "<group>"; };
+		D87CAD4A21CBFE350068E020 /* PropertyItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyItemView.swift; sourceTree = "<group>"; };
+		D87CAD4C21CC05790068E020 /* PropertyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyItem.swift; sourceTree = "<group>"; };
+		D87CAD5021CC0BEC0068E020 /* PropertiesViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewMock.swift; sourceTree = "<group>"; };
+		D87CAD5221CC0D620068E020 /* PropertyItemViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyItemViewMock.swift; sourceTree = "<group>"; };
+		D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesGatewayMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +135,7 @@
 		D87CACC721C996B20068E020 /* RealEstate */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD2A21CBFBE10068E020 /* UserStories */,
 				D87CAD1421CA795E0068E020 /* Core */,
 				D87CACF221C9AD300068E020 /* Gateway */,
 				D87CACC821C996B20068E020 /* AppDelegate.swift */,
@@ -135,6 +150,7 @@
 		D87CACDC21C996B40068E020 /* RealEstateTests */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD4E21CC0B6D0068E020 /* UserStories */,
 				D87CAD1B21CBB06D0068E020 /* Gateway */,
 				D87CAD1521CA79870068E020 /* Core */,
 				D87CACDF21C996B40068E020 /* Info.plist */,
@@ -230,8 +246,45 @@
 				D87CAD1F21CBB11B0068E020 /* URLSessionMock.swift */,
 				D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */,
 				D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */,
+				D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		D87CAD2A21CBFBE10068E020 /* UserStories */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD4521CBFCB40068E020 /* PropertiesList */,
+			);
+			path = UserStories;
+			sourceTree = "<group>";
+		};
+		D87CAD4521CBFCB40068E020 /* PropertiesList */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD4621CBFCE10068E020 /* PropertiesPresenter.swift */,
+				D87CAD4821CBFCFB0068E020 /* PropertiesView.swift */,
+				D87CAD4A21CBFE350068E020 /* PropertyItemView.swift */,
+				D87CAD4C21CC05790068E020 /* PropertyItem.swift */,
+			);
+			path = PropertiesList;
+			sourceTree = "<group>";
+		};
+		D87CAD4E21CC0B6D0068E020 /* UserStories */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD4F21CC0B7C0068E020 /* PropertiesList */,
+			);
+			path = UserStories;
+			sourceTree = "<group>";
+		};
+		D87CAD4F21CC0B7C0068E020 /* PropertiesList */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD5021CC0BEC0068E020 /* PropertiesViewMock.swift */,
+				D87CAD5221CC0D620068E020 /* PropertyItemViewMock.swift */,
+			);
+			path = PropertiesList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,12 +392,16 @@
 				D87CAD1121CA752E0068E020 /* URLSessionProtocol.swift in Sources */,
 				D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */,
 				D87CAD2221CBB69A0068E020 /* URLSessionDataTaskProtocol.swift in Sources */,
+				D87CAD4921CBFCFB0068E020 /* PropertiesView.swift in Sources */,
 				D87CAD1921CBAF920068E020 /* Cancellable.swift in Sources */,
+				D87CAD4D21CC05790068E020 /* PropertyItem.swift in Sources */,
 				D87CACF721C9ADB10068E020 /* Location.swift in Sources */,
 				D87CACF921C9AE280068E020 /* Property.swift in Sources */,
 				D87CAD1321CA77630068E020 /* Result.swift in Sources */,
 				D87CACF521C9AD720068E020 /* Image.swift in Sources */,
+				D87CAD4B21CBFE350068E020 /* PropertyItemView.swift in Sources */,
 				D87CAD0F21CA74B20068E020 /* PropertiesGateway.swift in Sources */,
+				D87CAD4721CBFCE10068E020 /* PropertiesPresenter.swift in Sources */,
 				D87CAD2721CBC73B0068E020 /* JSONDecoderProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +415,9 @@
 				D87CAD2021CBB11B0068E020 /* URLSessionMock.swift in Sources */,
 				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
 				D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */,
+				D87CAD5121CC0BEC0068E020 /* PropertiesViewMock.swift in Sources */,
+				D87CAD5321CC0D620068E020 /* PropertyItemViewMock.swift in Sources */,
+				D87CAD5521CC0E200068E020 /* PropertiesGatewayMock.swift in Sources */,
 				D87CAD1721CA799A0068E020 /* ResultTests.swift in Sources */,
 				D87CACFE21C9C6420068E020 /* Property+Helpers.swift in Sources */,
 				D87CAD2421CBB7B90068E020 /* URLSessionDataTaskMock.swift in Sources */,
