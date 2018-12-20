@@ -25,7 +25,7 @@ final class PropertiesGateway: PropertiesGatewayProtocol {
     private let jsonDecoder: JSONDecoderProtocol
     
     private var urlRequest: URLRequest {
-        return URLRequest(url: URL(string: "http://private-91146-mobiletask.apiary-mock.com/realestates")!)
+        return URLRequest(url: URL(string: "https://private-91146-mobiletask.apiary-mock.com/realestates")!)
     }
     
     init(urlSession: URLSessionProtocol = URLSession.shared, jsonDecoder: JSONDecoderProtocol = JSONDecoder()) {

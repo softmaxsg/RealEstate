@@ -7,7 +7,7 @@ import XCTest
 
 final class PropertiesGatewayTests: XCTestCase {
 
-    private let expectedURL = URL(string: "http://private-91146-mobiletask.apiary-mock.com/realestates")!
+    private let expectedURL = URL(string: "https://private-91146-mobiletask.apiary-mock.com/realestates")!
     private let expectedData = Data()
     private let expectedProperties: [Property] = [.random()]
 
