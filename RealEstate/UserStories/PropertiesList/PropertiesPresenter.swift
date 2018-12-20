@@ -31,12 +31,14 @@ final class PropertiesPresenter: PropertiesPresenterProtocol {
     
     func displayProperties() {
         gateway.loadAll { [weak self] result in
-            switch result {
-            case .success(let properties):
-                self?.handleLoadedProperties(properties)
-                
-            case .failure(let error):
-                self?.handleLoadingError(error)
+            OperationQueue.main.addOperation {
+                switch result {
+                case .success(let properties):
+                    self?.handleLoadedProperties(properties)
+                    
+                case .failure(let error):
+                    self?.handleLoadingError(error)
+                }
             }
         }
     }
