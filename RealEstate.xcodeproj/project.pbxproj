@@ -28,6 +28,9 @@
 		D87CAD1121CA752E0068E020 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */; };
 		D87CAD1321CA77630068E020 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1221CA77630068E020 /* Result.swift */; };
 		D87CAD1721CA799A0068E020 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1621CA799A0068E020 /* ResultTests.swift */; };
+		D87CAD1921CBAF920068E020 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD1821CBAF920068E020 /* Cancellable.swift */; };
+		D87CAD2221CBB69A0068E020 /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2121CBB69A0068E020 /* URLSessionDataTaskProtocol.swift */; };
+		D87CAD2721CBC73B0068E020 /* JSONDecoderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD2621CBC73B0068E020 /* JSONDecoderProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,8 +65,12 @@
 		D87CAD0521C9C82B0068E020 /* Dictionary+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Helpers.swift"; sourceTree = "<group>"; };
 		D87CAD0721C9CEE00068E020 /* DecodingTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTester.swift; sourceTree = "<group>"; };
 		D87CAD0921CA69CE0068E020 /* JSONPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPresentable.swift; sourceTree = "<group>"; };
+		D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		D87CAD1221CA77630068E020 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		D87CAD1621CA799A0068E020 /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
+		D87CAD1821CBAF920068E020 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		D87CAD2121CBB69A0068E020 /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
+		D87CAD2621CBC73B0068E020 /* JSONDecoderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +147,7 @@
 		D87CACF221C9AD300068E020 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD0D21CA747D0068E020 /* Networking */,
 				D87CACF321C9AD520068E020 /* Model */,
 			);
 			path = Gateway;
@@ -169,10 +177,21 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		D87CAD0D21CA747D0068E020 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */,
+				D87CAD2121CBB69A0068E020 /* URLSessionDataTaskProtocol.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		D87CAD1421CA795E0068E020 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				D87CAD1221CA77630068E020 /* Result.swift */,
+				D87CAD1821CBAF920068E020 /* Cancellable.swift */,
+				D87CAD2621CBC73B0068E020 /* JSONDecoderProtocol.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -295,11 +314,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D87CAD1121CA752E0068E020 /* URLSessionProtocol.swift in Sources */,
 				D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */,
+				D87CAD2221CBB69A0068E020 /* URLSessionDataTaskProtocol.swift in Sources */,
+				D87CAD1921CBAF920068E020 /* Cancellable.swift in Sources */,
 				D87CACF721C9ADB10068E020 /* Location.swift in Sources */,
 				D87CACF921C9AE280068E020 /* Property.swift in Sources */,
 				D87CAD1321CA77630068E020 /* Result.swift in Sources */,
 				D87CACF521C9AD720068E020 /* Image.swift in Sources */,
+				D87CAD2721CBC73B0068E020 /* JSONDecoderProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
