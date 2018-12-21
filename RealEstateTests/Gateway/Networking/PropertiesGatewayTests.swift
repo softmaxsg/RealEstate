@@ -16,8 +16,8 @@ final class PropertiesGatewayTests: XCTestCase {
         let decoderExpectation = self.expectation(description: "JSONDecoder.decode")
 
         let gateway = PropertiesGateway(
-            urlSession: mockedSession(expectedURL: expectedURL, resultStatusCode: 200, result: expectedData, expectation: sessionExpectation),
-            jsonDecoder: mockedDecoder(expectedData: expectedData, result: expectedProperties, expectation: decoderExpectation)
+            urlSession: mockedSession(expectedURL: expectedURL, resultStatusCode: 200, result: .success(expectedData), expectation: sessionExpectation),
+            jsonDecoder: mockedDecoder(expectedData: expectedData, result: .success(expectedProperties), expectation: decoderExpectation)
         )
         
         let result = loadAllProperties(gateway: gateway)
@@ -31,7 +31,7 @@ final class PropertiesGatewayTests: XCTestCase {
         let sessionExpectation = self.expectation(description: "URLSession.dataTask")
         
         let gateway = PropertiesGateway(
-            urlSession: mockedSession(expectedURL: expectedURL, resultStatusCode: 500, result: nil, expectation: sessionExpectation),
+            urlSession: mockedSession(expectedURL: expectedURL, resultStatusCode: 500, result: .failure(MockError.urlSession), expectation: sessionExpectation),
             jsonDecoder: JSONDecoderMock<[Property]> { _ in
                 XCTFail("Should not be called in this test")
                 fatalError()
@@ -50,8 +50,8 @@ final class PropertiesGatewayTests: XCTestCase {
         let decoderExpectation = self.expectation(description: "JSONDecoder.decode")
 
         let gateway = PropertiesGateway(
-            urlSession: mockedSession(expectedURL: expectedURL, resultStatusCode: 200, result: expectedData, expectation: sessionExpectation),
-            jsonDecoder: mockedDecoder(expectedData: expectedData, result: nil, expectation: decoderExpectation)
+            urlSession: mockedSession(expectedURL: expectedURL, resultStatusCode: 200, result: .success(expectedData), expectation: sessionExpectation),
+            jsonDecoder: mockedDecoder(expectedData: expectedData, result: .failure(MockError.jsonDecoder), expectation: decoderExpectation)
         )
 
         let result = loadAllProperties(gateway: gateway)
@@ -68,41 +68,6 @@ extension PropertiesGatewayTests {
     enum MockError: Error {
         case urlSession
         case jsonDecoder
-    }
-    
-    private func mockedSession(expectedURL: URL, resultStatusCode: Int, result: Data?, expectation: XCTestExpectation, file: StaticString = #file, line: UInt = #line) -> URLSessionProtocol {
-        return URLSessionMock { request, completion in
-            XCTAssertEqual(request.url, expectedURL, file: file, line: line)
-            return URLSessionDataTaskMock(
-                resume: {
-                    let urlResponse = HTTPURLResponse(
-                        url: request.url!,
-                        statusCode: resultStatusCode,
-                        httpVersion: nil,
-                        headerFields: nil
-                    )
-                    
-                    OperationQueue.main.addOperation {
-                        let error = result == nil ? MockError.urlSession : nil
-                        completion(result, urlResponse, error)
-                        expectation.fulfill()
-                    }
-                },
-                cancel: {
-                    XCTFail("Should not be called in this test", file: file, line: line)
-                }
-            )
-        }
-    }
-    
-    private func mockedDecoder(expectedData: Data, result: [Property]?, expectation: XCTestExpectation, file: StaticString = #file, line: UInt = #line) -> JSONDecoderProtocol {
-        return JSONDecoderMock<PropertiesResponse> { data in
-            XCTAssertEqual(data, expectedData, file: file, line: line)
-            expectation.fulfill()
-
-            guard let result = result else { throw MockError.jsonDecoder }
-            return PropertiesResponse(items: result)
-        }
     }
     
     private func loadAllProperties(gateway: PropertiesGateway) -> Result<[Property]> {

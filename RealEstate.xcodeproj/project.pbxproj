@@ -48,6 +48,9 @@
 		D87CAD5D21CC31590068E020 /* PropertiesResponse+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5C21CC31590068E020 /* PropertiesResponse+Helpers.swift */; };
 		D87CAD5F21CC31CF0068E020 /* PropertiesResponseDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD5E21CC31CF0068E020 /* PropertiesResponseDecodingTests.swift */; };
 		D87CAD6121CC58900068E020 /* PropertiesConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD6021CC58900068E020 /* PropertiesConfiguratorTests.swift */; };
+		D87CAD6921CC70F30068E020 /* XCTest+URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD6821CC70F30068E020 /* XCTest+URLSessionMock.swift */; };
+		D87CAD6B21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD6A21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift */; };
+		D87CAD6E21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +109,9 @@
 		D87CAD5C21CC31590068E020 /* PropertiesResponse+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PropertiesResponse+Helpers.swift"; sourceTree = "<group>"; };
 		D87CAD5E21CC31CF0068E020 /* PropertiesResponseDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesResponseDecodingTests.swift; sourceTree = "<group>"; };
 		D87CAD6021CC58900068E020 /* PropertiesConfiguratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesConfiguratorTests.swift; sourceTree = "<group>"; };
+		D87CAD6821CC70F30068E020 /* XCTest+URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+URLSessionMock.swift"; sourceTree = "<group>"; };
+		D87CAD6A21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+JSONDecoderMock.swift"; sourceTree = "<group>"; };
+		D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+PropertiesGatewayMock.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,8 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				D87CAD0E21CA74B20068E020 /* PropertiesGateway.swift */,
-				D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */,
 				D87CAD2121CBB69A0068E020 /* URLSessionDataTaskProtocol.swift */,
+				D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -257,11 +263,8 @@
 		D87CAD1C21CBB0820068E020 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D87CAD6721CC704F0068E020 /* Helpers */,
 				D87CAD1D21CBB09A0068E020 /* PropertiesGatewayTests.swift */,
-				D87CAD1F21CBB11B0068E020 /* URLSessionMock.swift */,
-				D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */,
-				D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */,
-				D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -297,12 +300,34 @@
 		D87CAD4F21CC0B7C0068E020 /* PropertiesList */ = {
 			isa = PBXGroup;
 			children = (
-				D87CAD5021CC0BEC0068E020 /* PropertiesViewMock.swift */,
-				D87CAD5221CC0D620068E020 /* PropertyItemViewMock.swift */,
-				D87CAD5621CC0F200068E020 /* PropertiesPresenterTests.swift */,
+				D87CAD6C21CC73C30068E020 /* Helpers */,
 				D87CAD6021CC58900068E020 /* PropertiesConfiguratorTests.swift */,
+				D87CAD5621CC0F200068E020 /* PropertiesPresenterTests.swift */,
 			);
 			path = PropertiesList;
+			sourceTree = "<group>";
+		};
+		D87CAD6721CC704F0068E020 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */,
+				D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */,
+				D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */,
+				D87CAD1F21CBB11B0068E020 /* URLSessionMock.swift */,
+				D87CAD6821CC70F30068E020 /* XCTest+URLSessionMock.swift */,
+				D87CAD6A21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D87CAD6C21CC73C30068E020 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D87CAD5021CC0BEC0068E020 /* PropertiesViewMock.swift */,
+				D87CAD5221CC0D620068E020 /* PropertyItemViewMock.swift */,
+				D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,11 +460,13 @@
 				D87CAD0A21CA69CE0068E020 /* JSONPresentable.swift in Sources */,
 				D87CAD5D21CC31590068E020 /* PropertiesResponse+Helpers.swift in Sources */,
 				D87CAD5F21CC31CF0068E020 /* PropertiesResponseDecodingTests.swift in Sources */,
+				D87CAD6E21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift in Sources */,
 				D87CAD5721CC0F200068E020 /* PropertiesPresenterTests.swift in Sources */,
 				D87CAD2021CBB11B0068E020 /* URLSessionMock.swift in Sources */,
 				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
 				D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */,
 				D87CAD5121CC0BEC0068E020 /* PropertiesViewMock.swift in Sources */,
+				D87CAD6B21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift in Sources */,
 				D87CAD5321CC0D620068E020 /* PropertyItemViewMock.swift in Sources */,
 				D87CAD5521CC0E200068E020 /* PropertiesGatewayMock.swift in Sources */,
 				D87CAD1721CA799A0068E020 /* ResultTests.swift in Sources */,
@@ -450,6 +477,7 @@
 				D87CAD0221C9C6DA0068E020 /* Location+Helpers.swift in Sources */,
 				D87CAD0021C9C6760068E020 /* Image+Helpers.swift in Sources */,
 				D87CAD1E21CBB09A0068E020 /* PropertiesGatewayTests.swift in Sources */,
+				D87CAD6921CC70F30068E020 /* XCTest+URLSessionMock.swift in Sources */,
 				D87CAD0421C9C7BB0068E020 /* JSONDecoder+Helpers.swift in Sources */,
 				D87CAD0621C9C82B0068E020 /* Dictionary+Helpers.swift in Sources */,
 			);
