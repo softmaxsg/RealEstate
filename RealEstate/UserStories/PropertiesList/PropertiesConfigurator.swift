@@ -17,6 +17,8 @@ final class PropertiesConfigurator {
             gateway: PropertiesGateway(),
             priceFormatter: priceFormatter
         )
+
+        viewController.imageLoader = ImageLoader()
     }
     
 }

@@ -19,6 +19,7 @@ final class PropertiesCollectionViewController: UICollectionViewController {
     
     var configurator = PropertiesConfigurator()
     var presenter: PropertiesPresenterProtocol?
+    var imageLoader: ImageLoader?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,8 @@ final class PropertiesCollectionViewController: UICollectionViewController {
     override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:ReuseIdentifiers.propertyItem.rawValue, for: indexPath)
 
-        guard let presenter = self.presenter, let itemView = cell as? PropertyItemViewProtocol else { assertionFailure(); return cell }
+        guard let presenter = self.presenter, let itemView = cell as? PropertyItemCellView else { assertionFailure(); return cell }
+        itemView.imageLoader = imageLoader
         presenter.configure(item: itemView, at: indexPath.item)
         
         return cell

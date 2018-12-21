@@ -10,7 +10,9 @@ final class PropertiesConfiguratorTests: XCTestCase {
     func testViewControllerConfiguration() {
         let viewController = PropertiesCollectionViewController()
         viewController.configurator.configure(viewController: viewController)
-        XCTAssertTrue(viewController.presenter is PropertiesPresenter)
+        
+        XCTAssertNotNil(viewController.presenter)
+        XCTAssertNotNil(viewController.imageLoader)
     }
 
 }

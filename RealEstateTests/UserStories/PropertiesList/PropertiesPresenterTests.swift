@@ -44,17 +44,6 @@ extension PropertiesPresenterTests {
     
     private enum MockError: Error { case some }
     
-    private func mockedGateway(result: Result<[Property]>, expectation: XCTestExpectation) -> PropertiesGatewayProtocol {
-        return PropertiesGatewayMock { handler in
-            OperationQueue.main.addOperation {
-                handler(result)
-                expectation.fulfill()
-            }
-            
-            return EmptyTask()
-        }
-    }
-    
     private func mockedViewSuccessState(expectation: XCTestExpectation, file: StaticString = #file, line: UInt = #line) -> PropertiesViewProtocol {
         return PropertiesViewMock(
             updateView: { expectation.fulfill() },
