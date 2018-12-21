@@ -44,10 +44,6 @@ extension PropertiesPresenterTests {
     
     private enum MockError: Error { case some }
     
-    private class EmptyTask: Cancellable {
-        func cancel() { }
-    }
-    
     private func mockedGateway(result: Result<[Property]>, expectation: XCTestExpectation) -> PropertiesGatewayProtocol {
         return PropertiesGatewayMock { handler in
             OperationQueue.main.addOperation {

@@ -9,3 +9,9 @@ protocol Cancellable {
     func cancel()
     
 }
+
+class EmptyTask: Cancellable {
+
+    func cancel() { }
+
+}
