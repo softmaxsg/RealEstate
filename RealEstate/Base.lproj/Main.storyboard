@@ -85,8 +85,30 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Real Estate" id="gVO-QH-s3G"/>
+                    <connections>
+                        <outlet property="emptyBackgroundView" destination="ZNM-Ot-zlH" id="MNc-tO-pA2"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7K2-fz-82W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="ZNM-Ot-zlH" userLabel="EmptyView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="382"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EmptyList" translatesAutoresizingMaskIntoConstraints="NO" id="J2J-k6-xSF">
+                            <rect key="frame" x="20" y="91" width="200" height="200"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="UQr-Zk-5Wt"/>
+                                <constraint firstAttribute="height" constant="200" id="bKf-sF-czj"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="J2J-k6-xSF" firstAttribute="centerX" secondItem="ZNM-Ot-zlH" secondAttribute="centerX" id="LTg-BR-xm8"/>
+                        <constraint firstItem="J2J-k6-xSF" firstAttribute="centerY" secondItem="ZNM-Ot-zlH" secondAttribute="centerY" id="Wzl-bn-2zU"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="uJd-f7-rGP"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="876" y="112.89355322338831"/>
         </scene>
@@ -109,4 +131,7 @@
             <point key="canvasLocation" x="-63.200000000000003" y="112.89355322338831"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="EmptyList" width="200" height="190"/>
+    </resources>
 </document>

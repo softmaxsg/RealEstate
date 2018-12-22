@@ -13,6 +13,8 @@ protocol PropertiesViewProtocol: class {
 
 final class PropertiesCollectionViewController: UICollectionViewController {
 
+    @IBOutlet weak var emptyBackgroundView: UIView?
+
     private enum ReuseIdentifiers: String {
         case propertyItem = "PropertyItem"
     }
@@ -29,6 +31,16 @@ final class PropertiesCollectionViewController: UICollectionViewController {
         
         guard let presenter = self.presenter else { assertionFailure(); return }
         presenter.displayProperties()
+    }
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if (presenter?.propertiesCount ?? 0) > 0 {
+            collectionView.backgroundView = nil
+            return 1
+        } else {
+            collectionView.backgroundView = emptyBackgroundView
+            return 0
+        }        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
