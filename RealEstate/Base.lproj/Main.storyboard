@@ -88,10 +88,27 @@
                     <connections>
                         <outlet property="emptyBackgroundView" destination="ZNM-Ot-zlH" id="MNc-tO-pA2"/>
                         <outlet property="errorBackgroundView" destination="iRl-qb-1NQ" id="MhP-Lg-0bA"/>
+                        <outlet property="loadingBackgroundView" destination="Q5t-ZA-wEr" id="OLj-Ku-Fb9"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7K2-fz-82W" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="ZNM-Ot-zlH" userLabel="EmptyView">
+                <view contentMode="scaleToFill" id="Q5t-ZA-wEr" userLabel="LoadingView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="382"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="e5G-HE-OFA">
+                            <rect key="frame" x="101.5" y="172.5" width="37" height="37"/>
+                            <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="e5G-HE-OFA" firstAttribute="centerY" secondItem="Q5t-ZA-wEr" secondAttribute="centerY" id="20a-B2-Rti"/>
+                        <constraint firstItem="e5G-HE-OFA" firstAttribute="centerX" secondItem="Q5t-ZA-wEr" secondAttribute="centerX" id="WAa-P6-2ev"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="cuV-i2-Tab"/>
+                </view>
+                <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="ZNM-Ot-zlH" userLabel="EmptyView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="382"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -102,15 +119,24 @@
                                 <constraint firstAttribute="height" constant="200" id="bKf-sF-czj"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="There is nothing to display" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvQ-mE-Zkd">
+                            <rect key="frame" x="8" y="307" width="224" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="uJd-f7-rGP" firstAttribute="trailing" secondItem="IvQ-mE-Zkd" secondAttribute="trailing" constant="8" id="1Hh-En-UGE"/>
+                        <constraint firstItem="IvQ-mE-Zkd" firstAttribute="leading" secondItem="uJd-f7-rGP" secondAttribute="leading" constant="8" id="HW5-1m-uFt"/>
                         <constraint firstItem="J2J-k6-xSF" firstAttribute="centerX" secondItem="ZNM-Ot-zlH" secondAttribute="centerX" id="LTg-BR-xm8"/>
                         <constraint firstItem="J2J-k6-xSF" firstAttribute="centerY" secondItem="ZNM-Ot-zlH" secondAttribute="centerY" id="Wzl-bn-2zU"/>
+                        <constraint firstItem="IvQ-mE-Zkd" firstAttribute="top" secondItem="J2J-k6-xSF" secondAttribute="bottom" constant="16" id="rh0-ag-Tg1"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="uJd-f7-rGP"/>
                 </view>
-                <view contentMode="scaleToFill" id="iRl-qb-1NQ" userLabel="ErrorView" customClass="ErrorView" customModule="RealEstate" customModuleProvider="target">
+                <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="iRl-qb-1NQ" userLabel="ErrorView" customClass="ErrorView" customModule="RealEstate" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="382"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -121,7 +147,7 @@
                                 <constraint firstAttribute="width" constant="200" id="vKz-12-rMX"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFM-Tr-9hi">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFM-Tr-9hi">
                             <rect key="frame" x="8" y="307" width="224" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

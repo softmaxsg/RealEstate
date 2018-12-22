@@ -13,6 +13,7 @@ protocol PropertiesViewProtocol: class {
 
 final class PropertiesCollectionViewController: UICollectionViewController {
 
+    @IBOutlet weak var loadingBackgroundView: UIView?
     @IBOutlet weak var emptyBackgroundView: UIView?
     @IBOutlet weak var errorBackgroundView: ErrorView?
 
@@ -21,6 +22,7 @@ final class PropertiesCollectionViewController: UICollectionViewController {
     }
     
     private enum State {
+        case loading
         case data
         case error(message: String)
     }
@@ -29,7 +31,7 @@ final class PropertiesCollectionViewController: UICollectionViewController {
     var presenter: PropertiesPresenterProtocol?
     var imageLoader: ImageLoader?
     
-    private var currentState = State.data
+    private var currentState = State.loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,26 +44,9 @@ final class PropertiesCollectionViewController: UICollectionViewController {
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        let backgroundView: UIView?
-        let numberOfSections: Int
-        
-        switch currentState {
-        case .data:
-            if (presenter?.propertiesCount ?? 0) > 0 {
-                backgroundView = nil
-                numberOfSections = 1
-            } else {
-                backgroundView = emptyBackgroundView
-                numberOfSections = 0
-            }
-        case .error(let message):
-            errorBackgroundView?.display(details: message)
-            backgroundView = errorBackgroundView
-            numberOfSections = 0
-        }
-        
-        collectionView.backgroundView = backgroundView
-        return numberOfSections
+        let stateView = configureStateView()
+        collectionView.backgroundView = stateView
+        return stateView == nil ? 1 : 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -126,6 +111,22 @@ extension PropertiesCollectionViewController {
             width: (viewWidth - spacing * (columnsCount + 1)) / columnsCount,
             height: 250
         )
+    }
+    
+    private func configureStateView() -> UIView? {
+        let result: UIView?
+        
+        switch currentState {
+        case .loading:
+            result = loadingBackgroundView
+        case .data:
+            result = (presenter?.propertiesCount ?? 0) <= 0 ? emptyBackgroundView : nil
+        case .error(let message):
+            errorBackgroundView?.display(details: message)
+            result = errorBackgroundView
+        }
+        
+        return result
     }
     
 }
