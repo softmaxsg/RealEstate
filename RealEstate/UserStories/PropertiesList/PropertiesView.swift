@@ -14,14 +14,22 @@ protocol PropertiesViewProtocol: class {
 final class PropertiesCollectionViewController: UICollectionViewController {
 
     @IBOutlet weak var emptyBackgroundView: UIView?
+    @IBOutlet weak var errorBackgroundView: ErrorView?
 
     private enum ReuseIdentifiers: String {
         case propertyItem = "PropertyItem"
     }
     
+    private enum State {
+        case data
+        case error(message: String)
+    }
+    
     var configurator = PropertiesConfigurator()
     var presenter: PropertiesPresenterProtocol?
     var imageLoader: ImageLoader?
+    
+    private var currentState = State.data
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +42,26 @@ final class PropertiesCollectionViewController: UICollectionViewController {
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if (presenter?.propertiesCount ?? 0) > 0 {
-            collectionView.backgroundView = nil
-            return 1
-        } else {
-            collectionView.backgroundView = emptyBackgroundView
-            return 0
-        }        
+        let backgroundView: UIView?
+        let numberOfSections: Int
+        
+        switch currentState {
+        case .data:
+            if (presenter?.propertiesCount ?? 0) > 0 {
+                backgroundView = nil
+                numberOfSections = 1
+            } else {
+                backgroundView = emptyBackgroundView
+                numberOfSections = 0
+            }
+        case .error(let message):
+            errorBackgroundView?.display(details: message)
+            backgroundView = errorBackgroundView
+            numberOfSections = 0
+        }
+        
+        collectionView.backgroundView = backgroundView
+        return numberOfSections
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -78,10 +99,13 @@ final class PropertiesCollectionViewController: UICollectionViewController {
 extension PropertiesCollectionViewController: PropertiesViewProtocol {
 
     func updateView() {
+        currentState = .data
         collectionView.reloadData()
     }
     
     func displayLoadingError(_ message: String) {
+        currentState = .error(message: message)
+        collectionView.reloadData()
     }
     
 }

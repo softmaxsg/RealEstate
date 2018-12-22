@@ -54,6 +54,7 @@
 		D87CAD6B21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD6A21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift */; };
 		D87CAD6E21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */; };
 		D87CAD7021CC79EC0068E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87CAD6F21CC79EC0068E020 /* Assets.xcassets */; };
+		D89FDD9D21CE6EFD008EAAA2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FDD9C21CE6EFD008EAAA2 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		D87CAD6A21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+JSONDecoderMock.swift"; sourceTree = "<group>"; };
 		D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+PropertiesGatewayMock.swift"; sourceTree = "<group>"; };
 		D87CAD6F21CC79EC0068E020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D89FDD9C21CE6EFD008EAAA2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +283,7 @@
 		D87CAD2A21CBFBE10068E020 /* UserStories */ = {
 			isa = PBXGroup;
 			children = (
+				D89FDD9B21CE6EE3008EAAA2 /* Shared */,
 				D87CAD4521CBFCB40068E020 /* PropertiesList */,
 			);
 			path = UserStories;
@@ -337,6 +340,14 @@
 				D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D89FDD9B21CE6EE3008EAAA2 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D89FDD9C21CE6EFD008EAAA2 /* ErrorView.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +460,7 @@
 				D87CAD1921CBAF920068E020 /* Cancellable.swift in Sources */,
 				D87CAD4D21CC05790068E020 /* PropertyItem.swift in Sources */,
 				D87CACF721C9ADB10068E020 /* Location.swift in Sources */,
+				D89FDD9D21CE6EFD008EAAA2 /* ErrorView.swift in Sources */,
 				D87CACF921C9AE280068E020 /* Property.swift in Sources */,
 				D87CAD5921CC2B770068E020 /* PropertiesConfigurator.swift in Sources */,
 				D87CAD1321CA77630068E020 /* Result.swift in Sources */,
