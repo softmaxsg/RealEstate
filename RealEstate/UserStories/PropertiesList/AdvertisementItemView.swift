@@ -4,13 +4,13 @@
 
 import UIKit
 
-protocol PropertyItemViewProtocol: PropertyListItemViewProtocol {
+protocol AdvertisementItemViewProtocol: PropertyListItemViewProtocol {
 
-    func display(item: PropertyItem)
+    func display(item: AdvertisementItem)
     
 }
 
-final class PropertyItemCellView: UICollectionViewCell {
+final class AdvertisementItemCellView: UICollectionViewCell {
     
     private lazy var placeHolderImage = UIImage(named: "ImagePlaceholder")
     
@@ -20,10 +20,7 @@ final class PropertyItemCellView: UICollectionViewCell {
     private var currentImageLoaderTask: Cancellable?
     
     @IBOutlet weak var imageView: UIImageView?
-    @IBOutlet weak var titleLabel: UILabel?
-    @IBOutlet weak var addressLabel: UILabel?
-    @IBOutlet weak var priceLabel: UILabel?
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.clear()
@@ -33,21 +30,17 @@ final class PropertyItemCellView: UICollectionViewCell {
         super.prepareForReuse()
         self.clear()
     }
-
+    
 }
 
-extension PropertyItemCellView: PropertyItemViewProtocol {
-
-    func display(item: PropertyItem) {
+extension AdvertisementItemCellView: AdvertisementItemViewProtocol {
+    
+    func display(item: AdvertisementItem) {
         currentImageURL = item.image
         
-        titleLabel?.text = item.title
-        addressLabel?.text = item.address
-        priceLabel?.text = item.price
-
-        if let imageURL = item.image, let imageLoader = self.imageLoader {
+        if let imageLoader = self.imageLoader {
             currentImageLoaderTask = imageLoader.image(
-                with: imageURL,
+                with: item.image,
                 loadingHandler: { [weak self] url in self?.updateImage(nil, for: url) },
                 completionHandler: { [weak self] url, image in self?.updateImage(image, for: url) }
             )
@@ -56,21 +49,17 @@ extension PropertyItemCellView: PropertyItemViewProtocol {
         }
         
     }
-
+    
 }
 
-extension PropertyItemCellView {
+extension AdvertisementItemCellView {
     
     private func clear() {
         currentImageURL = nil
         currentImageLoaderTask?.cancel()
-
         imageView?.image = nil
-        titleLabel?.text = ""
-        addressLabel?.text = ""
-        priceLabel?.text = ""
     }
-
+    
     private func updateImage(_ image: UIImage?, for url: URL) {
         if url == currentImageURL {
             imageView?.image = image ?? placeHolderImage

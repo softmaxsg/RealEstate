@@ -55,8 +55,10 @@
 		D87CAD6E21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */; };
 		D87CAD7021CC79EC0068E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87CAD6F21CC79EC0068E020 /* Assets.xcassets */; };
 		D89FDD9D21CE6EFD008EAAA2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FDD9C21CE6EFD008EAAA2 /* ErrorView.swift */; };
+		D89FDDA121CED232008EAAA2 /* AdvertisementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FDDA021CED232008EAAA2 /* AdvertisementItemView.swift */; };
 		D89FDDA321CED299008EAAA2 /* AdvertisementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FDDA221CED299008EAAA2 /* AdvertisementItem.swift */; };
 		D89FDDA521CED51F008EAAA2 /* PropertyListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FDDA421CED51F008EAAA2 /* PropertyListItem.swift */; };
+		D89FDDA721CED559008EAAA2 /* PropertyListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FDDA621CED559008EAAA2 /* PropertyListItemView.swift */; };
 		D89FDDA921CEE52E008EAAA2 /* AdvertisementsGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FDDA821CEE52E008EAAA2 /* AdvertisementsGateway.swift */; };
 		D89FDDAB21CEF0E2008EAAA2 /* AdvertisementsGatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FDDAA21CEF0E2008EAAA2 /* AdvertisementsGatewayTests.swift */; };
 /* End PBXBuildFile section */
@@ -124,8 +126,10 @@
 		D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+PropertiesGatewayMock.swift"; sourceTree = "<group>"; };
 		D87CAD6F21CC79EC0068E020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D89FDD9C21CE6EFD008EAAA2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		D89FDDA021CED232008EAAA2 /* AdvertisementItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementItemView.swift; sourceTree = "<group>"; };
 		D89FDDA221CED299008EAAA2 /* AdvertisementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementItem.swift; sourceTree = "<group>"; };
 		D89FDDA421CED51F008EAAA2 /* PropertyListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListItem.swift; sourceTree = "<group>"; };
+		D89FDDA621CED559008EAAA2 /* PropertyListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListItemView.swift; sourceTree = "<group>"; };
 		D89FDDA821CEE52E008EAAA2 /* AdvertisementsGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsGateway.swift; sourceTree = "<group>"; };
 		D89FDDAA21CEF0E2008EAAA2 /* AdvertisementsGatewayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsGatewayTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,8 +311,10 @@
 				D87CAD4821CBFCFB0068E020 /* PropertiesView.swift */,
 				D87CAD4C21CC05790068E020 /* PropertyItem.swift */,
 				D87CAD4A21CBFE350068E020 /* PropertyItemView.swift */,
+				D89FDDA021CED232008EAAA2 /* AdvertisementItemView.swift */,
 				D89FDDA221CED299008EAAA2 /* AdvertisementItem.swift */,
 				D89FDDA421CED51F008EAAA2 /* PropertyListItem.swift */,
+				D89FDDA621CED559008EAAA2 /* PropertyListItemView.swift */,
 			);
 			path = PropertiesList;
 			sourceTree = "<group>";
@@ -466,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D87CAD1121CA752E0068E020 /* URLSessionProtocol.swift in Sources */,
+				D89FDDA721CED559008EAAA2 /* PropertyListItemView.swift in Sources */,
 				D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */,
 				D89FDDA321CED299008EAAA2 /* AdvertisementItem.swift in Sources */,
 				D87CAD2221CBB69A0068E020 /* URLSessionDataTaskProtocol.swift in Sources */,
@@ -478,6 +485,7 @@
 				D87CACF921C9AE280068E020 /* Property.swift in Sources */,
 				D87CAD5921CC2B770068E020 /* PropertiesConfigurator.swift in Sources */,
 				D87CAD1321CA77630068E020 /* Result.swift in Sources */,
+				D89FDDA121CED232008EAAA2 /* AdvertisementItemView.swift in Sources */,
 				D87CACF521C9AD720068E020 /* Image.swift in Sources */,
 				D87CAD6321CC62D80068E020 /* ImageLoader.swift in Sources */,
 				D87CAD4B21CBFE350068E020 /* PropertyItemView.swift in Sources */,
