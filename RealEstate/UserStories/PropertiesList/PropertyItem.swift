@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct PropertyItem {
+struct PropertyItem: PropertyListItem {
     
     let title: String
     let address: String
