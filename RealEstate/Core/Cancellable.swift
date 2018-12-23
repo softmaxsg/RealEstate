@@ -15,3 +15,5 @@ class EmptyTask: Cancellable {
     func cancel() { }
 
 }
+
+extension URLSessionDataTask: Cancellable { }

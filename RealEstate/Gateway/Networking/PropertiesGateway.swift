@@ -4,8 +4,6 @@
 
 import Foundation
 
-extension URLSessionDataTask: Cancellable { }
-
 enum PropertiesGatewayError: Error {
     
     case unknwon
