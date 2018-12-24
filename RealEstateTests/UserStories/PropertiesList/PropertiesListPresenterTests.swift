@@ -23,16 +23,18 @@ final class PropertiesListPresenterTests: XCTestCase {
             advertisementsResult: .success(advertisements)
         )
 
-        let propertiesCount = (0..<presenter.itemsCount).reduce(0) { result, index in
-            guard try! presenter.itemType(at: index) == .property else { return result }
-            return result + 1
+        // Mocked AdvertisementsEmbedder just merges two arrays
+        XCTAssertEqual(presenter.itemsCount, properties.count + advertisements.count)
+        
+        for (index, property) in properties.enumerated() {
+            let item: PropertyItem = try! configureItem(presenter: presenter, at: index)
+            compare(item: item, property: property)
         }
-
-        var advertisementsCount = (properties.count / 2)
-        if advertisementsCount > 0 && properties.count % 2 == 0 { advertisementsCount -= 1 }
-
-        XCTAssertEqual(propertiesCount, properties.count)
-        XCTAssertEqual(presenter.itemsCount, properties.count + advertisementsCount)
+        
+        for (index, url) in advertisements.enumerated() {
+            let item: AdvertisementItem = try! configureItem(presenter: presenter, at: index + properties.count)
+            compare(item: item, url: url)
+        }
     }
     
     func testDispslayAdvertisementsFailed() {
@@ -64,10 +66,7 @@ final class PropertiesListPresenterTests: XCTestCase {
         let item: PropertyItem = try! configureItem(presenter: presenter, at: itemIndex)
         let property = properties[itemIndex]
 
-        XCTAssertEqual(item.title, property.title)
-        XCTAssertEqual(item.address, property.location.address)
-        XCTAssertEqual(item.price, priceFormatter.string(from: NSDecimalNumber(decimal: property.price)))
-        XCTAssertEqual(item.image, property.images.first?.url)
+        compare(item: item, property: property)
     }
 
     func testConfigureAdvertisementItem() {
@@ -79,7 +78,7 @@ final class PropertiesListPresenterTests: XCTestCase {
         let itemIndex = (0..<presenter.itemsCount).first(where: { try! presenter.itemType(at: $0) == .advertisement })!
         let item: AdvertisementItem = try! configureItem(presenter: presenter, at: itemIndex)
         
-        XCTAssertEqual(item.image, advertisements.first)
+        compare(item: item, url: advertisements.first!)
     }
 
 }
@@ -99,6 +98,7 @@ extension PropertiesListPresenterTests {
         let viewExpectation = self.expectation(description: "PropertiesView.updateView or displayLoadingError")
         let propertiesGatewayExpectation = self.expectation(description: "PropertiesGateway.loadAll")
         let advertisementsGatewayExpectation = self.expectation(description: "AdvertisementsGateway.loadAll")
+        let advertisementsEmbedderExpectation = self.expectation(description: "AdvertisementsEmbedder.embed")
 
         let viewMock = PropertiesListViewMock(
             updateView: {
@@ -123,17 +123,27 @@ extension PropertiesListPresenterTests {
         let propertiesGatewayMock = mockedPropertiesGateway(result: propertiesResult, expectation: propertiesGatewayExpectation)
         let advertisementsGatewayMock = mockedAdvertisementsGateway(result: advertisementsResult, expectation: advertisementsGatewayExpectation)
         
+        let advertisementsEmbedderMock = AdvertisementsEmbedderMock { advertisements, properties in
+            advertisementsEmbedderExpectation.fulfill()
+            return properties.map { PropertyListItemInfo(type: .property, value: $0) } +
+                advertisements.map { PropertyListItemInfo(type: .advertisement, value: $0) }
+        }
+        
         let presenter = PropertiesListPresenter(
             view: viewMock,
             propertiesGateway: propertiesGatewayMock,
             advertisementsGateway: advertisementsGatewayMock,
-            advertisementsEmbedder: AdvertisementsEmbedder(),
+            advertisementsEmbedder: advertisementsEmbedderMock,
             priceFormatter: priceFormatter
         )
         
         presenter.displayProperties()
-        wait(for: [viewExpectation, propertiesGatewayExpectation, advertisementsGatewayExpectation], timeout: 1)
         
+        if propertiesResult.value?.isEmpty ?? true {
+            advertisementsEmbedderExpectation.fulfill()
+        }
+
+        wait(for: [viewExpectation, propertiesGatewayExpectation, advertisementsGatewayExpectation, advertisementsEmbedderExpectation], timeout: 1)
         return presenter
     }
     
@@ -148,6 +158,17 @@ extension PropertiesListPresenterTests {
         
         wait(for: [expectation], timeout: 1)
         return result
+    }
+    
+    private func compare(item: PropertyItem, property: Property, file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(item.title, property.title, file: file, line: line)
+        XCTAssertEqual(item.address, property.location.address, file: file, line: line)
+        XCTAssertEqual(item.price, priceFormatter.string(from: NSDecimalNumber(decimal: property.price)), file: file, line: line)
+        XCTAssertEqual(item.image, property.images.first?.url, file: file, line: line)
+    }
+    
+    private func compare(item: AdvertisementItem, url: URL, file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(item.image, url, file: file, line: line)
     }
 
 }
