@@ -5,7 +5,7 @@
 import Foundation
 @testable import RealEstate
 
-final class PropertiesViewMock: PropertiesViewProtocol {
+final class PropertiesListViewMock: PropertiesListViewProtocol {
     
     typealias UpdateViewImpl = () -> Void
     typealias DisplayLoadingErrorImpl = (String) -> Void

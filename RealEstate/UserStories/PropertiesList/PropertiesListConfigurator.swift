@@ -4,17 +4,18 @@
 
 import UIKit
 
-final class PropertiesConfigurator {
+final class PropertiesListConfigurator {
     
-    func configure(viewController: PropertiesCollectionViewController) {
+    func configure(viewController: PropertiesListCollectionViewController) {
         let priceFormatter = NumberFormatter()
         priceFormatter.numberStyle = .currency
         priceFormatter.currencyCode = "EUR"
         priceFormatter.maximumFractionDigits = 0
         
-        viewController.presenter = PropertiesPresenter(
+        viewController.presenter = PropertiesListPresenter(
             view: viewController,
-            gateway: PropertiesGateway(),
+            propertiesGateway: PropertiesGateway(),
+            advertisementsGateway: AdvertisementsGateway(),
             priceFormatter: priceFormatter
         )
 

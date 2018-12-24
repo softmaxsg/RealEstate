@@ -5,9 +5,9 @@
 import Foundation
 @testable import RealEstate
 
-final class PropertyItemViewMock: PropertyItemViewProtocol {
+final class PropertyListItemViewMock<ItemType>: PropertyListItemViewProtocol where ItemType: PropertyListItem {
 
-    typealias DisplayItemImpl = (PropertyItem) -> Void
+    typealias DisplayItemImpl = (ItemType) -> Void
     
     private let displayItemImpl: DisplayItemImpl
     
@@ -15,7 +15,7 @@ final class PropertyItemViewMock: PropertyItemViewProtocol {
         self.displayItemImpl = displayItem
     }
 
-    func display(item: PropertyItem) {
+    func display(item: ItemType) {
         displayItemImpl(item)
     }
     

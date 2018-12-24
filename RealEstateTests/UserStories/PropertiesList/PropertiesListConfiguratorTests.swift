@@ -5,10 +5,10 @@
 import XCTest
 @testable import RealEstate
 
-final class PropertiesConfiguratorTests: XCTestCase {
+final class PropertiesListConfiguratorTests: XCTestCase {
 
     func testViewControllerConfiguration() {
-        let viewController = PropertiesCollectionViewController()
+        let viewController = PropertiesListCollectionViewController()
         viewController.configurator.configure(viewController: viewController)
         
         XCTAssertNotNil(viewController.presenter)

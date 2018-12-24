@@ -7,8 +7,8 @@ import XCTest
 
 extension XCTest {
     
-    func mockedPropertiesGateway(result: Result<[Property]>, expectation: XCTestExpectation) -> PropertiesGatewayProtocol {
-        return PropertiesGatewayMock { handler in
+    func mockedAdvertisementsGateway(result: Result<[URL]>, expectation: XCTestExpectation) -> AdvertisementsGatewayProtocol {
+        return AdvertisementsGatewayMock { handler in
             OperationQueue.main.addOperation {
                 handler(result)
                 expectation.fulfill()
