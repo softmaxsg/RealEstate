@@ -9,7 +9,7 @@ extension PropertiesResponse {
     
     static func random() -> PropertiesResponse {
         return PropertiesResponse(
-            items: Array(repeating: 0, count: Int.random(in: 0...10)).map { _ in Property.random() }
+            items: Array(0...Int.random(in: 0...10)).map { _ in Property.random() }
         )
     }
     
