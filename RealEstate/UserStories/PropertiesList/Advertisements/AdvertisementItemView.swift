@@ -16,7 +16,6 @@ final class AdvertisementItemCellView: UICollectionViewCell {
     
     var imageLoader: ImageLoader?
     
-    private var currentImageURL: URL?
     private var currentImageLoaderTask: Cancellable?
     
     @IBOutlet weak var imageView: UIImageView?
@@ -36,18 +35,8 @@ final class AdvertisementItemCellView: UICollectionViewCell {
 extension AdvertisementItemCellView: AdvertisementItemViewProtocol {
     
     func display(item: AdvertisementItem) {
-        currentImageURL = item.image
-        
-        if let imageLoader = self.imageLoader {
-            currentImageLoaderTask = imageLoader.image(
-                with: item.image,
-                loadingHandler: { [weak self] url in self?.updateImage(nil, for: url) },
-                completionHandler: { [weak self] url, image in self?.updateImage(image, for: url) }
-            )
-        } else {
-            imageView?.image = placeHolderImage
-        }
-        
+        guard let imageLoader = imageLoader, let imageView = imageView else { assertionFailure(); return }
+        currentImageLoaderTask = imageLoader.setImage(with: item.image, on: imageView, placeholder: placeHolderImage)
     }
     
 }
@@ -55,14 +44,12 @@ extension AdvertisementItemCellView: AdvertisementItemViewProtocol {
 extension AdvertisementItemCellView {
     
     private func clear() {
-        currentImageURL = nil
-        currentImageLoaderTask?.cancel()
+        if let currentImageLoaderTask = currentImageLoaderTask, let imageView = imageView {
+            self.currentImageLoaderTask = nil
+            imageLoader?.cancel(task: currentImageLoaderTask, on: imageView)
+        }
+
         imageView?.image = nil
     }
-    
-    private func updateImage(_ image: UIImage?, for url: URL) {
-        if url == currentImageURL {
-            imageView?.image = image ?? placeHolderImage
-        }
-    }
+
 }

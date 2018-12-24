@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import ObjectiveC
 
 final class ImageLoader {
     
@@ -43,5 +44,43 @@ final class ImageLoader {
         task.resume()
         return task
     }
+    
+    @discardableResult
+    func setImage(with url: URL, on imageView: UIImageView, placeholder: UIImage?) -> Cancellable {
+        imageView.currentURL = url
+        return image(
+            with: url,
+            loadingHandler: { url in imageView.setImage(nil, from: url, placeholder: placeholder) },
+            completionHandler: { url, image in imageView.setImage(image, from: url, placeholder: placeholder) }
+        )
+    }
+    
+    func cancel(task: Cancellable, on imageView: UIImageView) {
+        imageView.currentURL = nil
+        task.cancel()
+    }
 
+}
+
+
+extension UIImageView {
+    
+    private static var associatedURLKey: UInt = 0
+    
+    fileprivate var currentURL: URL? {
+        get {
+            return objc_getAssociatedObject(self, &UIImageView.associatedURLKey) as? URL
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &UIImageView.associatedURLKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    fileprivate func setImage(_ image: UIImage?, from url: URL, placeholder: UIImage?) {
+        if url == currentURL {
+            self.image = image ?? placeholder
+        }
+    }
+    
 }

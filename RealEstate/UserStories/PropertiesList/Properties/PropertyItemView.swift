@@ -16,7 +16,6 @@ final class PropertyItemCellView: UICollectionViewCell {
     
     var imageLoader: ImageLoader?
     
-    private var currentImageURL: URL?
     private var currentImageLoaderTask: Cancellable?
     
     @IBOutlet weak var imageView: UIImageView?
@@ -39,20 +38,20 @@ final class PropertyItemCellView: UICollectionViewCell {
 extension PropertyItemCellView: PropertyItemViewProtocol {
 
     func display(item: PropertyItem) {
-        currentImageURL = item.image
-        
+        guard let imageLoader = imageLoader, let imageView = imageView else { assertionFailure(); return }
+
+        assert(titleLabel != nil)
+        assert(addressLabel != nil)
+        assert(priceLabel != nil)
+
         titleLabel?.text = item.title
         addressLabel?.text = item.address
         priceLabel?.text = item.price
 
-        if let imageURL = item.image, let imageLoader = self.imageLoader {
-            currentImageLoaderTask = imageLoader.image(
-                with: imageURL,
-                loadingHandler: { [weak self] url in self?.updateImage(nil, for: url) },
-                completionHandler: { [weak self] url, image in self?.updateImage(image, for: url) }
-            )
+        if let imageURL = item.image {
+            currentImageLoaderTask = imageLoader.setImage(with: imageURL, on: imageView, placeholder: placeHolderImage)
         } else {
-            imageView?.image = placeHolderImage
+            imageView.image = placeHolderImage
         }
         
     }
@@ -62,8 +61,10 @@ extension PropertyItemCellView: PropertyItemViewProtocol {
 extension PropertyItemCellView {
     
     private func clear() {
-        currentImageURL = nil
-        currentImageLoaderTask?.cancel()
+        if let currentImageLoaderTask = currentImageLoaderTask, let imageView = imageView {
+            self.currentImageLoaderTask = nil
+            imageLoader?.cancel(task: currentImageLoaderTask, on: imageView)
+        }
 
         imageView?.image = nil
         titleLabel?.text = ""
@@ -71,9 +72,4 @@ extension PropertyItemCellView {
         priceLabel?.text = ""
     }
 
-    private func updateImage(_ image: UIImage?, for url: URL) {
-        if url == currentImageURL {
-            imageView?.image = image ?? placeHolderImage
-        }
-    }
 }
