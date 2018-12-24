@@ -22,29 +22,26 @@ protocol PropertiesListPresenterProtocol {
 }
 
 final class PropertiesListPresenter: PropertiesListPresenterProtocol {
-
-    private struct Item {
-        let type: ItemType
-        let value: PropertyListItem
-        
-    }
     
     private weak var view: PropertiesListViewProtocol?
     private let propertiesGateway: PropertiesGatewayProtocol
     private let advertisementsGateway: AdvertisementsGatewayProtocol
+    private let advertisementsEmbedder: AdvertisementsEmbedderProtocol
     private let priceFormatter: NumberFormatter
 
     private var advertisements: [URL] = [] { didSet { embedAdvertisements() } }
     private var properties: [Property] = [] { didSet { embedAdvertisements() } }
-    private var items: [Item] = []
+    private var items: [PropertyListItemInfo] = []
 
     init(view: PropertiesListViewProtocol,
          propertiesGateway: PropertiesGatewayProtocol,
          advertisementsGateway: AdvertisementsGatewayProtocol,
+         advertisementsEmbedder: AdvertisementsEmbedderProtocol,
          priceFormatter: NumberFormatter) {
         self.view = view
         self.propertiesGateway = propertiesGateway
         self.advertisementsGateway = advertisementsGateway
+        self.advertisementsEmbedder = advertisementsEmbedder
         self.priceFormatter = priceFormatter
     }
     
@@ -68,7 +65,7 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
 
 extension PropertiesListPresenter {
     
-    private func item(at index: Int) throws -> Item {
+    private func item(at index: Int) throws -> PropertyListItemInfo {
         guard items.indices.contains(index) else { throw PropertiesListPresenterError.indexOutOfBounds }
         return items[index]
     }
@@ -103,37 +100,19 @@ extension PropertiesListPresenter {
     }
     
     private func embedAdvertisements() {
-        guard !properties.isEmpty else { return }
-        var items: [Item] = []
+        guard !(self.properties.isEmpty && self.items.isEmpty) else { return }
         
-        var currentAdIndex = advertisements.startIndex
-        for (index, property) in properties.enumerated() {
-            if index > 0 && index % 2 == 0 {
-                if currentAdIndex < advertisements.endIndex {
-                    items.append(Item(
-                        type: .advertisement,
-                        value: AdvertisementItem(image: advertisements[currentAdIndex])
-                    ))
-                    
-                    advertisements.formIndex(after: &currentAdIndex)
-                    if currentAdIndex == advertisements.endIndex {
-                        currentAdIndex = advertisements.startIndex
-                    }
-                }
-            }
-            
-            items.append(Item(
-                type: .property,
-                value: PropertyItem(
-                    title: property.title,
-                    address: property.location.address,
-                    price: priceFormatter.string(from: NSDecimalNumber(decimal: property.price)) ?? "",
-                    image: property.images.first?.url
-                )
-            ))
+        let advertisements = self.advertisements.map(AdvertisementItem.init)
+        let properties = self.properties.map { property in
+            PropertyItem(
+                title: property.title,
+                address: property.location.address,
+                price: priceFormatter.string(from: NSDecimalNumber(decimal: property.price)) ?? "",
+                image: property.images.first?.url
+            )
         }
         
-        self.items = items
+        items = advertisementsEmbedder.embed(advertisements, into: properties)
         view?.updateView()
     }
     

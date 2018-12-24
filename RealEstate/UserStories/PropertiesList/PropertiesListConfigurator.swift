@@ -16,6 +16,7 @@ final class PropertiesListConfigurator {
             view: viewController,
             propertiesGateway: PropertiesGateway(),
             advertisementsGateway: AdvertisementsGateway(),
+            advertisementsEmbedder: AdvertisementsEmbedder(),
             priceFormatter: priceFormatter
         )
 

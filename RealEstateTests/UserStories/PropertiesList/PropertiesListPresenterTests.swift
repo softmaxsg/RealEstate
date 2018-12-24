@@ -54,19 +54,6 @@ final class PropertiesListPresenterTests: XCTestCase {
         XCTAssertEqual(presenter.itemsCount, 0)
     }
 
-    func testCorrectAdvertisementsEmbedding() {
-        let presenter = presenterDisplayProperties(
-            propertiesResult: .success(properties),
-            advertisementsResult: .success(advertisements)
-        )
-
-        for index in 0..<presenter.itemsCount {
-            let expectedItemType: ItemType = (index + 1) % 3 == 0 ? .advertisement : .property
-            let itemType = try! presenter.itemType(at: index)
-            XCTAssertEqual(itemType, expectedItemType, "Invalid item type at index \(index)")
-        }
-    }
-    
     func testConfigurePropertyItem() {
         let presenter = presenterDisplayProperties(
             propertiesResult: .success(properties),
@@ -140,6 +127,7 @@ extension PropertiesListPresenterTests {
             view: viewMock,
             propertiesGateway: propertiesGatewayMock,
             advertisementsGateway: advertisementsGatewayMock,
+            advertisementsEmbedder: AdvertisementsEmbedder(),
             priceFormatter: priceFormatter
         )
         

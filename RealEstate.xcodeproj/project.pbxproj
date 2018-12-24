@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D845EB1821D13E54006AA360 /* AdvertisementsEmbedder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB1721D13E54006AA360 /* AdvertisementsEmbedder.swift */; };
+		D845EB1A21D14406006AA360 /* PropertyListItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB1921D14406006AA360 /* PropertyListItemInfo.swift */; };
+		D845EB1D21D14877006AA360 /* AdvertisementsEmbedderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB1C21D14877006AA360 /* AdvertisementsEmbedderMock.swift */; };
+		D845EB1F21D14CE2006AA360 /* AdvertisementsEmbedderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB1E21D14CE2006AA360 /* AdvertisementsEmbedderTests.swift */; };
+		D845EB2121D14D5E006AA360 /* PropertyItem+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB2021D14D5E006AA360 /* PropertyItem+Helpers.swift */; };
+		D845EB2321D14E1B006AA360 /* AdvertisementItem+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB2221D14E1B006AA360 /* AdvertisementItem+Helpers.swift */; };
 		D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACC821C996B20068E020 /* AppDelegate.swift */; };
 		D87CACCE21C996B20068E020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCC21C996B20068E020 /* Main.storyboard */; };
 		D87CACD021C996B40068E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCF21C996B40068E020 /* Assets.xcassets */; };
@@ -77,6 +83,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D845EB1721D13E54006AA360 /* AdvertisementsEmbedder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsEmbedder.swift; sourceTree = "<group>"; };
+		D845EB1921D14406006AA360 /* PropertyListItemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListItemInfo.swift; sourceTree = "<group>"; };
+		D845EB1C21D14877006AA360 /* AdvertisementsEmbedderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsEmbedderMock.swift; sourceTree = "<group>"; };
+		D845EB1E21D14CE2006AA360 /* AdvertisementsEmbedderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsEmbedderTests.swift; sourceTree = "<group>"; };
+		D845EB2021D14D5E006AA360 /* PropertyItem+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PropertyItem+Helpers.swift"; sourceTree = "<group>"; };
+		D845EB2221D14E1B006AA360 /* AdvertisementItem+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdvertisementItem+Helpers.swift"; sourceTree = "<group>"; };
 		D87CACC521C996B20068E020 /* RealEstate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87CACC821C996B20068E020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D87CACCD21C996B20068E020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -158,6 +170,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D845EB1621D13E1E006AA360 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D845EB1721D13E54006AA360 /* AdvertisementsEmbedder.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D845EB1B21D1443B006AA360 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D89FDD9E21CECF8D008EAAA2 /* ItemType.swift */,
+				D845EB1921D14406006AA360 /* PropertyListItemInfo.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		D87CACBC21C996B20068E020 = {
 			isa = PBXGroup;
 			children = (
@@ -312,9 +341,10 @@
 		D87CAD4521CBFCB40068E020 /* PropertiesList */ = {
 			isa = PBXGroup;
 			children = (
+				D845EB1B21D1443B006AA360 /* Shared */,
 				D89FDDAC21D029AC008EAAA2 /* Advertisements */,
 				D89FDDAD21D029B7008EAAA2 /* Properties */,
-				D89FDD9E21CECF8D008EAAA2 /* ItemType.swift */,
+				D845EB1621D13E1E006AA360 /* Services */,
 				D87CAD5821CC2B770068E020 /* PropertiesListConfigurator.swift */,
 				D87CAD4621CBFCE10068E020 /* PropertiesListPresenter.swift */,
 				D87CAD4821CBFCFB0068E020 /* PropertiesListView.swift */,
@@ -336,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				D87CAD6C21CC73C30068E020 /* Helpers */,
+				D845EB1E21D14CE2006AA360 /* AdvertisementsEmbedderTests.swift */,
 				D87CAD6021CC58900068E020 /* PropertiesListConfiguratorTests.swift */,
 				D87CAD5621CC0F200068E020 /* PropertiesListPresenterTests.swift */,
 			);
@@ -359,10 +390,13 @@
 		D87CAD6C21CC73C30068E020 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D845EB2221D14E1B006AA360 /* AdvertisementItem+Helpers.swift */,
+				D845EB1C21D14877006AA360 /* AdvertisementsEmbedderMock.swift */,
 				D87CAD5021CC0BEC0068E020 /* PropertiesListViewMock.swift */,
+				D845EB2021D14D5E006AA360 /* PropertyItem+Helpers.swift */,
 				D87CAD5221CC0D620068E020 /* PropertyListItemViewMock.swift */,
-				D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */,
 				D89FDDB121D10DCE008EAAA2 /* XCTest+AdvertisementsGatewayMock.swift */,
+				D87CAD6D21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -513,8 +547,10 @@
 				D89FDDA121CED232008EAAA2 /* AdvertisementItemView.swift in Sources */,
 				D87CACF521C9AD720068E020 /* Image.swift in Sources */,
 				D87CAD6321CC62D80068E020 /* ImageLoader.swift in Sources */,
+				D845EB1A21D14406006AA360 /* PropertyListItemInfo.swift in Sources */,
 				D87CAD4B21CBFE350068E020 /* PropertyItemView.swift in Sources */,
 				D89FDDA921CEE52E008EAAA2 /* AdvertisementsGateway.swift in Sources */,
+				D845EB1821D13E54006AA360 /* AdvertisementsEmbedder.swift in Sources */,
 				D89FDD9F21CECF8D008EAAA2 /* ItemType.swift in Sources */,
 				D87CAD0F21CA74B20068E020 /* PropertiesGateway.swift in Sources */,
 				D87CAD4721CBFCE10068E020 /* PropertiesListPresenter.swift in Sources */,
@@ -534,6 +570,7 @@
 				D87CAD5D21CC31590068E020 /* PropertiesResponse+Helpers.swift in Sources */,
 				D87CAD5F21CC31CF0068E020 /* PropertiesResponseDecodingTests.swift in Sources */,
 				D87CAD6521CC6E0B0068E020 /* ImageLoaderTests.swift in Sources */,
+				D845EB2121D14D5E006AA360 /* PropertyItem+Helpers.swift in Sources */,
 				D87CAD6E21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift in Sources */,
 				D87CAD5721CC0F200068E020 /* PropertiesListPresenterTests.swift in Sources */,
 				D87CAD2021CBB11B0068E020 /* URLSessionMock.swift in Sources */,
@@ -550,10 +587,13 @@
 				D87CACEE21C9A4C80068E020 /* ImageDecodingTests.swift in Sources */,
 				D89FDDB021D02D7B008EAAA2 /* AdvertisementsGatewayMock.swift in Sources */,
 				D87CAD2921CBCCD80068E020 /* JSONDecoderMock.swift in Sources */,
+				D845EB1F21D14CE2006AA360 /* AdvertisementsEmbedderTests.swift in Sources */,
 				D87CAD0221C9C6DA0068E020 /* Location+Helpers.swift in Sources */,
 				D87CAD0021C9C6760068E020 /* Image+Helpers.swift in Sources */,
 				D87CAD1E21CBB09A0068E020 /* PropertiesGatewayTests.swift in Sources */,
+				D845EB1D21D14877006AA360 /* AdvertisementsEmbedderMock.swift in Sources */,
 				D87CAD6921CC70F30068E020 /* XCTest+URLSessionMock.swift in Sources */,
+				D845EB2321D14E1B006AA360 /* AdvertisementItem+Helpers.swift in Sources */,
 				D87CAD0421C9C7BB0068E020 /* JSONDecoder+Helpers.swift in Sources */,
 				D87CAD0621C9C82B0068E020 /* Dictionary+Helpers.swift in Sources */,
 			);
