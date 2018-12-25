@@ -306,8 +306,11 @@
 		D87CACF221C9AD300068E020 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
-				D87CAD0D21CA747D0068E020 /* Networking */,
 				D87CACF321C9AD520068E020 /* Model */,
+				D87CAD0D21CA747D0068E020 /* Networking */,
+				D89FDDA821CEE52E008EAAA2 /* AdvertisementsGateway.swift */,
+				D87CAD6221CC62D80068E020 /* ImageLoader.swift */,
+				D87CAD0E21CA74B20068E020 /* PropertiesGateway.swift */,
 			);
 			path = Gateway;
 			sourceTree = "<group>";
@@ -341,9 +344,6 @@
 		D87CAD0D21CA747D0068E020 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				D89FDDA821CEE52E008EAAA2 /* AdvertisementsGateway.swift */,
-				D87CAD6221CC62D80068E020 /* ImageLoader.swift */,
-				D87CAD0E21CA74B20068E020 /* PropertiesGateway.swift */,
 				D87CAD2121CBB69A0068E020 /* URLSessionDataTaskProtocol.swift */,
 				D87CAD1021CA752E0068E020 /* URLSessionProtocol.swift */,
 			);
@@ -371,21 +371,13 @@
 		D87CAD1B21CBB06D0068E020 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
-				D87CAD1C21CBB0820068E020 /* Networking */,
-				D87CACEC21C9A4990068E020 /* Model */,
-			);
-			path = Gateway;
-			sourceTree = "<group>";
-		};
-		D87CAD1C21CBB0820068E020 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
 				D87CAD6721CC704F0068E020 /* Helpers */,
+				D87CACEC21C9A4990068E020 /* Model */,
 				D89FDDAA21CEF0E2008EAAA2 /* AdvertisementsGatewayTests.swift */,
 				D87CAD6421CC6E0B0068E020 /* ImageLoaderTests.swift */,
 				D87CAD1D21CBB09A0068E020 /* PropertiesGatewayTests.swift */,
 			);
-			path = Networking;
+			path = Gateway;
 			sourceTree = "<group>";
 		};
 		D87CAD2A21CBFBE10068E020 /* UserStories */ = {
