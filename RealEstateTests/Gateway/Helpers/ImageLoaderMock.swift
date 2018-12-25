@@ -7,7 +7,7 @@ import UIKit
 
 final class ImageLoaderMock: ImageLoaderProtocol {
     
-    typealias LoadImageImpl = (URL, LoadingHandler, CompletionHandler) -> Cancellable
+    typealias LoadImageImpl = (URL, @escaping LoadingHandler, @escaping CompletionHandler) -> Cancellable
     
     private let loadImageImpl: LoadImageImpl
     

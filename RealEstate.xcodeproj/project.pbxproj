@@ -28,6 +28,10 @@
 		D845EB4521D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB3F21D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@2x.png */; };
 		D845EB4621D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB4021D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@3x.png */; };
 		D845EB4721D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB4121D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png */; };
+		D845EB4921D25372006AA360 /* FavoritesGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB4821D25372006AA360 /* FavoritesGateway.swift */; };
+		D845EB4B21D26AB2006AA360 /* FavoritesGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB4A21D26AB2006AA360 /* FavoritesGatewayMock.swift */; };
+		D845EB4D21D2B6EE006AA360 /* FavoritesGatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB4C21D2B6EE006AA360 /* FavoritesGatewayTests.swift */; };
+		D845EB4F21D2B947006AA360 /* FavoritesGatewayDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB4E21D2B947006AA360 /* FavoritesGatewayDelegateMock.swift */; };
 		D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACC821C996B20068E020 /* AppDelegate.swift */; };
 		D87CACCE21C996B20068E020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCC21C996B20068E020 /* Main.storyboard */; };
 		D87CACD021C996B40068E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCF21C996B40068E020 /* Assets.xcassets */; };
@@ -119,6 +123,10 @@
 		D845EB3F21D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@2x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLongLabelsAppearance@2x.png"; sourceTree = "<group>"; };
 		D845EB4021D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@3x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLongLabelsAppearance@3x.png"; sourceTree = "<group>"; };
 		D845EB4121D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png"; sourceTree = "<group>"; };
+		D845EB4821D25372006AA360 /* FavoritesGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGateway.swift; sourceTree = "<group>"; };
+		D845EB4A21D26AB2006AA360 /* FavoritesGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGatewayMock.swift; sourceTree = "<group>"; };
+		D845EB4C21D2B6EE006AA360 /* FavoritesGatewayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGatewayTests.swift; sourceTree = "<group>"; };
+		D845EB4E21D2B947006AA360 /* FavoritesGatewayDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGatewayDelegateMock.swift; sourceTree = "<group>"; };
 		D87CACC521C996B20068E020 /* RealEstate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87CACC821C996B20068E020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D87CACCD21C996B20068E020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -311,6 +319,7 @@
 				D89FDDA821CEE52E008EAAA2 /* AdvertisementsGateway.swift */,
 				D87CAD6221CC62D80068E020 /* ImageLoader.swift */,
 				D87CAD0E21CA74B20068E020 /* PropertiesGateway.swift */,
+				D845EB4821D25372006AA360 /* FavoritesGateway.swift */,
 			);
 			path = Gateway;
 			sourceTree = "<group>";
@@ -374,6 +383,7 @@
 				D87CAD6721CC704F0068E020 /* Helpers */,
 				D87CACEC21C9A4990068E020 /* Model */,
 				D89FDDAA21CEF0E2008EAAA2 /* AdvertisementsGatewayTests.swift */,
+				D845EB4C21D2B6EE006AA360 /* FavoritesGatewayTests.swift */,
 				D87CAD6421CC6E0B0068E020 /* ImageLoaderTests.swift */,
 				D87CAD1D21CBB09A0068E020 /* PropertiesGatewayTests.swift */,
 			);
@@ -429,13 +439,15 @@
 			isa = PBXGroup;
 			children = (
 				D89FDDAF21D02D7B008EAAA2 /* AdvertisementsGatewayMock.swift */,
+				D845EB4E21D2B947006AA360 /* FavoritesGatewayDelegateMock.swift */,
+				D845EB4A21D26AB2006AA360 /* FavoritesGatewayMock.swift */,
+				D845EB2E21D19FA1006AA360 /* ImageLoaderMock.swift */,
 				D87CAD2821CBCCD80068E020 /* JSONDecoderMock.swift */,
 				D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */,
 				D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */,
 				D87CAD1F21CBB11B0068E020 /* URLSessionMock.swift */,
 				D87CAD6A21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift */,
 				D87CAD6821CC70F30068E020 /* XCTest+URLSessionMock.swift */,
-				D845EB2E21D19FA1006AA360 /* ImageLoaderMock.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -618,6 +630,7 @@
 				D87CAD0F21CA74B20068E020 /* PropertiesGateway.swift in Sources */,
 				D87CAD4721CBFCE10068E020 /* PropertiesListPresenter.swift in Sources */,
 				D87CAD2721CBC73B0068E020 /* JSONDecoderProtocol.swift in Sources */,
+				D845EB4921D25372006AA360 /* FavoritesGateway.swift in Sources */,
 				D87CAD5B21CC2F1B0068E020 /* PropertiesResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,9 +653,11 @@
 				D87CAD6E21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift in Sources */,
 				D845EB3921D1B8F4006AA360 /* XCTestCase+CollectionViewCells.swift in Sources */,
 				D87CAD5721CC0F200068E020 /* PropertiesListPresenterTests.swift in Sources */,
+				D845EB4D21D2B6EE006AA360 /* FavoritesGatewayTests.swift in Sources */,
 				D87CAD2021CBB11B0068E020 /* URLSessionMock.swift in Sources */,
 				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
 				D87CACEB21C9A4520068E020 /* LocationDecodingTests.swift in Sources */,
+				D845EB4F21D2B947006AA360 /* FavoritesGatewayDelegateMock.swift in Sources */,
 				D87CAD5121CC0BEC0068E020 /* PropertiesListViewMock.swift in Sources */,
 				D87CAD6B21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift in Sources */,
 				D87CAD5321CC0D620068E020 /* PropertyListItemViewMock.swift in Sources */,
@@ -660,6 +675,7 @@
 				D87CAD0021C9C6760068E020 /* Image+Helpers.swift in Sources */,
 				D87CAD1E21CBB09A0068E020 /* PropertiesGatewayTests.swift in Sources */,
 				D845EB1D21D14877006AA360 /* AdvertisementsEmbedderMock.swift in Sources */,
+				D845EB4B21D26AB2006AA360 /* FavoritesGatewayMock.swift in Sources */,
 				D87CAD6921CC70F30068E020 /* XCTest+URLSessionMock.swift in Sources */,
 				D845EB2321D14E1B006AA360 /* AdvertisementItem+Helpers.swift in Sources */,
 				D87CAD0421C9C7BB0068E020 /* JSONDecoder+Helpers.swift in Sources */,
