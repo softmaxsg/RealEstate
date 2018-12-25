@@ -39,7 +39,7 @@ final class PropertiesListCollectionViewController: UICollectionViewController {
     
     var configurator = PropertiesListConfigurator()
     var presenter: PropertiesListPresenterProtocol?
-    var imageLoader: ImageLoader?
+    var imageLoader: ImageLoaderProtocol?
     
     private var currentState = State.loading
     

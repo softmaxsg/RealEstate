@@ -126,7 +126,7 @@ extension ImageLoaderTests {
         }
         
         // Have to postpone the return since an image is set on the image view on the main thread asynchronously
-        let expectation = self.expectation(description: "")
+        let expectation = self.expectation(description: "Just a postpone")
         OperationQueue.main.addOperation { expectation.fulfill() }
         wait(for: [expectation], timeout: 1)
 

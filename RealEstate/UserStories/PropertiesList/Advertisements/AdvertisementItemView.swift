@@ -14,7 +14,7 @@ final class AdvertisementItemCellView: UICollectionViewCell {
     
     private lazy var placeHolderImage = UIImage(named: "ImagePlaceholder")
     
-    var imageLoader: ImageLoader?
+    var imageLoader: ImageLoaderProtocol?
     
     private var currentImageLoaderTask: Cancellable?
     

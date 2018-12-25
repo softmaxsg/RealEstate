@@ -5,7 +5,22 @@
 import UIKit
 import ObjectiveC
 
-final class ImageLoader {
+protocol ImageLoaderProtocol {
+    
+    typealias LoadingHandler = (URL) -> Void
+    typealias CompletionHandler = (URL, UIImage?) -> Void
+    
+    @discardableResult
+    func image(with url: URL, loadingHandler: @escaping LoadingHandler, completionHandler: @escaping CompletionHandler) -> Cancellable
+
+    @discardableResult
+    func setImage(with url: URL, on imageView: UIImageView, placeholder: UIImage?) -> Cancellable
+
+    func cancel(task: Cancellable, on imageView: UIImageView)
+
+}
+
+final class ImageLoader: ImageLoaderProtocol {
     
     private let urlSession: URLSessionProtocol
     private let cache: NSCache<NSURL, UIImage>
@@ -16,7 +31,7 @@ final class ImageLoader {
     }
     
     @discardableResult
-    func image(with url: URL, loadingHandler: @escaping (URL) -> Void, completionHandler: @escaping (URL, UIImage?) -> Void) -> Cancellable {
+    func image(with url: URL, loadingHandler: @escaping LoadingHandler, completionHandler: @escaping CompletionHandler) -> Cancellable {
         if let cachedImage = cache.object(forKey: url as NSURL) {
             completionHandler(url, cachedImage)
             return EmptyTask()
@@ -44,6 +59,10 @@ final class ImageLoader {
         task.resume()
         return task
     }
+
+}
+
+extension ImageLoaderProtocol {
     
     @discardableResult
     func setImage(with url: URL, on imageView: UIImageView, placeholder: UIImage?) -> Cancellable {
