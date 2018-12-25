@@ -36,8 +36,8 @@ class PropertyItemCellViewTests: XCTestCase {
             title: "Just an item",
             address: "Somewhere in the world",
             price: "€1,234",
-            image: expectedImageURL)
-        )
+            image: expectedImageURL
+        ))
         
         snapshotVerifyView(cell.contentView)
     }
@@ -50,8 +50,8 @@ class PropertyItemCellViewTests: XCTestCase {
             title: "Another item",
             address: "Somewhere else in the world",
             price: "€9,876",
-            image: nil)
-        )
+            image: nil
+        ))
         
         snapshotVerifyView(cell.contentView)
     }
@@ -64,8 +64,22 @@ class PropertyItemCellViewTests: XCTestCase {
             title: "An item with very long title to test how word wrapping works in the cell",
             address: "Somewhere else in the world where noone can find",
             price: "€9,876,543,210",
-            image: nil)
-        )
+            image: nil
+        ))
+        
+        snapshotVerifyView(cell.contentView)
+    }
+    
+    func testFavoritePropertyAppearance() {
+        let cell = self.cell
+        cell.display(item: PropertyItem(
+            id: 1,
+            isFavorite: true,
+            title: "Favorite item",
+            address: "Somewhere in the world",
+            price: "€1,234",
+            image: expectedImageURL
+        ))
         
         snapshotVerifyView(cell.contentView)
     }
