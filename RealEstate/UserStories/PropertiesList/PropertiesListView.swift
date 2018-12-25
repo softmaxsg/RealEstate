@@ -18,6 +18,7 @@ final class PropertiesListCollectionViewController: UICollectionViewController {
     @IBOutlet weak var errorBackgroundView: ErrorView?
 
     private enum ReuseIdentifier: String {
+        
         case unknown
         case propertyItem = "PropertyItem"
         case advertisementItem = "AdvertisementItem"

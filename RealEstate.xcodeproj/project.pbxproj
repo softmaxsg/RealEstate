@@ -20,6 +20,14 @@
 		D845EB3521D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB3121D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@2x.png */; };
 		D845EB3621D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadedImageAppearance@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB3221D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadedImageAppearance@3x.png */; };
 		D845EB3721D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB3321D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@3x.png */; };
+		D845EB3921D1B8F4006AA360 /* XCTestCase+CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB3821D1B8F4006AA360 /* XCTestCase+CollectionViewCells.swift */; };
+		D845EB3B21D1B97F006AA360 /* PropertyItemCellViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB3A21D1B97F006AA360 /* PropertyItemCellViewTests.swift */; };
+		D845EB4221D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB3C21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@3x.png */; };
+		D845EB4321D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB3D21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@2x.png */; };
+		D845EB4421D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB3E21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@3x.png */; };
+		D845EB4521D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB3F21D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@2x.png */; };
+		D845EB4621D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB4021D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@3x.png */; };
+		D845EB4721D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB4121D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png */; };
 		D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACC821C996B20068E020 /* AppDelegate.swift */; };
 		D87CACCE21C996B20068E020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCC21C996B20068E020 /* Main.storyboard */; };
 		D87CACD021C996B40068E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCF21C996B40068E020 /* Assets.xcassets */; };
@@ -103,6 +111,14 @@
 		D845EB3121D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@2x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@2x.png"; sourceTree = "<group>"; };
 		D845EB3221D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadedImageAppearance@3x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "AdvertisementItemCellViewTests_testLoadedImageAppearance@3x.png"; sourceTree = "<group>"; };
 		D845EB3321D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@3x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@3x.png"; sourceTree = "<group>"; };
+		D845EB3821D1B8F4006AA360 /* XCTestCase+CollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+CollectionViewCells.swift"; sourceTree = "<group>"; };
+		D845EB3A21D1B97F006AA360 /* PropertyItemCellViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyItemCellViewTests.swift; sourceTree = "<group>"; };
+		D845EB3C21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@3x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLoadedImageAppearance@3x.png"; sourceTree = "<group>"; };
+		D845EB3D21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@2x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLoadedImageAppearance@2x.png"; sourceTree = "<group>"; };
+		D845EB3E21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@3x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLoadingImageFailedAppearance@3x.png"; sourceTree = "<group>"; };
+		D845EB3F21D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@2x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLongLabelsAppearance@2x.png"; sourceTree = "<group>"; };
+		D845EB4021D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@3x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLongLabelsAppearance@3x.png"; sourceTree = "<group>"; };
+		D845EB4121D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png"; sourceTree = "<group>"; };
 		D87CACC521C996B20068E020 /* RealEstate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87CACC821C996B20068E020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D87CACCD21C996B20068E020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -206,6 +222,7 @@
 		D845EB2721D184EA006AA360 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D845EB3821D1B8F4006AA360 /* XCTestCase+CollectionViewCells.swift */,
 				D845EB2A21D18612006AA360 /* XCTestCase+Snapshots.swift */,
 			);
 			path = Helpers;
@@ -214,6 +231,12 @@
 		D845EB2D21D187CB006AA360 /* ReferenceImages */ = {
 			isa = PBXGroup;
 			children = (
+				D845EB3D21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@2x.png */,
+				D845EB3C21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@3x.png */,
+				D845EB4121D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png */,
+				D845EB3E21D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@3x.png */,
+				D845EB3F21D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@2x.png */,
+				D845EB4021D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@3x.png */,
 				D845EB3021D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadedImageAppearance@2x.png */,
 				D845EB3221D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadedImageAppearance@3x.png */,
 				D845EB3121D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@2x.png */,
@@ -405,6 +428,7 @@
 				D845EB1E21D14CE2006AA360 /* AdvertisementsEmbedderTests.swift */,
 				D87CAD6021CC58900068E020 /* PropertiesListConfiguratorTests.swift */,
 				D87CAD5621CC0F200068E020 /* PropertiesListPresenterTests.swift */,
+				D845EB3A21D1B97F006AA360 /* PropertyItemCellViewTests.swift */,
 			);
 			path = PropertiesList;
 			sourceTree = "<group>";
@@ -556,11 +580,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D845EB4321D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@2x.png in Resources */,
+				D845EB4621D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@3x.png in Resources */,
 				D845EB3621D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadedImageAppearance@3x.png in Resources */,
+				D845EB4421D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@3x.png in Resources */,
 				D87CAD7021CC79EC0068E020 /* Assets.xcassets in Resources */,
 				D845EB3521D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@2x.png in Resources */,
 				D845EB3721D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadingImageFailedAppearance@3x.png in Resources */,
 				D845EB3421D1AD51006AA360 /* AdvertisementItemCellViewTests_testLoadedImageAppearance@2x.png in Resources */,
+				D845EB4521D1BB7E006AA360 /* PropertyItemCellViewTests_testLongLabelsAppearance@2x.png in Resources */,
+				D845EB4221D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadedImageAppearance@3x.png in Resources */,
+				D845EB4721D1BB7E006AA360 /* PropertyItemCellViewTests_testLoadingImageFailedAppearance@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +646,7 @@
 				D845EB2121D14D5E006AA360 /* PropertyItem+Helpers.swift in Sources */,
 				D845EB2F21D19FA1006AA360 /* ImageLoaderMock.swift in Sources */,
 				D87CAD6E21CC74670068E020 /* XCTest+PropertiesGatewayMock.swift in Sources */,
+				D845EB3921D1B8F4006AA360 /* XCTestCase+CollectionViewCells.swift in Sources */,
 				D87CAD5721CC0F200068E020 /* PropertiesListPresenterTests.swift in Sources */,
 				D87CAD2021CBB11B0068E020 /* URLSessionMock.swift in Sources */,
 				D87CACE921C99C600068E020 /* PropertyDecodingTests.swift in Sources */,
@@ -629,6 +660,7 @@
 				D87CACFE21C9C6420068E020 /* Property+Helpers.swift in Sources */,
 				D87CAD2421CBB7B90068E020 /* URLSessionDataTaskMock.swift in Sources */,
 				D87CACEE21C9A4C80068E020 /* ImageDecodingTests.swift in Sources */,
+				D845EB3B21D1B97F006AA360 /* PropertyItemCellViewTests.swift in Sources */,
 				D89FDDB021D02D7B008EAAA2 /* AdvertisementsGatewayMock.swift in Sources */,
 				D87CAD2921CBCCD80068E020 /* JSONDecoderMock.swift in Sources */,
 				D845EB1F21D14CE2006AA360 /* AdvertisementsEmbedderTests.swift in Sources */,

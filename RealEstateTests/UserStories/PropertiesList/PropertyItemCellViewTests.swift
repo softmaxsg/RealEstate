@@ -5,8 +5,8 @@
 import XCTest
 @testable import RealEstate
 
-class AdvertisementItemCellViewTests: XCTestCase {
-
+class PropertyItemCellViewTests: XCTestCase {
+    
     private let defaultSize = CGSize(width: 350, height: 250)
     
     private let expectedImageURL = URL(string: UUID().uuidString)!
@@ -15,12 +15,12 @@ class AdvertisementItemCellViewTests: XCTestCase {
         completion(url, url == self.expectedImageURL ? self.expectedImage : nil)
         return EmptyTask()
     }
-
-    private lazy var cell: AdvertisementItemCellView = {
-        let cell: AdvertisementItemCellView = collectionView(
+    
+    private lazy var cell: PropertyItemCellView = {
+        let cell: PropertyItemCellView = collectionView(
             storyboardID: "Main",
             controllerID: "PropertiesListCollectionViewController",
-            cellID: "AdvertisementItem",
+            cellID: "PropertyItem",
             size: defaultSize
         )
         
@@ -30,13 +30,37 @@ class AdvertisementItemCellViewTests: XCTestCase {
     
     func testLoadedImageAppearance() {
         let cell = self.cell
-        cell.display(item: AdvertisementItem(image: expectedImageURL))
+        cell.display(item: PropertyItem(
+            title: "Just an item",
+            address: "Somewhere in the world",
+            price: "€1,234",
+            image: expectedImageURL)
+        )
+        
         snapshotVerifyView(cell.contentView)
     }
     
     func testLoadingImageFailedAppearance() {
         let cell = self.cell
-        cell.display(item: AdvertisementItem(image: URL(string: UUID().uuidString)!))
+        cell.display(item: PropertyItem(
+            title: "Another item",
+            address: "Somewhere else in the world",
+            price: "€9,876",
+            image: nil)
+        )
+        
+        snapshotVerifyView(cell.contentView)
+    }
+    
+    func testLongLabelsAppearance() {
+        let cell = self.cell
+        cell.display(item: PropertyItem(
+            title: "An item with very long title to test how word wrapping works in the cell",
+            address: "Somewhere else in the world where noone can find",
+            price: "€9,876,543,210",
+            image: nil)
+        )
+        
         snapshotVerifyView(cell.contentView)
     }
 
