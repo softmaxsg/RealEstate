@@ -9,6 +9,8 @@ extension PropertyItem {
     
     static func random() -> PropertyItem {
         return PropertyItem(
+            id: Int.random(in: 1...Int.max),
+            isFavorite: Bool.random(),
             title: UUID().uuidString,
             address: UUID().uuidString,
             price: UUID().uuidString,

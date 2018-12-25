@@ -9,6 +9,9 @@ final class PropertiesListPresenterTests: XCTestCase {
     
     private let properties = Array(1...Int.random(in: 3...10)).map { _ in Property.random() }
     private let advertisements = Array(1...Int.random(in: 1...10)).map { _ in URL(string: UUID().uuidString)! }
+    private lazy var favorites: [Property] = {
+        return properties.compactMap { Bool.random() ? $0 : nil }
+    }()
     
     private lazy var priceFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -55,6 +58,17 @@ final class PropertiesListPresenterTests: XCTestCase {
         // Assert of the validity of the error message is tested in `presenterDisplayProperties`
         XCTAssertEqual(presenter.itemsCount, 0)
     }
+    
+    func testInvalidIndex() {
+        let presenter = presenterDisplayProperties(
+            propertiesResult: .success(properties),
+            advertisementsResult: .success(advertisements)
+        )
+        
+        XCTAssertThrowsError(try presenter.itemType(at: presenter.itemsCount), "Has to throw an error") { error in
+            XCTAssertEqual(error as? PropertiesListPresenterError, PropertiesListPresenterError.indexOutOfBounds)
+        }
+    }
 
     func testConfigurePropertyItem() {
         let presenter = presenterDisplayProperties(
@@ -80,6 +94,67 @@ final class PropertiesListPresenterTests: XCTestCase {
         
         compare(item: item, url: advertisements.first!)
     }
+    
+    func testTogglePropertyFavoriteState() {
+        let updateItemExpectation = self.expectation(description: "PropertiesView.updateItem")
+        let favoritesGatewayExpectation = self.expectation(description: "FavoritesGateway.addProperty or removeProperty")
+
+        var item: PropertyItem!
+        var favoriteState: Bool!
+        let itemIndex = Int.random(in: 0..<self.properties.count)
+
+        let defaultFavoritesGateway = FavoritesGateway(favorites: favorites)
+        let favoritesGatewayMock = FavoritesGatewayMock(
+            getFavorites: { defaultFavoritesGateway.favorites },
+            addProperty: { property in
+                guard !item.isFavorite else { XCTFail("Should not be called"); fatalError() }
+                defaultFavoritesGateway.addProperty(property)
+                favoriteState = true
+                favoritesGatewayExpectation.fulfill()
+            },
+            removeProperty: { id in
+                guard item.isFavorite else { XCTFail("Should not be called"); fatalError() }
+                defaultFavoritesGateway.removeProperty(with: id)
+                favoriteState = false
+                favoritesGatewayExpectation.fulfill()
+            },
+            addDelegate: { defaultFavoritesGateway.addDelegate($0) },
+            removeDelegate: { defaultFavoritesGateway.removeDelegate($0) }
+        )
+        
+        let presenter = presenterDisplayProperties(
+            propertiesResult: .success(properties),
+            advertisementsResult: .failure(MockError.some), // To simplify finding correct property in the list
+            updateItemImpl: { index in
+                XCTAssertEqual(index, itemIndex)
+                updateItemExpectation.fulfill()
+            },
+            favoritesGateway: favoritesGatewayMock,
+            additionalActions: { presenter in
+                // Has to be done within the scope of `presenterDisplayProperties` in order to keep view mock alive during this call
+                item = try! self.configureItem(presenter: presenter, at: itemIndex)
+                try! presenter.toggleFavoriteState(at: itemIndex)
+            }
+        )
+        
+        wait(for: [updateItemExpectation, favoritesGatewayExpectation], timeout: 1)
+        
+        let updatedItem: PropertyItem = try! configureItem(presenter: presenter, at: itemIndex)
+        XCTAssertEqual(updatedItem.isFavorite, favoriteState)
+        XCTAssertNotEqual(updatedItem.isFavorite, item.isFavorite)
+    }
+
+    func testToggleAdvertisementFavoriteState() {
+        let presenter = presenterDisplayProperties(
+            propertiesResult: .success(properties),
+            advertisementsResult: .success(advertisements)
+        )
+        
+        let itemIndex = (0..<presenter.itemsCount).first(where: { try! presenter.itemType(at: $0) == .advertisement })!
+        XCTAssertThrowsError(try presenter.toggleFavoriteState(at: itemIndex), "Has to throw an error") { error in
+            XCTAssertEqual(error as? PropertiesListPresenterError, PropertiesListPresenterError.invalidItemType)
+        }
+    }
 
 }
 
@@ -87,14 +162,13 @@ extension PropertiesListPresenterTests {
     
     private enum MockError: Error { case some }
     
-    private func mockedViewSuccessState(expectation: XCTestExpectation, file: StaticString = #file, line: UInt = #line) -> PropertiesListViewProtocol {
-        return PropertiesListViewMock(
-            updateView: { expectation.fulfill() },
-            displayLoadingError: { _ in XCTFail("Should not be called in this test", file: file, line: line) }
-        )
-    }
-    
-    private func presenterDisplayProperties(propertiesResult: Result<[Property]>, advertisementsResult: Result<[URL]>, file: StaticString = #file, line: UInt = #line) -> PropertiesListPresenterProtocol {
+    private func presenterDisplayProperties(propertiesResult: Result<[Property]>,
+                                            advertisementsResult: Result<[URL]>,
+                                            updateItemImpl: PropertiesListViewMock.UpdateItemImpl? = nil,
+                                            favoritesGateway: FavoritesGatewayProtocol? = nil,
+                                            additionalActions: ((PropertiesListPresenterProtocol) -> Void)? = nil,
+                                            file: StaticString = #file,
+                                            line: UInt = #line) -> PropertiesListPresenterProtocol {
         let viewExpectation = self.expectation(description: "PropertiesView.updateView or displayLoadingError")
         let propertiesGatewayExpectation = self.expectation(description: "PropertiesGateway.loadAll")
         let advertisementsGatewayExpectation = self.expectation(description: "AdvertisementsGateway.loadAll")
@@ -109,6 +183,7 @@ extension PropertiesListPresenterTests {
                     XCTFail("Should not be called in this test", file: file, line: line)
                 }
             },
+            updateItem: updateItemImpl ?? { _ in XCTFail("Should not be called in this test", file: file, line: line) },
             displayLoadingError: { errorMessage in
                 switch propertiesResult {
                 case .success:
@@ -132,6 +207,7 @@ extension PropertiesListPresenterTests {
         let presenter = PropertiesListPresenter(
             view: viewMock,
             propertiesGateway: propertiesGatewayMock,
+            favoritesGateway: favoritesGateway ?? FavoritesGateway(favorites: favorites),
             advertisementsGateway: advertisementsGatewayMock,
             advertisementsEmbedder: advertisementsEmbedderMock,
             priceFormatter: priceFormatter
@@ -144,6 +220,8 @@ extension PropertiesListPresenterTests {
         }
 
         wait(for: [viewExpectation, propertiesGatewayExpectation, advertisementsGatewayExpectation, advertisementsEmbedderExpectation], timeout: 1)
+        additionalActions?(presenter)
+        
         return presenter
     }
     
@@ -161,6 +239,8 @@ extension PropertiesListPresenterTests {
     }
     
     private func compare(item: PropertyItem, property: Property, file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(item.id, property.id, file: file, line: line)
+        XCTAssertEqual(item.isFavorite, favorites.contains(property), file: file, line: line)
         XCTAssertEqual(item.title, property.title, file: file, line: line)
         XCTAssertEqual(item.address, property.location.address, file: file, line: line)
         XCTAssertEqual(item.price, priceFormatter.string(from: NSDecimalNumber(decimal: property.price)), file: file, line: line)

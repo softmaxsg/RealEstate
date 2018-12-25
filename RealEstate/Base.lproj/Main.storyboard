@@ -54,6 +54,21 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k23-6G-5yt">
+                                            <rect key="frame" x="287" y="0.0" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="hrJ-SD-YiB"/>
+                                                <constraint firstAttribute="height" constant="40" id="yX5-te-PHM"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                            <state key="normal" title="☆">
+                                                <color key="titleColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <state key="selected" title="★"/>
+                                            <connections>
+                                                <action selector="favoriteButtonDidTap" destination="pdI-0v-nAN" eventType="touchUpInside" id="nCh-DK-IG0"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <constraints>
@@ -70,9 +85,12 @@
                                     <constraint firstItem="t2b-hw-MMI" firstAttribute="top" secondItem="pdI-0v-nAN" secondAttribute="top" id="diT-mv-pLz"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8mg-Ri-rxc" secondAttribute="trailing" symbolic="YES" id="g9a-ak-Yww"/>
                                     <constraint firstItem="Hba-vq-R5y" firstAttribute="bottom" secondItem="t2b-hw-MMI" secondAttribute="bottom" constant="-8" id="hED-Si-a5K"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="k23-6G-5yt" secondAttribute="trailing" id="nAu-kn-Enn"/>
+                                    <constraint firstItem="k23-6G-5yt" firstAttribute="top" secondItem="pdI-0v-nAN" secondAttribute="top" id="rMA-f3-mzE"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="addressLabel" destination="Tno-pG-y9u" id="ro7-fm-PK7"/>
+                                    <outlet property="favoriteButton" destination="k23-6G-5yt" id="AKb-Bp-nZb"/>
                                     <outlet property="imageView" destination="t2b-hw-MMI" id="dbn-fT-yuo"/>
                                     <outlet property="priceLabel" destination="8mg-Ri-rxc" id="vsC-3o-tid"/>
                                     <outlet property="titleLabel" destination="Hba-vq-R5y" id="TE9-eH-bYt"/>

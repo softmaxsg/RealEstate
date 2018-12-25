@@ -35,6 +35,11 @@ final class FavoritesGateway: FavoritesGatewayProtocol {
     
     private(set) var favorites: [Property] = []
     
+    // Initial state for testing while data storage is not implemented
+    init(favorites: [Property] = []) {
+        self.favorites = favorites
+    }
+    
     func addProperty(_ property: Property) {
         guard !favorites.contains(where: { $0.id == property.id }) else { assertionFailure(); return }
         favorites.append(property)

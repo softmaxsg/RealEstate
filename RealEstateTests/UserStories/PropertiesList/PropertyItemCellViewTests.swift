@@ -31,6 +31,8 @@ class PropertyItemCellViewTests: XCTestCase {
     func testLoadedImageAppearance() {
         let cell = self.cell
         cell.display(item: PropertyItem(
+            id: 1,
+            isFavorite: false,
             title: "Just an item",
             address: "Somewhere in the world",
             price: "€1,234",
@@ -43,6 +45,8 @@ class PropertyItemCellViewTests: XCTestCase {
     func testLoadingImageFailedAppearance() {
         let cell = self.cell
         cell.display(item: PropertyItem(
+            id: 1,
+            isFavorite: false,
             title: "Another item",
             address: "Somewhere else in the world",
             price: "€9,876",
@@ -55,6 +59,8 @@ class PropertyItemCellViewTests: XCTestCase {
     func testLongLabelsAppearance() {
         let cell = self.cell
         cell.display(item: PropertyItem(
+            id: 1,
+            isFavorite: false,
             title: "An item with very long title to test how word wrapping works in the cell",
             address: "Somewhere else in the world where noone can find",
             price: "€9,876,543,210",

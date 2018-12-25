@@ -15,6 +15,7 @@ final class PropertiesListConfigurator {
         viewController.presenter = PropertiesListPresenter(
             view: viewController,
             propertiesGateway: PropertiesGateway(),
+            favoritesGateway: FavoritesGateway(),
             advertisementsGateway: AdvertisementsGateway(),
             advertisementsEmbedder: AdvertisementsEmbedder(),
             priceFormatter: priceFormatter

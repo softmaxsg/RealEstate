@@ -6,6 +6,8 @@ import Foundation
 
 struct PropertyItem: PropertyListItem {
     
+    let id: Int
+    let isFavorite: Bool
     let title: String
     let address: String
     let price: String

@@ -7,6 +7,8 @@ import UIKit
 protocol PropertiesListViewProtocol: class {
 
     func updateView()
+    func updateItem(at index: Int)
+    
     func displayLoadingError(_ message: String)
     
 }
@@ -109,6 +111,11 @@ extension PropertiesListCollectionViewController: PropertiesListViewProtocol {
         collectionView.reloadData()
     }
     
+    func updateItem(at index: Int) {
+        guard case .data = currentState else { return }
+        collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+    }
+    
     func displayLoadingError(_ message: String) {
         currentState = .error(message: message)
         collectionView.reloadData()
@@ -153,6 +160,10 @@ extension PropertiesListCollectionViewController {
     private func configure<T>(cell: UICollectionViewCell, of type: T.Type, at index: Int) where T: PropertyItemCellView {
         guard let presenter = presenter, let cell = cell as? T else { assertionFailure(); return }
         cell.imageLoader = imageLoader
+        cell.favoriteButtonCallback = { [weak self] in
+            try? self?.presenter?.toggleFavoriteState(at: index)
+        }
+        
         try? presenter.configure(item: cell, at: index)
     }
 
