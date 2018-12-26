@@ -48,24 +48,79 @@ final class FavoritesPresenterTests: XCTestCase {
         compare(item: item, property: property)
     }
     
+    func testUnfavoriteItem() {
+        let removeExpectation = self.expectation(description: "FavoritesView.removeItem")
+
+        let itemIndex = Int.random(in: 0..<favorites.count)
+        let property = favorites[itemIndex]
+
+        let viewMock = FavoritesViewMock(
+            updateView: { },
+            insertItem: { _ in XCTFail("Should not be called") },
+            removeItem: { index in
+                XCTAssertEqual(index, itemIndex)
+                removeExpectation.fulfill()
+            }
+        )
+        
+        let presenter = presenterDisplayFavorites(
+            initial: favorites,
+            expected: favorites.filter { $0 != property },
+            view: viewMock
+        )
+
+        try! presenter.unfavorite(with: property.id)
+        
+        wait(for: [removeExpectation], timeout: 1)
+        XCTAssertEqual(presenter.itemsCount, favorites.count - 1)
+    }
+    
+    func testUnfavoriteItemWithInvalidID() {
+        let viewMock = FavoritesViewMock(
+            updateView: { },
+            insertItem: { _ in XCTFail("Should not be called") },
+            removeItem: { _ in XCTFail("Should not be called") }
+        )
+        
+        let presenter = presenterDisplayFavorites(initial: [], view: viewMock)
+        
+        XCTAssertThrowsError(try presenter.unfavorite(with: Int.random(in: 0...Int.max)), "Has to throw an error") { error in
+            XCTAssertEqual(error as? FavoritesPresenterError, FavoritesPresenterError.invalidID)
+        }
+    }
+
 }
 
 extension FavoritesPresenterTests {
     
     private enum MockError: Error { case some }
     
-    private func presenterDisplayFavorites(initial favorites: [Property], file: StaticString = #file, line: UInt = #line) -> FavoritesPresenterProtocol {
+    private func presenterDisplayFavorites(initial initialFavorites: [Property],
+                                           expected expectedFavorites: [Property]? = nil,
+                                           view: FavoritesViewProtocol? = nil,
+                                           file: StaticString = #file,
+                                           line: UInt = #line) -> FavoritesPresenterProtocol {
         let viewExpectation = self.expectation(description: "FavoritesView.updateView")
         
-        let viewMock = FavoritesViewMock { viewExpectation.fulfill() }
+        let viewMock = view ?? FavoritesViewMock(
+            updateView: { viewExpectation.fulfill() },
+            insertItem: { _ in },
+            removeItem: { _ in }
+        )
+        
+        let favoritesStorageMock = self.favoritesStorageMock(
+            initial: initialFavorites,
+            expected: expectedFavorites
+        )
         
         let presenter = FavoritesPresenter(
             view: viewMock,
-            favoritesGateway: FavoritesGateway(dataStorage: favoritesStorageMock(initial: favorites)),
+            favoritesGateway: FavoritesGateway(dataStorage: favoritesStorageMock),
             priceFormatter: priceFormatter
         )
         
         presenter.displayFavorites()
+        if view != nil { viewExpectation.fulfill() }
         
         wait(for: [viewExpectation], timeout: 1)
         return presenter

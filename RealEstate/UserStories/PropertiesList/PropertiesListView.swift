@@ -133,15 +133,21 @@ extension PropertiesListCollectionViewController {
     private func configure<T>(cell: UICollectionViewCell, of type: T.Type, at index: Int) where T: PropertyItemCellView {
         guard let presenter = presenter, let cell = cell as? T else { assertionFailure(); return }
         try? presenter.configure(item: cell, at: index)
-
-        cell.favoriteButtonCallback = { [weak self] in
-            try? self?.presenter?.toggleFavoriteState(at: index)
-        }
+        cell.favoriteButtonCallback = { [weak self] in self?.favoriteButtonDidTap(id: $0) }
     }
 
     private func configure<T>(cell: UICollectionViewCell, of type: T.Type, at index: Int) where T: AdvertisementItemCellView {
         guard let presenter = presenter, let cell = cell as? T else { assertionFailure(); return }
         try? presenter.configure(item: cell, at: index)
+    }
+    
+    private func favoriteButtonDidTap(id: Int) {
+        do {
+            guard let presenter = self.presenter else { assertionFailure(); return }
+            try presenter.toggleFavoriteState(with: id)
+        } catch {
+            collectionView.reloadData()
+        }
     }
 
 }

@@ -6,7 +6,7 @@ import Foundation
 
 enum PropertiesListPresenterError: Error {
     
-    case invalidItemType
+    case invalidID
     
 }
 
@@ -19,7 +19,7 @@ protocol PropertiesListPresenterProtocol {
 
     func configure<ViewType>(item: ViewType, at index: Int) throws where ViewType: PropertyListItemViewProtocol
     
-    func toggleFavoriteState(at index: Int) throws
+    func toggleFavoriteState(with id: Int) throws
 
 }
 
@@ -70,11 +70,8 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
         itemView.display(item: item)
     }
 
-    func toggleFavoriteState(at index: Int) throws {
-        let item = try items.item(at: index)
-        guard item.type == .property else { throw PropertiesListPresenterError.invalidItemType }
-        guard let propertyItem = item.value as? PropertyItem else { assertionFailure(); return }
-
+    func toggleFavoriteState(with id: Int) throws {
+        guard let propertyItem = propertyItem(with: id) else { throw PropertiesListPresenterError.invalidID }
         if propertyItem.isFavorite {
             favoritesGateway.removeProperty(with: propertyItem.id)
         } else {
@@ -91,6 +88,10 @@ extension PropertiesListPresenter {
         return items.firstIndex {
             return ($0.value as? PropertyItem)?.id == propertyID
         }
+    }
+    
+    private func propertyItem(with id: Int) -> PropertyItem? {
+        return items.lazy.compactMap({ $0.value as? PropertyItem }).first(where: { $0.id == id })
     }
     
     private func loadAdvertisements() {

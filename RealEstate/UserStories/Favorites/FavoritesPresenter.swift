@@ -4,12 +4,20 @@
 
 import Foundation
 
+enum FavoritesPresenterError: Error {
+    
+    case invalidID
+    
+}
+
 protocol FavoritesPresenterProtocol {
     
     func displayFavorites()
 
     var itemsCount: Int { get }
     func configure<ViewType>(item itemView: ViewType, at index: Int) throws where ViewType: PropertyItemViewProtocol
+    
+    func unfavorite(with id: Int) throws
 
 }
 
@@ -33,6 +41,7 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
     
     func displayFavorites() {
         updateFavorites()
+        view?.updateView()
     }
     
     var itemsCount: Int { return items.count }
@@ -42,13 +51,21 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
         itemView.display(item: item)
     }
     
+    func unfavorite(with id: Int) throws {
+        guard let _ = items.first(where: { $0.id == id }) else { throw FavoritesPresenterError.invalidID }
+        favoritesGateway.removeProperty(with: id)
+    }
+
 }
 
 extension FavoritesPresenter {
     
+    private func itemIndex(with propertyID: Int) -> Int? {
+        return items.firstIndex { $0.id == propertyID }
+    }
+
     private func updateFavorites() {
         items = favoritesGateway.favorites.map { PropertyItem(property: $0, favorite: true, priceFormatter: priceFormatter) }
-        view?.updateView()
     }
 
 }
@@ -57,10 +74,23 @@ extension FavoritesPresenter: FavoritesGatewayDelegate {
     
     func favoriteItemAdded(with id: Int) {
         updateFavorites()
+        
+        if let itemIndex = self.itemIndex(with: id) {
+            view?.insertItem(at: itemIndex)
+        } else {
+            view?.updateView()
+        }
     }
     
     func favoriteItemRemoved(with id: Int) {
+        let itemIndex = self.itemIndex(with: id)
         updateFavorites()
+        
+        if let itemIndex = itemIndex {
+            view?.removeItem(at: itemIndex)
+        } else {
+            view?.updateView()
+        }
     }
     
 }

@@ -95,7 +95,7 @@ final class PropertiesListPresenterTests: XCTestCase {
         compare(item: item, url: advertisements.first!)
     }
     
-    func testTogglePropertyFavoriteState() {
+    func testToggleFavoriteState() {
         let updateItemExpectation = self.expectation(description: "PropertiesView.updateItem")
         let favoritesGatewayExpectation = self.expectation(description: "FavoritesGateway.addProperty or removeProperty")
 
@@ -133,7 +133,7 @@ final class PropertiesListPresenterTests: XCTestCase {
             additionalActions: { presenter in
                 // Has to be done within the scope of `presenterDisplayProperties` in order to keep view mock alive during this call
                 item = try! self.configureItem(presenter: presenter, at: itemIndex)
-                try! presenter.toggleFavoriteState(at: itemIndex)
+                try! presenter.toggleFavoriteState(with: item.id)
             }
         )
         
@@ -144,15 +144,14 @@ final class PropertiesListPresenterTests: XCTestCase {
         XCTAssertNotEqual(updatedItem.isFavorite, item.isFavorite)
     }
 
-    func testToggleAdvertisementFavoriteState() {
+    func testToggleFavoriteStateWithInvalidID() {
         let presenter = presenterDisplayProperties(
-            propertiesResult: .success(properties),
-            advertisementsResult: .success(advertisements)
+            propertiesResult: .failure(MockError.some),
+            advertisementsResult: .failure(MockError.some)
         )
         
-        let itemIndex = (0..<presenter.itemsCount).first(where: { try! presenter.itemType(at: $0) == .advertisement })!
-        XCTAssertThrowsError(try presenter.toggleFavoriteState(at: itemIndex), "Has to throw an error") { error in
-            XCTAssertEqual(error as? PropertiesListPresenterError, PropertiesListPresenterError.invalidItemType)
+        XCTAssertThrowsError(try presenter.toggleFavoriteState(with: Int.random(in: 0...Int.max)), "Has to throw an error") { error in
+            XCTAssertEqual(error as? PropertiesListPresenterError, PropertiesListPresenterError.invalidID)
         }
     }
 

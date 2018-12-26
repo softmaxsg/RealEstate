@@ -7,6 +7,8 @@ import UIKit
 protocol FavoritesViewProtocol: class {
     
     func updateView()
+    func insertItem(at index: Int)
+    func removeItem(at index: Int)
     
 }
 
@@ -49,8 +51,9 @@ final class FavoritesCollectionViewController: UICollectionViewController, Colle
 
         guard let presenter = presenter, let itemCell = cell as? PropertyItemCellView else { assertionFailure(); return cell }
         try? presenter.configure(item: itemCell, at: indexPath.item)
-        
-        return cell
+        itemCell.favoriteButtonCallback = { [weak self] in self?.favoriteButtonDidTap(id: $0) }
+
+        return itemCell
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -64,6 +67,37 @@ extension FavoritesCollectionViewController: FavoritesViewProtocol {
 
     func updateView() {
         collectionView.reloadData()
+    }
+    
+    func insertItem(at index: Int) {
+        guard let presenter = self.presenter else { assertionFailure(); return }
+        if presenter.itemsCount > 1 {
+            collectionView.insertItems(at: [IndexPath(item: index, section: 0)])
+        } else {
+            collectionView.insertSections(IndexSet(integer: 0))
+        }
+    }
+    
+    func removeItem(at index: Int) {
+        guard let presenter = self.presenter else { assertionFailure(); return }
+        if presenter.itemsCount > 0 {
+            collectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+        } else {
+            collectionView.deleteSections(IndexSet(integer: 0))
+        }
+    }
+
+}
+
+extension FavoritesCollectionViewController {
+    
+    private func favoriteButtonDidTap(id: Int) {
+        do {
+            guard let presenter = self.presenter else { assertionFailure(); return }
+            try presenter.unfavorite(with: id)
+        } catch {
+            collectionView.reloadData()
+        }
     }
     
 }

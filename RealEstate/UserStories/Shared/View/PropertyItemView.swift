@@ -6,7 +6,7 @@ import UIKit
 
 protocol PropertyItemViewProtocol: PropertyListItemViewProtocol {
 
-    typealias Callback = () -> Void
+    typealias Callback = (Int) -> Void
     
     var favoriteButtonCallback: Callback? { get set }
     func display(item: PropertyItem)
@@ -21,6 +21,8 @@ final class PropertyItemCellView: UICollectionViewCell, ImageContainerView {
 
     var imageLoader: ImageLoaderProtocol = DependencyContainer.shared.imageLoader
     var currentImageLoaderTask: Cancellable?
+    
+    private var itemID: Int?
     
     @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?
@@ -39,7 +41,8 @@ final class PropertyItemCellView: UICollectionViewCell, ImageContainerView {
     }
 
     @IBAction func favoriteButtonDidTap() {
-        favoriteButtonCallback?()
+        guard let itemID = itemID else { assertionFailure(); return }
+        favoriteButtonCallback?(itemID)
     }
     
 }
@@ -50,8 +53,9 @@ extension PropertyItemCellView: PropertyItemViewProtocol {
         assert(titleLabel != nil)
         assert(addressLabel != nil)
         assert(priceLabel != nil)
-        // favoriteButton is not asserted since it's not required
+        assert(favoriteButton != nil)
 
+        itemID = item.id
         titleLabel?.text = item.title
         addressLabel?.text = item.address
         priceLabel?.text = item.price
@@ -71,6 +75,7 @@ extension PropertyItemCellView {
     private func clear() {
         clearImageView()
 
+        itemID = nil
         titleLabel?.text = ""
         addressLabel?.text = ""
         priceLabel?.text = ""

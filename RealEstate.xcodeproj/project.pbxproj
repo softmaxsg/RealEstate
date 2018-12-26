@@ -48,6 +48,7 @@
 		D845EB6E21D4001B006AA360 /* ImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB6D21D4001B006AA360 /* ImageContainerView.swift */; };
 		D845EB7721D4055B006AA360 /* FavoritesPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB7621D4055B006AA360 /* FavoritesPresenterTests.swift */; };
 		D845EB7921D40815006AA360 /* FavoritesViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB7821D40815006AA360 /* FavoritesViewMock.swift */; };
+		D845EB7B21D43782006AA360 /* FavoritesConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB7A21D43782006AA360 /* FavoritesConfiguratorTests.swift */; };
 		D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACC821C996B20068E020 /* AppDelegate.swift */; };
 		D87CACCE21C996B20068E020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCC21C996B20068E020 /* Main.storyboard */; };
 		D87CACD021C996B40068E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCF21C996B40068E020 /* Assets.xcassets */; };
@@ -159,6 +160,7 @@
 		D845EB6D21D4001B006AA360 /* ImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContainerView.swift; sourceTree = "<group>"; };
 		D845EB7621D4055B006AA360 /* FavoritesPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenterTests.swift; sourceTree = "<group>"; };
 		D845EB7821D40815006AA360 /* FavoritesViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewMock.swift; sourceTree = "<group>"; };
+		D845EB7A21D43782006AA360 /* FavoritesConfiguratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesConfiguratorTests.swift; sourceTree = "<group>"; };
 		D87CACC521C996B20068E020 /* RealEstate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87CACC821C996B20068E020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D87CACCD21C996B20068E020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				D845EB7621D4055B006AA360 /* FavoritesPresenterTests.swift */,
+				D845EB7A21D43782006AA360 /* FavoritesConfiguratorTests.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				D87CAD6921CC70F30068E020 /* XCTest+URLSessionMock.swift in Sources */,
 				D845EB2321D14E1B006AA360 /* AdvertisementItem+Helpers.swift in Sources */,
 				D87CAD0421C9C7BB0068E020 /* JSONDecoder+Helpers.swift in Sources */,
+				D845EB7B21D43782006AA360 /* FavoritesConfiguratorTests.swift in Sources */,
 				D87CAD0621C9C82B0068E020 /* Dictionary+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
