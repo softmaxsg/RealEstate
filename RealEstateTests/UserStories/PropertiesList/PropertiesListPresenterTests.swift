@@ -66,7 +66,7 @@ final class PropertiesListPresenterTests: XCTestCase {
         )
         
         XCTAssertThrowsError(try presenter.itemType(at: presenter.itemsCount), "Has to throw an error") { error in
-            XCTAssertEqual(error as? PropertiesListPresenterError, PropertiesListPresenterError.indexOutOfBounds)
+            XCTAssertEqual(error as? RandomAccessCollectionError, RandomAccessCollectionError.indexOutOfBounds)
         }
     }
 

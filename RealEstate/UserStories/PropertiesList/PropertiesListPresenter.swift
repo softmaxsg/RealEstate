@@ -6,7 +6,6 @@ import Foundation
 
 enum PropertiesListPresenterError: Error {
     
-    case indexOutOfBounds
     case invalidItemType
     
 }
@@ -63,16 +62,16 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
     var itemsCount: Int { return items.count }
 
     func itemType(at index: Int) throws -> ItemType {
-        return try item(at: index).type
+        return try items.item(at: index).type
     }
 
     func configure<ViewType>(item itemView: ViewType, at index: Int) throws where ViewType: PropertyListItemViewProtocol {
-        guard let item = try item(at: index).value as? ViewType.ItemType else { assertionFailure("Unexpected view type passed"); return }
+        guard let item = try items.item(at: index).value as? ViewType.ItemType else { assertionFailure("Unexpected view type passed"); return }
         itemView.display(item: item)
     }
 
     func toggleFavoriteState(at index: Int) throws {
-        let item = try self.item(at: index)
+        let item = try items.item(at: index)
         guard item.type == .property else { throw PropertiesListPresenterError.invalidItemType }
         guard let propertyItem = item.value as? PropertyItem else { assertionFailure(); return }
 
@@ -87,11 +86,6 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
 }
 
 extension PropertiesListPresenter {
-    
-    private func item(at index: Int) throws -> PropertyListItemInfo {
-        guard items.indices.contains(index) else { throw PropertiesListPresenterError.indexOutOfBounds }
-        return items[index]
-    }
     
     private func itemIndex(with propertyID: Int) -> Int? {
         return items.firstIndex {
@@ -134,12 +128,9 @@ extension PropertiesListPresenter {
 
     private func makePropertyItem(with property: Property) -> PropertyItem {
         return PropertyItem(
-            id: property.id,
-            isFavorite: favorites.contains(property.id),
-            title: property.title,
-            address: property.location.address,
-            price: priceFormatter.string(from: NSDecimalNumber(decimal: property.price)) ?? "",
-            image: property.images.first?.url
+            property: property,
+            favorite: favorites.contains(property.id),
+            priceFormatter: priceFormatter
         )
     }
     

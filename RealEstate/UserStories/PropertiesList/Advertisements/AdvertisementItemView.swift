@@ -10,24 +10,23 @@ protocol AdvertisementItemViewProtocol: PropertyListItemViewProtocol {
     
 }
 
-final class AdvertisementItemCellView: UICollectionViewCell {
+final class AdvertisementItemCellView: UICollectionViewCell, ImageContainerView {
     
     private lazy var placeHolderImage = UIImage(named: "ImagePlaceholder")
     
-    var imageLoader: ImageLoaderProtocol?
-    
-    private var currentImageLoaderTask: Cancellable?
+    var imageLoader: ImageLoaderProtocol = DependencyContainer.shared.imageLoader
+    var currentImageLoaderTask: Cancellable?
     
     @IBOutlet weak var imageView: UIImageView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.clear()
+        clearImageView()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.clear()
+        clearImageView()
     }
     
 }
@@ -35,21 +34,7 @@ final class AdvertisementItemCellView: UICollectionViewCell {
 extension AdvertisementItemCellView: AdvertisementItemViewProtocol {
     
     func display(item: AdvertisementItem) {
-        guard let imageLoader = imageLoader, let imageView = imageView else { assertionFailure(); return }
-        currentImageLoaderTask = imageLoader.setImage(with: item.image, on: imageView, placeholder: placeHolderImage)
+        displayImage(with: item.image, placeholder: placeHolderImage)
     }
     
-}
-
-extension AdvertisementItemCellView {
-    
-    private func clear() {
-        if let currentImageLoaderTask = currentImageLoaderTask, let imageView = imageView {
-            self.currentImageLoaderTask = nil
-            imageLoader?.cancel(task: currentImageLoaderTask, on: imageView)
-        }
-
-        imageView?.image = nil
-    }
-
 }

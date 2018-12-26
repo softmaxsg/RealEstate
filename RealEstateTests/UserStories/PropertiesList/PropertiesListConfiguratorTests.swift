@@ -12,7 +12,6 @@ final class PropertiesListConfiguratorTests: XCTestCase {
         viewController.configurator.configure(viewController: viewController)
         
         XCTAssertNotNil(viewController.presenter)
-        XCTAssertNotNil(viewController.imageLoader)
     }
 
 }

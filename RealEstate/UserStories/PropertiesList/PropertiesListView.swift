@@ -13,7 +13,7 @@ protocol PropertiesListViewProtocol: class {
     
 }
 
-final class PropertiesListCollectionViewController: UICollectionViewController {
+final class PropertiesListCollectionViewController: UICollectionViewController, CollectionViewCellAdjuster {
 
     @IBOutlet weak var loadingBackgroundView: UIView?
     @IBOutlet weak var emptyBackgroundView: UIView?
@@ -42,14 +42,13 @@ final class PropertiesListCollectionViewController: UICollectionViewController {
     
     var configurator = PropertiesListConfigurator()
     var presenter: PropertiesListPresenterProtocol?
-    var imageLoader: ImageLoaderProtocol?
     
     private var currentState = State.loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureCellSizes(for: view.bounds.size, safeArea: collectionView.safeAreaInsets)
+        adjustCellSize(for: view.bounds.size, safeArea: collectionView.safeAreaInsets)
         configurator.configure(viewController: self)
         
         guard let presenter = self.presenter else { assertionFailure(); return }
@@ -89,17 +88,7 @@ final class PropertiesListCollectionViewController: UICollectionViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-        collectionView.collectionViewLayout.invalidateLayout()
-        
-        coordinator.animate(
-            alongsideTransition: { _ in
-                self.configureCellSizes(for: size, safeArea: self.collectionView.safeAreaInsets)
-            },
-            completion: { _ in
-                self.collectionView.collectionViewLayout.invalidateLayout()
-            }
-        )
+        adjustCellSizeInTransition(to: size, with: coordinator)
     }
 
 }
@@ -125,22 +114,6 @@ extension PropertiesListCollectionViewController: PropertiesListViewProtocol {
 
 extension PropertiesListCollectionViewController {
     
-    private func configureCellSizes(for size: CGSize, safeArea: UIEdgeInsets) {
-        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { assertionFailure(); return }
-        
-        let viewWidth = size.width - (safeArea.left + safeArea.right)
-        let columnsCount = CGFloat(Int(viewWidth) / 500 + 1)
-        let spacing: CGFloat = (viewWidth / columnsCount) < 350 ? 10 : 20
-        
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        layout.itemSize = CGSize(
-            width: (viewWidth - spacing * (columnsCount + 1)) / columnsCount,
-            height: 250
-        )
-    }
-    
     private func configureStateView() -> UIView? {
         let result: UIView?
         
@@ -159,17 +132,15 @@ extension PropertiesListCollectionViewController {
     
     private func configure<T>(cell: UICollectionViewCell, of type: T.Type, at index: Int) where T: PropertyItemCellView {
         guard let presenter = presenter, let cell = cell as? T else { assertionFailure(); return }
-        cell.imageLoader = imageLoader
+        try? presenter.configure(item: cell, at: index)
+
         cell.favoriteButtonCallback = { [weak self] in
             try? self?.presenter?.toggleFavoriteState(at: index)
         }
-        
-        try? presenter.configure(item: cell, at: index)
     }
 
     private func configure<T>(cell: UICollectionViewCell, of type: T.Type, at index: Int) where T: AdvertisementItemCellView {
         guard let presenter = presenter, let cell = cell as? T else { assertionFailure(); return }
-        cell.imageLoader = imageLoader
         try? presenter.configure(item: cell, at: index)
     }
 

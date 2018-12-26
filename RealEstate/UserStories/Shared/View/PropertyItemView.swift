@@ -13,14 +13,14 @@ protocol PropertyItemViewProtocol: PropertyListItemViewProtocol {
     
 }
 
-final class PropertyItemCellView: UICollectionViewCell {
+final class PropertyItemCellView: UICollectionViewCell, ImageContainerView {
     
     private lazy var placeHolderImage = UIImage(named: "ImagePlaceholder")
     
-    var imageLoader: ImageLoaderProtocol?
     var favoriteButtonCallback: Callback?
 
-    private var currentImageLoaderTask: Cancellable?
+    var imageLoader: ImageLoaderProtocol = DependencyContainer.shared.imageLoader
+    var currentImageLoaderTask: Cancellable?
     
     @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?
@@ -47,8 +47,6 @@ final class PropertyItemCellView: UICollectionViewCell {
 extension PropertyItemCellView: PropertyItemViewProtocol {
 
     func display(item: PropertyItem) {
-        guard let imageLoader = imageLoader, let imageView = imageView else { assertionFailure(); return }
-
         assert(titleLabel != nil)
         assert(addressLabel != nil)
         assert(priceLabel != nil)
@@ -60,9 +58,9 @@ extension PropertyItemCellView: PropertyItemViewProtocol {
         favoriteButton?.isSelected = item.isFavorite
 
         if let imageURL = item.image {
-            currentImageLoaderTask = imageLoader.setImage(with: imageURL, on: imageView, placeholder: placeHolderImage)
+            displayImage(with: imageURL, placeholder: placeHolderImage)
         } else {
-            imageView.image = placeHolderImage
+            imageView?.image = placeHolderImage
         }
     }
 
@@ -71,12 +69,8 @@ extension PropertyItemCellView: PropertyItemViewProtocol {
 extension PropertyItemCellView {
     
     private func clear() {
-        if let currentImageLoaderTask = currentImageLoaderTask, let imageView = imageView {
-            self.currentImageLoaderTask = nil
-            imageLoader?.cancel(task: currentImageLoaderTask, on: imageView)
-        }
+        clearImageView()
 
-        imageView?.image = nil
         titleLabel?.text = ""
         addressLabel?.text = ""
         priceLabel?.text = ""
