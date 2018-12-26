@@ -36,6 +36,8 @@
 		D845EB5321D2F15C006AA360 /* PropertyItemCellViewTests_testFavoritePropertyAppearance@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D845EB5121D2F15C006AA360 /* PropertyItemCellViewTests_testFavoritePropertyAppearance@3x.png */; };
 		D845EB5621D39C38006AA360 /* FavoritesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB5521D39C38006AA360 /* FavoritesDataStorage.swift */; };
 		D845EB5821D3A9D8006AA360 /* FavoritesDataStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB5721D3A9D8006AA360 /* FavoritesDataStorageTests.swift */; };
+		D845EB5A21D3B134006AA360 /* FavoritesDataStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB5921D3B134006AA360 /* FavoritesDataStorageMock.swift */; };
+		D845EB5C21D3BE1A006AA360 /* XCTest+FavoritesDataStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB5B21D3BE1A006AA360 /* XCTest+FavoritesDataStorageMock.swift */; };
 		D87CACC921C996B20068E020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CACC821C996B20068E020 /* AppDelegate.swift */; };
 		D87CACCE21C996B20068E020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCC21C996B20068E020 /* Main.storyboard */; };
 		D87CACD021C996B40068E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87CACCF21C996B40068E020 /* Assets.xcassets */; };
@@ -135,6 +137,8 @@
 		D845EB5121D2F15C006AA360 /* PropertyItemCellViewTests_testFavoritePropertyAppearance@3x.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = "PropertyItemCellViewTests_testFavoritePropertyAppearance@3x.png"; sourceTree = "<group>"; };
 		D845EB5521D39C38006AA360 /* FavoritesDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataStorage.swift; sourceTree = "<group>"; };
 		D845EB5721D3A9D8006AA360 /* FavoritesDataStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataStorageTests.swift; sourceTree = "<group>"; };
+		D845EB5921D3B134006AA360 /* FavoritesDataStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataStorageMock.swift; sourceTree = "<group>"; };
+		D845EB5B21D3BE1A006AA360 /* XCTest+FavoritesDataStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+FavoritesDataStorageMock.swift"; sourceTree = "<group>"; };
 		D87CACC521C996B20068E020 /* RealEstate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87CACC821C996B20068E020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D87CACCD21C996B20068E020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -459,6 +463,7 @@
 			isa = PBXGroup;
 			children = (
 				D89FDDAF21D02D7B008EAAA2 /* AdvertisementsGatewayMock.swift */,
+				D845EB5921D3B134006AA360 /* FavoritesDataStorageMock.swift */,
 				D845EB4E21D2B947006AA360 /* FavoritesGatewayDelegateMock.swift */,
 				D845EB4A21D26AB2006AA360 /* FavoritesGatewayMock.swift */,
 				D845EB2E21D19FA1006AA360 /* ImageLoaderMock.swift */,
@@ -466,6 +471,7 @@
 				D87CAD5421CC0E200068E020 /* PropertiesGatewayMock.swift */,
 				D87CAD2321CBB7B90068E020 /* URLSessionDataTaskMock.swift */,
 				D87CAD1F21CBB11B0068E020 /* URLSessionMock.swift */,
+				D845EB5B21D3BE1A006AA360 /* XCTest+FavoritesDataStorageMock.swift */,
 				D87CAD6A21CC72CD0068E020 /* XCTest+JSONDecoderMock.swift */,
 				D87CAD6821CC70F30068E020 /* XCTest+URLSessionMock.swift */,
 			);
@@ -688,6 +694,7 @@
 				D87CAD1721CA799A0068E020 /* ResultTests.swift in Sources */,
 				D89FDDB221D10DCE008EAAA2 /* XCTest+AdvertisementsGatewayMock.swift in Sources */,
 				D87CACFE21C9C6420068E020 /* Property+Helpers.swift in Sources */,
+				D845EB5C21D3BE1A006AA360 /* XCTest+FavoritesDataStorageMock.swift in Sources */,
 				D87CAD2421CBB7B90068E020 /* URLSessionDataTaskMock.swift in Sources */,
 				D87CACEE21C9A4C80068E020 /* ImageDecodingTests.swift in Sources */,
 				D845EB3B21D1B97F006AA360 /* PropertyItemCellViewTests.swift in Sources */,
@@ -696,6 +703,7 @@
 				D845EB1F21D14CE2006AA360 /* AdvertisementsEmbedderTests.swift in Sources */,
 				D87CAD0221C9C6DA0068E020 /* Location+Helpers.swift in Sources */,
 				D87CAD0021C9C6760068E020 /* Image+Helpers.swift in Sources */,
+				D845EB5A21D3B134006AA360 /* FavoritesDataStorageMock.swift in Sources */,
 				D87CAD1E21CBB09A0068E020 /* PropertiesGatewayTests.swift in Sources */,
 				D845EB1D21D14877006AA360 /* AdvertisementsEmbedderMock.swift in Sources */,
 				D845EB4B21D26AB2006AA360 /* FavoritesGatewayMock.swift in Sources */,

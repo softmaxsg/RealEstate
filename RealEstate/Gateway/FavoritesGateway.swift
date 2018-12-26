@@ -31,24 +31,26 @@ final class FavoritesGateway: FavoritesGatewayProtocol {
         
     }
     
+    private let dataStorage: FavoritesDataStorageProtocol
     private var delegates: [DelegateWrapper] = []
     
-    private(set) var favorites: [Property] = []
+    private(set) lazy var favorites: [Property] = dataStorage.loadAll()
     
-    // Initial state for testing while data storage is not implemented
-    init(favorites: [Property] = []) {
-        self.favorites = favorites
+    init(dataStorage: FavoritesDataStorageProtocol) {
+        self.dataStorage = dataStorage
     }
     
     func addProperty(_ property: Property) {
         guard !favorites.contains(where: { $0.id == property.id }) else { assertionFailure(); return }
         favorites.append(property)
+        dataStorage.saveAll(favorites)
         delegates.forEach { $0.delegate?.favoriteItemAdded(with: property.id) }
     }
     
     func removeProperty(with propertyID: Int) {
         guard let index = favorites.firstIndex(where: { $0.id == propertyID }) else { assertionFailure(); return }
         favorites.remove(at: index)
+        dataStorage.saveAll(favorites)
         delegates.forEach { $0.delegate?.favoriteItemRemoved(with: propertyID) }
     }
 

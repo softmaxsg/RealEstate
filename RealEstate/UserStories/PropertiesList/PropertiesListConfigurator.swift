@@ -12,10 +12,12 @@ final class PropertiesListConfigurator {
         priceFormatter.currencyCode = "EUR"
         priceFormatter.maximumFractionDigits = 0
         
+        let favoritesStorage = FavoritesDataStorage()
+        
         viewController.presenter = PropertiesListPresenter(
             view: viewController,
             propertiesGateway: PropertiesGateway(),
-            favoritesGateway: FavoritesGateway(),
+            favoritesGateway: FavoritesGateway(dataStorage: favoritesStorage),
             advertisementsGateway: AdvertisementsGateway(),
             advertisementsEmbedder: AdvertisementsEmbedder(),
             priceFormatter: priceFormatter

@@ -103,7 +103,7 @@ final class PropertiesListPresenterTests: XCTestCase {
         var favoriteState: Bool!
         let itemIndex = Int.random(in: 0..<self.properties.count)
 
-        let defaultFavoritesGateway = FavoritesGateway(favorites: favorites)
+        let defaultFavoritesGateway = FavoritesGateway(dataStorage: favoritesStorageMock(initial: favorites))
         let favoritesGatewayMock = FavoritesGatewayMock(
             getFavorites: { defaultFavoritesGateway.favorites },
             addProperty: { property in
@@ -207,7 +207,7 @@ extension PropertiesListPresenterTests {
         let presenter = PropertiesListPresenter(
             view: viewMock,
             propertiesGateway: propertiesGatewayMock,
-            favoritesGateway: favoritesGateway ?? FavoritesGateway(favorites: favorites),
+            favoritesGateway: favoritesGateway ?? FavoritesGateway(dataStorage: favoritesStorageMock(initial: favorites)),
             advertisementsGateway: advertisementsGatewayMock,
             advertisementsEmbedder: advertisementsEmbedderMock,
             priceFormatter: priceFormatter
