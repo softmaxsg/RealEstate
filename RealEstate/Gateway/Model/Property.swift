@@ -33,3 +33,5 @@ extension Property: Decodable {
     }
 
 }
+
+extension Property: Encodable { }

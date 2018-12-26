@@ -18,7 +18,7 @@ struct Location: Equatable {
 
 }
 
-extension Location: Decodable {
+extension Location: Codable {
 
     enum CodingKeys: String, CodingKey {
         case address
@@ -33,6 +33,13 @@ extension Location: Decodable {
             latitude: try values.decode(Double.self, forKey: .latitude),
             longitude: try values.decode(Double.self, forKey: .longitude)
         )
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var values = encoder.container(keyedBy: CodingKeys.self)
+        try values.encode(address, forKey: .address)
+        try values.encode(coordinate.latitude, forKey: .latitude)
+        try values.encode(coordinate.longitude, forKey: .longitude)
     }
 
 }

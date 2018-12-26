@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct Image: Equatable, Decodable {
+struct Image: Equatable, Codable {
     
     let id: Int
     let url: URL
