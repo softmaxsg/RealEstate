@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YtL-op-CS9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation-->
+        <scene sceneID="WIe-43-ujC">
+            <objects>
+                <navigationController id="YtL-op-CS9" userLabel="Navigation" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="TOM-EU-TYP"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gt4-iJ-FuT">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hdu-5m-qkg" kind="relationship" relationship="rootViewController" id="qqZ-wz-dQe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cnx-y7-z6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="876" y="1173"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="lC4-RI-PMM">
+            <objects>
+                <collectionViewController id="hdu-5m-qkg" customClass="FavoritesCollectionViewController" customModule="RealEstate" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" id="GwU-Xa-SmE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="6U9-yp-QwS"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" sectionInsetReference="safeArea" id="AIg-WA-pfd">
+                            <size key="itemSize" width="335" height="250"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="hdu-5m-qkg" id="gIl-n4-Rfa"/>
+                            <outlet property="delegate" destination="hdu-5m-qkg" id="C2y-Xb-Fz5"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Favorites" id="Y6q-6d-5LE"/>
+                    <connections>
+                        <outlet property="emptyBackgroundView" destination="0e0-1h-jZd" id="gad-qy-7Ag"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NYz-OI-LCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="0e0-1h-jZd" userLabel="EmptyView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="382"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7S-eB-vlB">
+                            <rect key="frame" x="22.5" y="59.5" width="195" height="263"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="220"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="There are no favorites yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKx-iE-4PY">
+                            <rect key="frame" x="8" y="307" width="224" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="rKx-iE-4PY" firstAttribute="top" secondItem="G7S-eB-vlB" secondAttribute="bottom" constant="-15.5" id="5QD-2j-aqs"/>
+                        <constraint firstItem="aZP-OK-Tkd" firstAttribute="trailing" secondItem="rKx-iE-4PY" secondAttribute="trailing" constant="8" id="c3w-ya-vl0"/>
+                        <constraint firstItem="G7S-eB-vlB" firstAttribute="centerY" secondItem="0e0-1h-jZd" secondAttribute="centerY" id="dPl-4J-Jux"/>
+                        <constraint firstItem="rKx-iE-4PY" firstAttribute="leading" secondItem="aZP-OK-Tkd" secondAttribute="leading" constant="8" id="hpn-pC-yAg"/>
+                        <constraint firstItem="G7S-eB-vlB" firstAttribute="centerX" secondItem="0e0-1h-jZd" secondAttribute="centerX" id="i5d-MS-kCP"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="aZP-OK-Tkd"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="1799" y="1173"/>
+        </scene>
+    </scenes>
+</document>
