@@ -4,7 +4,13 @@
 
 import UIKit
 
-final class FavoritesCollectionViewController: UICollectionViewController {
+protocol FavoritesViewProtocol: class {
+    
+    func updateView()
+    
+}
+
+final class FavoritesCollectionViewController: UICollectionViewController, CollectionViewCellAdjuster {
 
     @IBOutlet weak var emptyBackgroundView: UIView?
 

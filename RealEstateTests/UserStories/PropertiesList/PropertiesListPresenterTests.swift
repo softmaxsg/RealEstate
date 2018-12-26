@@ -227,15 +227,24 @@ extension PropertiesListPresenterTests {
     
     private func configureItem<ItemType>(presenter: PropertiesListPresenterProtocol, at index: Int) throws -> ItemType where ItemType: PropertyListItem {
         let expectation = self.expectation(description: "PropertyItemView.displayItem")
-        var result: ItemType!
+        var result: Result<ItemType>!
         
-        try presenter.configure(item: PropertyListItemViewMock<ItemType> {
-            result = $0
+        do {
+            try presenter.configure(item: PropertyListItemViewMock<ItemType> {
+                result = .success($0)
+                expectation.fulfill()
+            }, at: index)
+        } catch (let error) {
+            result = .failure(error)
             expectation.fulfill()
-        }, at: index)
+        }
         
         wait(for: [expectation], timeout: 1)
-        return result
+        
+        switch result! {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        }
     }
     
     private func compare(item: PropertyItem, property: Property, file: StaticString = #file, line: UInt = #line) {

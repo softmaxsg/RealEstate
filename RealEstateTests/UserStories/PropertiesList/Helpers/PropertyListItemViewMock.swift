@@ -5,7 +5,7 @@
 import Foundation
 @testable import RealEstate
 
-final class PropertyListItemViewMock<ItemType>: PropertyListItemViewProtocol where ItemType: PropertyListItem {
+class PropertyListItemViewMock<ItemType>: PropertyListItemViewProtocol where ItemType: PropertyListItem {
 
     typealias DisplayItemImpl = (ItemType) -> Void
     
@@ -18,5 +18,11 @@ final class PropertyListItemViewMock<ItemType>: PropertyListItemViewProtocol whe
     func display(item: ItemType) {
         displayItemImpl(item)
     }
+    
+}
+
+final class PropertyItemViewMock: PropertyListItemViewMock<PropertyItem>, PropertyItemViewProtocol {
+    
+    var favoriteButtonCallback: Callback? 
     
 }
