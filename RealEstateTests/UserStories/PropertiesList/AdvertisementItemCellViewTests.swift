@@ -17,13 +17,7 @@ class AdvertisementItemCellViewTests: XCTestCase {
     }
 
     private lazy var cell: AdvertisementItemCellView = {
-        let cell: AdvertisementItemCellView = collectionView(
-            storyboardID: "Main",
-            controllerID: "PropertiesListCollectionViewController",
-            cellID: "AdvertisementItem",
-            size: defaultSize
-        )
-        
+        let cell: AdvertisementItemCellView = view(nibName: "AdvertisementItemView", size: defaultSize)
         cell.imageLoader = imageLoaderMock
         return cell
     }()
@@ -31,13 +25,13 @@ class AdvertisementItemCellViewTests: XCTestCase {
     func testLoadedImageAppearance() {
         let cell = self.cell
         cell.display(item: AdvertisementItem(image: expectedImageURL))
-        snapshotVerifyView(cell.contentView)
+        snapshotVerifyView(cell)
     }
     
     func testLoadingImageFailedAppearance() {
         let cell = self.cell
         cell.display(item: AdvertisementItem(image: URL(string: UUID().uuidString)!))
-        snapshotVerifyView(cell.contentView)
+        snapshotVerifyView(cell)
     }
 
 }

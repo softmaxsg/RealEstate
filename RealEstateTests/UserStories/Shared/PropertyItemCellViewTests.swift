@@ -17,13 +17,7 @@ class PropertyItemCellViewTests: XCTestCase {
     }
     
     private lazy var cell: PropertyItemCellView = {
-        let cell: PropertyItemCellView = collectionView(
-            storyboardID: "Main",
-            controllerID: "PropertiesListCollectionViewController",
-            cellID: "PropertyItem",
-            size: defaultSize
-        )
-        
+        let cell: PropertyItemCellView = view(nibName: "PropertyItemView", size: defaultSize)
         cell.imageLoader = imageLoaderMock
         return cell
     }()
@@ -39,7 +33,7 @@ class PropertyItemCellViewTests: XCTestCase {
             image: expectedImageURL
         ))
         
-        snapshotVerifyView(cell.contentView)
+        snapshotVerifyView(cell)
     }
     
     func testLoadingImageFailedAppearance() {
@@ -53,7 +47,7 @@ class PropertyItemCellViewTests: XCTestCase {
             image: nil
         ))
         
-        snapshotVerifyView(cell.contentView)
+        snapshotVerifyView(cell)
     }
     
     func testLongLabelsAppearance() {
@@ -67,7 +61,7 @@ class PropertyItemCellViewTests: XCTestCase {
             image: nil
         ))
         
-        snapshotVerifyView(cell.contentView)
+        snapshotVerifyView(cell)
     }
     
     func testFavoritePropertyAppearance() {
@@ -81,7 +75,7 @@ class PropertyItemCellViewTests: XCTestCase {
             image: expectedImageURL
         ))
         
-        snapshotVerifyView(cell.contentView)
+        snapshotVerifyView(cell)
     }
 
 }

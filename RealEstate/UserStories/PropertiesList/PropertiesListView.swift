@@ -48,6 +48,8 @@ final class PropertiesListCollectionViewController: UICollectionViewController, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registerCells()
+
         adjustCellSize(for: view.bounds.size, safeArea: collectionView.safeAreaInsets)
         configurator.configure(viewController: self)
         
@@ -113,6 +115,11 @@ extension PropertiesListCollectionViewController: PropertiesListViewProtocol {
 }
 
 extension PropertiesListCollectionViewController {
+    
+    private func registerCells() {
+        PropertyItemCellView.register(in: collectionView, with: ReuseIdentifier.propertyItem.rawValue)
+        AdvertisementItemCellView.register(in: collectionView, with: ReuseIdentifier.advertisementItem.rawValue)
+    }
     
     private func configureStateView() -> UIView? {
         let result: UIView?

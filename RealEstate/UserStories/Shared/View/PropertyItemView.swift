@@ -82,3 +82,14 @@ extension PropertyItemCellView {
     }
 
 }
+
+extension PropertyItemCellView {
+    
+    class func register(in collectionView: UICollectionView, with identifier: String) {
+        collectionView.register(
+            UINib(nibName: "PropertyItemView", bundle: nil),
+            forCellWithReuseIdentifier: identifier
+        )
+    }
+    
+}

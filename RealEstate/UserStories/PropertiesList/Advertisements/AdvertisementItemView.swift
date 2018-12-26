@@ -38,3 +38,14 @@ extension AdvertisementItemCellView: AdvertisementItemViewProtocol {
     }
     
 }
+
+extension AdvertisementItemCellView {
+    
+    class func register(in collectionView: UICollectionView, with identifier: String) {
+        collectionView.register(
+            UINib(nibName: "AdvertisementItemView", bundle: nil),
+            forCellWithReuseIdentifier: identifier
+        )
+    }
+    
+}

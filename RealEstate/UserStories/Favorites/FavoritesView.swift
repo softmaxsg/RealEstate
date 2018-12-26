@@ -27,7 +27,9 @@ final class FavoritesCollectionViewController: UICollectionViewController, Colle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        registerCells()
+
         adjustCellSize(for: view.bounds.size, safeArea: collectionView.safeAreaInsets)
         configurator.configure(viewController: self)
         
@@ -90,6 +92,10 @@ extension FavoritesCollectionViewController: FavoritesViewProtocol {
 }
 
 extension FavoritesCollectionViewController {
+    
+    private func registerCells() {
+        PropertyItemCellView.register(in: collectionView, with: ReuseIdentifier.propertyItem.rawValue)
+    }
     
     private func favoriteButtonDidTap(id: Int) {
         do {
