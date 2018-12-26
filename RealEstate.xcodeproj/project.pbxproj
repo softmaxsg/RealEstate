@@ -39,6 +39,7 @@
 		D845EB5A21D3B134006AA360 /* FavoritesDataStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB5921D3B134006AA360 /* FavoritesDataStorageMock.swift */; };
 		D845EB5C21D3BE1A006AA360 /* XCTest+FavoritesDataStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB5B21D3BE1A006AA360 /* XCTest+FavoritesDataStorageMock.swift */; };
 		D845EB5F21D3CD9C006AA360 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB5E21D3CD9C006AA360 /* FavoritesView.swift */; };
+		D845EB6121D3E066006AA360 /* FavoritesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB6021D3E066006AA360 /* FavoritesConfigurator.swift */; };
 		D845EB6321D3E1ED006AA360 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB6221D3E1ED006AA360 /* DependencyContainer.swift */; };
 		D845EB6521D3E8BC006AA360 /* CollectionViewCellAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB6421D3E8BC006AA360 /* CollectionViewCellAdjuster.swift */; };
 		D845EB6721D3EC60006AA360 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845EB6621D3EC60006AA360 /* FavoritesPresenter.swift */; };
@@ -149,6 +150,7 @@
 		D845EB5921D3B134006AA360 /* FavoritesDataStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataStorageMock.swift; sourceTree = "<group>"; };
 		D845EB5B21D3BE1A006AA360 /* XCTest+FavoritesDataStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+FavoritesDataStorageMock.swift"; sourceTree = "<group>"; };
 		D845EB5E21D3CD9C006AA360 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		D845EB6021D3E066006AA360 /* FavoritesConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesConfigurator.swift; sourceTree = "<group>"; };
 		D845EB6221D3E1ED006AA360 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		D845EB6421D3E8BC006AA360 /* CollectionViewCellAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellAdjuster.swift; sourceTree = "<group>"; };
 		D845EB6621D3EC60006AA360 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		D845EB5D21D3CC65006AA360 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				D845EB6021D3E066006AA360 /* FavoritesConfigurator.swift */,
 				D845EB6621D3EC60006AA360 /* FavoritesPresenter.swift */,
 				D845EB5E21D3CD9C006AA360 /* FavoritesView.swift */,
 			);
@@ -706,6 +709,7 @@
 				D89FDDA121CED232008EAAA2 /* AdvertisementItemView.swift in Sources */,
 				D87CACF521C9AD720068E020 /* Image.swift in Sources */,
 				D87CAD6321CC62D80068E020 /* ImageLoader.swift in Sources */,
+				D845EB6121D3E066006AA360 /* FavoritesConfigurator.swift in Sources */,
 				D845EB1A21D14406006AA360 /* PropertyListItemInfo.swift in Sources */,
 				D87CAD4B21CBFE350068E020 /* PropertyItemView.swift in Sources */,
 				D89FDDA921CEE52E008EAAA2 /* AdvertisementsGateway.swift in Sources */,

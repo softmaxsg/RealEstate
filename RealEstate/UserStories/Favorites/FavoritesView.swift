@@ -19,10 +19,51 @@ final class FavoritesCollectionViewController: UICollectionViewController, Colle
         case propertyItem = "PropertyItem"
         
     }
+    
+    var configurator = FavoritesConfigurator()
+    var presenter: FavoritesPresenterProtocol?
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        collectionView.backgroundView = emptyBackgroundView
-        return 0
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        adjustCellSize(for: view.bounds.size, safeArea: collectionView.safeAreaInsets)
+        configurator.configure(viewController: self)
+        
+        guard let presenter = self.presenter else { assertionFailure(); return }
+        presenter.displayFavorites()
     }
 
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        let stateView = (presenter?.itemsCount ?? 0) <= 0 ? emptyBackgroundView : nil
+        collectionView.backgroundView = stateView
+        return stateView == nil ? 1 : 0
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let presenter = self.presenter else { assertionFailure(); return 0 }
+        return presenter.itemsCount
+    }
+    
+    override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:ReuseIdentifier.propertyItem.rawValue, for: indexPath)
+
+        guard let presenter = presenter, let itemCell = cell as? PropertyItemCellView else { assertionFailure(); return cell }
+        try? presenter.configure(item: itemCell, at: indexPath.item)
+        
+        return cell
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        adjustCellSizeInTransition(to: size, with: coordinator)
+    }
+
+}
+
+extension FavoritesCollectionViewController: FavoritesViewProtocol {
+
+    func updateView() {
+        collectionView.reloadData()
+    }
+    
 }
