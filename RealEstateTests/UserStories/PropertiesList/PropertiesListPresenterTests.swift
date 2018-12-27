@@ -9,34 +9,55 @@ final class PropertiesListPresenterTests: XCTestCase {
     
     private let properties = Array(1...Int.random(in: 3...10)).map { _ in Property.random() }
     private let advertisements = Array(1...Int.random(in: 1...10)).map { _ in URL(string: UUID().uuidString)! }
-    private lazy var favorites: [Property] = {
-        return properties.compactMap { Bool.random() ? $0 : nil }
-    }()
-    
-    private lazy var priceFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencyCode = "EUR"
-        return formatter
-    }()
     
     func testDispslayPropertiesSuccessful() {
+        var expectedProperty: Property!
+        var expectedAdvertisement: URL!
+        var expectedItemPresenter: PropertyListItemPresenterProtocol!
+        
+        let propertyItemViewMock = PropertyItemViewMock.empty
+        let advertisementItemViewMock = AdvertisementItemViewMock.empty
+
         let presenter = presenterDisplayProperties(
             propertiesResult: .success(properties),
-            advertisementsResult: .success(advertisements)
+            advertisementsResult: .success(advertisements),
+            propertyItemPresenter: { property, itemView in
+                XCTAssertTrue(itemView === propertyItemViewMock)
+                XCTAssertEqual(property, expectedProperty)
+                expectedItemPresenter = PropertItemPresenterMock.empty
+                return expectedItemPresenter as! PropertyItemPresenterProtocol
+            },
+            advertisementItemPresenter: { advertisement, itemView in
+                XCTAssertTrue(itemView === advertisementItemViewMock)
+                XCTAssertEqual(advertisement, expectedAdvertisement)
+                expectedItemPresenter = AdvertisementItemPresenterMock.empty
+                return expectedItemPresenter as! AdvertisementItemPresenterProtocol
+            }
         )
 
         // Mocked AdvertisementsEmbedder just merges two arrays
         XCTAssertEqual(presenter.itemsCount, properties.count + advertisements.count)
-        
+
+        expectedAdvertisement = nil
         for (index, property) in properties.enumerated() {
-            let item: PropertyItem = try! configureItem(presenter: presenter, at: index)
-            compare(item: item, property: property)
+            expectedProperty = property
+            
+            let itemType = try! presenter.itemType(at: index)
+            XCTAssertEqual(itemType, .property)
+            
+            let itemPresenter = try! presenter.itemPresenter(for: propertyItemViewMock, at: index)
+            XCTAssertTrue(itemPresenter === expectedItemPresenter)
         }
         
-        for (index, url) in advertisements.enumerated() {
-            let item: AdvertisementItem = try! configureItem(presenter: presenter, at: index + properties.count)
-            compare(item: item, url: url)
+        expectedProperty = nil
+        for (index, advertisement) in advertisements.enumerated() {
+            expectedAdvertisement = advertisement
+            
+            let itemType = try! presenter.itemType(at: properties.count + index)
+            XCTAssertEqual(itemType, .advertisement)
+            
+            let itemPresenter = try! presenter.itemPresenter(for: advertisementItemViewMock, at: properties.count + index)
+            XCTAssertTrue(itemPresenter === expectedItemPresenter)
         }
     }
     
@@ -70,91 +91,6 @@ final class PropertiesListPresenterTests: XCTestCase {
         }
     }
 
-    func testConfigurePropertyItem() {
-        let presenter = presenterDisplayProperties(
-            propertiesResult: .success(properties),
-            advertisementsResult: .failure(MockError.some) // To simplify finding correct property in the list
-        )
-        
-        let itemIndex = Int.random(in: 0..<properties.count)
-        let item: PropertyItem = try! configureItem(presenter: presenter, at: itemIndex)
-        let property = properties[itemIndex]
-
-        compare(item: item, property: property)
-    }
-
-    func testConfigureAdvertisementItem() {
-        let presenter = presenterDisplayProperties(
-            propertiesResult: .success(properties),
-            advertisementsResult: .success(advertisements)
-        )
-
-        let itemIndex = (0..<presenter.itemsCount).first(where: { try! presenter.itemType(at: $0) == .advertisement })!
-        let item: AdvertisementItem = try! configureItem(presenter: presenter, at: itemIndex)
-        
-        compare(item: item, url: advertisements.first!)
-    }
-    
-    func testToggleFavoriteState() {
-        let updateItemExpectation = self.expectation(description: "PropertiesView.updateItem")
-        let favoritesGatewayExpectation = self.expectation(description: "FavoritesGateway.addProperty or removeProperty")
-
-        var item: PropertyItem!
-        var favoriteState: Bool!
-        let itemIndex = Int.random(in: 0..<self.properties.count)
-
-        let defaultFavoritesGateway = FavoritesGateway(dataStorage: favoritesStorageMock(initial: favorites))
-        let favoritesGatewayMock = FavoritesGatewayMock(
-            getFavorites: { defaultFavoritesGateway.favorites },
-            addProperty: { property in
-                guard !item.isFavorite else { XCTFail("Should not be called"); fatalError() }
-                defaultFavoritesGateway.addProperty(property)
-                favoriteState = true
-                favoritesGatewayExpectation.fulfill()
-            },
-            removeProperty: { id in
-                guard item.isFavorite else { XCTFail("Should not be called"); fatalError() }
-                defaultFavoritesGateway.removeProperty(with: id)
-                favoriteState = false
-                favoritesGatewayExpectation.fulfill()
-            },
-            addDelegate: { defaultFavoritesGateway.addDelegate($0) },
-            removeDelegate: { defaultFavoritesGateway.removeDelegate($0) }
-        )
-        
-        let presenter = presenterDisplayProperties(
-            propertiesResult: .success(properties),
-            advertisementsResult: .failure(MockError.some), // To simplify finding correct property in the list
-            updateItemImpl: { index in
-                XCTAssertEqual(index, itemIndex)
-                updateItemExpectation.fulfill()
-            },
-            favoritesGateway: favoritesGatewayMock,
-            additionalActions: { presenter in
-                // Has to be done within the scope of `presenterDisplayProperties` in order to keep view mock alive during this call
-                item = try! self.configureItem(presenter: presenter, at: itemIndex)
-                try! presenter.toggleFavoriteState(with: item.id)
-            }
-        )
-        
-        wait(for: [updateItemExpectation, favoritesGatewayExpectation], timeout: 1)
-        
-        let updatedItem: PropertyItem = try! configureItem(presenter: presenter, at: itemIndex)
-        XCTAssertEqual(updatedItem.isFavorite, favoriteState)
-        XCTAssertNotEqual(updatedItem.isFavorite, item.isFavorite)
-    }
-
-    func testToggleFavoriteStateWithInvalidID() {
-        let presenter = presenterDisplayProperties(
-            propertiesResult: .failure(MockError.some),
-            advertisementsResult: .failure(MockError.some)
-        )
-        
-        XCTAssertThrowsError(try presenter.toggleFavoriteState(with: PropertyID.random(in: 0...PropertyID.max)), "Has to throw an error") { error in
-            XCTAssertEqual(error as? PropertiesListPresenterError, PropertiesListPresenterError.invalidID)
-        }
-    }
-
 }
 
 extension PropertiesListPresenterTests {
@@ -163,9 +99,8 @@ extension PropertiesListPresenterTests {
     
     private func presenterDisplayProperties(propertiesResult: Result<[Property]>,
                                             advertisementsResult: Result<[URL]>,
-                                            updateItemImpl: PropertiesListViewMock.UpdateItemImpl? = nil,
-                                            favoritesGateway: FavoritesGatewayProtocol? = nil,
-                                            additionalActions: ((PropertiesListPresenterProtocol) -> Void)? = nil,
+                                            propertyItemPresenter: PropertiesListConfiguratorMock.PresenterForPropertyImpl? = nil,
+                                            advertisementItemPresenter: PropertiesListConfiguratorMock.PresenterForAdvertisementImpl? = nil,
                                             file: StaticString = #file,
                                             line: UInt = #line) -> PropertiesListPresenterProtocol {
         let viewExpectation = self.expectation(description: "PropertiesView.updateView or displayLoadingError")
@@ -182,7 +117,6 @@ extension PropertiesListPresenterTests {
                     XCTFail("Should not be called in this test", file: file, line: line)
                 }
             },
-            updateItem: updateItemImpl ?? { _ in XCTFail("Should not be called in this test", file: file, line: line) },
             displayLoadingError: { errorMessage in
                 switch propertiesResult {
                 case .success:
@@ -199,17 +133,21 @@ extension PropertiesListPresenterTests {
         
         let advertisementsEmbedderMock = AdvertisementsEmbedderMock { advertisements, properties in
             advertisementsEmbedderExpectation.fulfill()
-            return properties.map { PropertyListItemInfo(type: .property, value: $0) } +
-                advertisements.map { PropertyListItemInfo(type: .advertisement, value: $0) }
+            return properties.map { .property($0) } + advertisements.map { .advertisement($0) }
         }
+        
+        let configurationMock = PropertiesListConfiguratorMock(
+            configure: { _ in },
+            propertyPresenter: propertyItemPresenter ?? { _, _ in PropertItemPresenterMock.empty },
+            advertisementPresenter: advertisementItemPresenter ?? { _, _ in AdvertisementItemPresenterMock.empty }
+        )
         
         let presenter = PropertiesListPresenter(
             view: viewMock,
             propertiesGateway: propertiesGatewayMock,
-            favoritesGateway: favoritesGateway ?? FavoritesGateway(dataStorage: favoritesStorageMock(initial: favorites)),
             advertisementsGateway: advertisementsGatewayMock,
             advertisementsEmbedder: advertisementsEmbedderMock,
-            priceFormatter: priceFormatter
+            configurator: configurationMock
         )
         
         presenter.displayProperties()
@@ -219,44 +157,8 @@ extension PropertiesListPresenterTests {
         }
 
         wait(for: [viewExpectation, propertiesGatewayExpectation, advertisementsGatewayExpectation, advertisementsEmbedderExpectation], timeout: 1)
-        additionalActions?(presenter)
         
         return presenter
-    }
-    
-    private func configureItem<ItemType>(presenter: PropertiesListPresenterProtocol, at index: Int) throws -> ItemType where ItemType: PropertyListItem {
-        let expectation = self.expectation(description: "PropertyItemView.displayItem")
-        var result: Result<ItemType>!
-        
-        do {
-            try presenter.configure(item: PropertyListItemViewMock<ItemType> {
-                result = .success($0)
-                expectation.fulfill()
-            }, at: index)
-        } catch (let error) {
-            result = .failure(error)
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 1)
-        
-        switch result! {
-        case .success(let value): return value
-        case .failure(let error): throw error
-        }
-    }
-    
-    private func compare(item: PropertyItem, property: Property, file: StaticString = #file, line: UInt = #line) {
-        XCTAssertEqual(item.id, property.id, file: file, line: line)
-        XCTAssertEqual(item.isFavorite, favorites.contains(property), file: file, line: line)
-        XCTAssertEqual(item.title, property.title, file: file, line: line)
-        XCTAssertEqual(item.address, property.location.address, file: file, line: line)
-        XCTAssertEqual(item.price, priceFormatter.string(from: NSDecimalNumber(decimal: property.price)), file: file, line: line)
-        XCTAssertEqual(item.image, property.images.first?.url, file: file, line: line)
-    }
-    
-    private func compare(item: AdvertisementItem, url: URL, file: StaticString = #file, line: UInt = #line) {
-        XCTAssertEqual(item.image, url, file: file, line: line)
     }
 
 }

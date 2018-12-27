@@ -32,7 +32,7 @@ final class FavoritesCollectionViewController: UICollectionViewController, Colle
 
         adjustCellSize(for: view.bounds.size, safeArea: collectionView.safeAreaInsets)
         configurator.configure(viewController: self)
-        
+
         guard let presenter = self.presenter else { assertionFailure(); return }
         presenter.displayFavorites()
     }
@@ -47,13 +47,14 @@ final class FavoritesCollectionViewController: UICollectionViewController, Colle
         guard let presenter = self.presenter else { assertionFailure(); return 0 }
         return presenter.itemsCount
     }
-    
+
     override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:ReuseIdentifier.propertyItem.rawValue, for: indexPath)
 
         guard let presenter = presenter, let itemCell = cell as? PropertyItemCellView else { assertionFailure(); return cell }
-        try? presenter.configure(item: itemCell, at: indexPath.item)
-        itemCell.favoriteButtonCallback = { [weak self] in self?.favoriteButtonDidTap(id: $0) }
+        guard let itemPresenter = try? presenter.itemPresenter(for: itemCell, at: indexPath.item) else { assertionFailure(); return itemCell }
+        itemCell.presenter = itemPresenter
+        itemPresenter.updateView()
 
         return itemCell
     }
@@ -95,15 +96,6 @@ extension FavoritesCollectionViewController {
     
     private func registerCells() {
         PropertyItemCellView.register(in: collectionView, with: ReuseIdentifier.propertyItem.rawValue)
-    }
-    
-    private func favoriteButtonDidTap(id: PropertyID) {
-        do {
-            guard let presenter = self.presenter else { assertionFailure(); return }
-            try presenter.unfavorite(with: id)
-        } catch {
-            collectionView.reloadData()
-        }
     }
     
 }

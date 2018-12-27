@@ -7,8 +7,6 @@ import UIKit
 protocol PropertiesListViewProtocol: class {
 
     func updateView()
-    func updateItem(at index: Int)
-    
     func displayLoadingError(_ message: String)
     
 }
@@ -77,14 +75,14 @@ final class PropertiesListCollectionViewController: UICollectionViewController, 
 
         let reuseIdentifier = ReuseIdentifier(itemType: itemType)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:reuseIdentifier.rawValue, for: indexPath)
-        
+
         switch itemType {
         case .property:
             configure(cell: cell, of: PropertyItemCellView.self, at: indexPath.item)
         case .advertisement:
             configure(cell: cell, of: AdvertisementItemCellView.self, at: indexPath.item)
         }
-        
+
         return cell
     }
 
@@ -100,11 +98,6 @@ extension PropertiesListCollectionViewController: PropertiesListViewProtocol {
     func updateView() {
         currentState = .data
         collectionView.reloadData()
-    }
-    
-    func updateItem(at index: Int) {
-        guard case .data = currentState else { return }
-        collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
     
     func displayLoadingError(_ message: String) {
@@ -136,25 +129,19 @@ extension PropertiesListCollectionViewController {
         
         return result
     }
-    
+
     private func configure<T>(cell: UICollectionViewCell, of type: T.Type, at index: Int) where T: PropertyItemCellView {
         guard let presenter = presenter, let cell = cell as? T else { assertionFailure(); return }
-        try? presenter.configure(item: cell, at: index)
-        cell.favoriteButtonCallback = { [weak self] in self?.favoriteButtonDidTap(id: $0) }
+        guard let itemPresenter = (try? presenter.itemPresenter(for: cell, at: index)) as? PropertyItemPresenterProtocol else { assertionFailure(); return }
+        cell.presenter = itemPresenter
+        itemPresenter.updateView()
     }
 
     private func configure<T>(cell: UICollectionViewCell, of type: T.Type, at index: Int) where T: AdvertisementItemCellView {
         guard let presenter = presenter, let cell = cell as? T else { assertionFailure(); return }
-        try? presenter.configure(item: cell, at: index)
-    }
-    
-    private func favoriteButtonDidTap(id: PropertyID) {
-        do {
-            guard let presenter = self.presenter else { assertionFailure(); return }
-            try presenter.toggleFavoriteState(with: id)
-        } catch {
-            collectionView.reloadData()
-        }
+        guard let itemPresenter = (try? presenter.itemPresenter(for: cell, at: index)) as? AdvertisementItemPresenterProtocol else { assertionFailure(); return }
+        cell.presenter = itemPresenter
+        itemPresenter.updateView()
     }
 
 }

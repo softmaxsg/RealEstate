@@ -4,20 +4,12 @@
 
 import Foundation
 
-enum FavoritesPresenterError: Error {
-    
-    case invalidID
-    
-}
-
 protocol FavoritesPresenterProtocol {
     
     func displayFavorites()
 
     var itemsCount: Int { get }
-    func configure<ViewType>(item itemView: ViewType, at index: Int) throws where ViewType: PropertyItemViewProtocol
-    
-    func unfavorite(with id: PropertyID) throws
+    func itemPresenter(for itemView: PropertyItemViewProtocol, at index: Int) throws -> PropertyItemPresenterProtocol
 
 }
 
@@ -25,16 +17,16 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
 
     private weak var view: FavoritesViewProtocol?
     private let favoritesGateway: FavoritesGatewayProtocol
-    private let priceFormatter: NumberFormatter
+    private let configurator: FavoritesConfiguratorProtocol
 
-    private var items: [PropertyItem] = []
+    private var favorites: [Property] = []
     
     init(view: FavoritesViewProtocol,
          favoritesGateway: FavoritesGatewayProtocol,
-         priceFormatter: NumberFormatter) {
+         configurator: FavoritesConfiguratorProtocol) {
         self.view = view
         self.favoritesGateway = favoritesGateway
-        self.priceFormatter = priceFormatter
+        self.configurator = configurator
         
         self.favoritesGateway.addDelegate(self)
     }
@@ -44,16 +36,11 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
         view?.updateView()
     }
     
-    var itemsCount: Int { return items.count }
+    var itemsCount: Int { return favorites.count }
     
-    func configure<ViewType>(item itemView: ViewType, at index: Int) throws where ViewType: PropertyItemViewProtocol {
-        let item = try items.item(at: index)
-        itemView.display(item: item)
-    }
-    
-    func unfavorite(with id: PropertyID) throws {
-        guard let _ = items.first(where: { $0.id == id }) else { throw FavoritesPresenterError.invalidID }
-        favoritesGateway.removeProperty(with: id)
+    func itemPresenter(for itemView: PropertyItemViewProtocol, at index: Int) throws -> PropertyItemPresenterProtocol {
+        let property = try favorites.item(at: index)
+        return configurator.presenter(for: property, in: itemView)
     }
 
 }
@@ -61,11 +48,11 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
 extension FavoritesPresenter {
     
     private func itemIndex(with propertyID: PropertyID) -> Int? {
-        return items.firstIndex { $0.id == propertyID }
+        return favorites.firstIndex { $0.id == propertyID }
     }
 
     private func updateFavorites() {
-        items = favoritesGateway.favorites.map { PropertyItem(property: $0, favorite: true, priceFormatter: priceFormatter) }
+        favorites = favoritesGateway.favorites
     }
 
 }

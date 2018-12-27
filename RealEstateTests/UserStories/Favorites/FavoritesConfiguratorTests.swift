@@ -14,4 +14,11 @@ final class FavoritesConfiguratorTests: XCTestCase {
         XCTAssertNotNil(viewController.presenter)
     }
     
+    // Basically this test just makes sure call does not crash
+    // because all passed parameters can not be tested on presenter due to protection level
+    func testItemPresenter() {
+        let configurator = FavoritesConfigurator()
+        _ = configurator.presenter(for: Property.random(), in: PropertyItemViewMock.empty)
+    }
+    
 }

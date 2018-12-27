@@ -4,9 +4,8 @@
 
 import Foundation
 
-enum PropertyListItemInfo {
+protocol PropertyListItemPresenterProtocol: class {
     
-    case property(Property)
-    case advertisement(URL)
+    func updateView()
     
 }

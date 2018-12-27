@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct AdvertisementItem: PropertyListItem {
+struct AdvertisementItem: PropertyListItemProtocol {
     
     let image: URL
     

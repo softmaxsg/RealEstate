@@ -6,20 +6,20 @@ import Foundation
 
 protocol AdvertisementsEmbedderProtocol {
 
-    func embed(_ advertisements: [AdvertisementItem], into properties: [PropertyItem]) -> [PropertyListItemInfo]
+    func embed(_ advertisements: [URL], into properties: [Property]) -> [PropertyListItemInfo]
     
 }
 
 final class AdvertisementsEmbedder: AdvertisementsEmbedderProtocol {
     
-    func embed(_ advertisements: [AdvertisementItem], into properties: [PropertyItem]) -> [PropertyListItemInfo] {
+    func embed(_ advertisements: [URL], into properties: [Property]) -> [PropertyListItemInfo] {
         var result: [PropertyListItemInfo] = []
         
         var currentAdIndex = advertisements.startIndex
         for (index, property) in properties.enumerated() {
             if index > 0 && index % 2 == 0 {
                 if currentAdIndex < advertisements.endIndex {
-                    result.append(PropertyListItemInfo(type: .advertisement, value: advertisements[currentAdIndex]))
+                    result.append(.advertisement(advertisements[currentAdIndex]))
                     
                     advertisements.formIndex(after: &currentAdIndex)
                     if currentAdIndex == advertisements.endIndex {
@@ -28,7 +28,7 @@ final class AdvertisementsEmbedder: AdvertisementsEmbedderProtocol {
                 }
             }
             
-            result.append(PropertyListItemInfo(type: .property, value: property))
+            result.append(.property(property))
         }
         
         return result

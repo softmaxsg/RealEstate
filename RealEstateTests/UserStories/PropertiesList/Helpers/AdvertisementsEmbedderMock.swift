@@ -7,7 +7,7 @@ import Foundation
 
 final class AdvertisementsEmbedderMock: AdvertisementsEmbedderProtocol {
 
-    typealias EmbedImpl = ([AdvertisementItem], [PropertyItem]) -> [PropertyListItemInfo]
+    typealias EmbedImpl = ([URL], [Property]) -> [PropertyListItemInfo]
     
     private let embedImpl: EmbedImpl
 
@@ -15,7 +15,7 @@ final class AdvertisementsEmbedderMock: AdvertisementsEmbedderProtocol {
         self.embedImpl = embedImpl
     }
 
-    func embed(_ advertisements: [AdvertisementItem], into properties: [PropertyItem]) -> [PropertyListItemInfo] {
+    func embed(_ advertisements: [URL], into properties: [Property]) -> [PropertyListItemInfo] {
         return embedImpl(advertisements, properties)
     }
     

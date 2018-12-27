@@ -5,7 +5,7 @@
 import XCTest
 @testable import RealEstate
 
-extension XCTest {
+extension XCTestCase {
     
     func mockedDecoder(expectedData: Data, result: Result<[Property]>, expectation: XCTestExpectation, file: StaticString = #file, line: UInt = #line) -> JSONDecoderProtocol {
         return JSONDecoderMock<PropertiesResponse> { data in

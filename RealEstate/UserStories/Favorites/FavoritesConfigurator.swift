@@ -4,14 +4,30 @@
 
 import UIKit
 
-final class FavoritesConfigurator {
+protocol FavoritesConfiguratorProtocol {
+    
+    func configure(viewController: FavoritesCollectionViewController)
+    func presenter(for property: Property, in itemView: PropertyItemViewProtocol) -> PropertyItemPresenterProtocol
+    
+}
+
+final class FavoritesConfigurator: FavoritesConfiguratorProtocol {
     
     func configure(viewController: FavoritesCollectionViewController) {
         viewController.presenter = FavoritesPresenter(
             view: viewController,
             favoritesGateway: DependencyContainer.shared.favoritesGateway,
+            configurator: self
+        )
+    }
+
+    func presenter(for property: Property, in itemView: PropertyItemViewProtocol) -> PropertyItemPresenterProtocol {
+        return PropertyItemPresenter(
+            view: itemView,
+            property: property,
+            favoritesGateway: DependencyContainer.shared.favoritesGateway,
             priceFormatter: DependencyContainer.shared.priceFormatter
         )
     }
-    
+
 }

@@ -5,9 +5,9 @@
 import Foundation
 
 enum PropertiesListPresenterError: Error {
-    
-    case invalidID
-    
+
+    case invalidViewType
+
 }
 
 protocol PropertiesListPresenterProtocol {
@@ -15,11 +15,9 @@ protocol PropertiesListPresenterProtocol {
     func displayProperties()
     
     var itemsCount: Int { get }
-    func itemType(at index: Int) throws -> ItemType
-
-    func configure<ViewType>(item: ViewType, at index: Int) throws where ViewType: PropertyListItemViewProtocol
     
-    func toggleFavoriteState(with id: PropertyID) throws
+    func itemType(at index: Int) throws -> ItemType
+    func itemPresenter(for itemView: PropertyListItemViewProtocol, at index: Int) throws -> PropertyListItemPresenterProtocol
 
 }
 
@@ -27,34 +25,27 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
     
     private weak var view: PropertiesListViewProtocol?
     private let propertiesGateway: PropertiesGatewayProtocol
-    private let favoritesGateway: FavoritesGatewayProtocol
     private let advertisementsGateway: AdvertisementsGatewayProtocol
     private let advertisementsEmbedder: AdvertisementsEmbedderProtocol
-    private let priceFormatter: NumberFormatter
+    private let configurator: PropertiesListConfiguratorProtocol
 
     private var advertisements: [URL] = [] { didSet { embedAdvertisements() } }
     private var properties: [Property] = [] { didSet { embedAdvertisements() } }
-    private var favorites = Set<PropertyID>()
     private var items: [PropertyListItemInfo] = []
 
     init(view: PropertiesListViewProtocol,
          propertiesGateway: PropertiesGatewayProtocol,
-         favoritesGateway: FavoritesGatewayProtocol,
          advertisementsGateway: AdvertisementsGatewayProtocol,
          advertisementsEmbedder: AdvertisementsEmbedderProtocol,
-         priceFormatter: NumberFormatter) {
+         configurator: PropertiesListConfiguratorProtocol) {
         self.view = view
         self.propertiesGateway = propertiesGateway
-        self.favoritesGateway = favoritesGateway
         self.advertisementsGateway = advertisementsGateway
         self.advertisementsEmbedder = advertisementsEmbedder
-        self.priceFormatter = priceFormatter
-        
-        self.favoritesGateway.addDelegate(self)
+        self.configurator = configurator
     }
     
     func displayProperties() {
-        updateFavorites()
         loadAdvertisements()
         loadProperties()
     }
@@ -62,37 +53,28 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
     var itemsCount: Int { return items.count }
 
     func itemType(at index: Int) throws -> ItemType {
-        return try items.item(at: index).type
+        let item = try items.item(at: index)
+        switch item {
+        case .property: return .property
+        case .advertisement: return .advertisement
+        }
     }
 
-    func configure<ViewType>(item itemView: ViewType, at index: Int) throws where ViewType: PropertyListItemViewProtocol {
-        guard let item = try items.item(at: index).value as? ViewType.ItemType else { assertionFailure("Unexpected view type passed"); return }
-        itemView.display(item: item)
-    }
-
-    func toggleFavoriteState(with id: PropertyID) throws {
-        guard let propertyItem = propertyItem(with: id) else { throw PropertiesListPresenterError.invalidID }
-        if propertyItem.isFavorite {
-            favoritesGateway.removeProperty(with: propertyItem.id)
-        } else {
-            guard let property = properties.first(where: { $0.id == propertyItem.id }) else { assertionFailure(); return }
-            favoritesGateway.addProperty(property)
+    func itemPresenter(for itemView: PropertyListItemViewProtocol, at index: Int) throws -> PropertyListItemPresenterProtocol {
+        let item = try items.item(at: index)
+        switch item {
+        case .property(let property):
+            guard let propertyItemView = itemView as? PropertyItemViewProtocol else { throw PropertiesListPresenterError.invalidViewType }
+            return configurator.presenter(for: property, in: propertyItemView)
+        case .advertisement(let imageURL):
+            guard let advertisementItemView = itemView as? AdvertisementItemViewProtocol else { throw PropertiesListPresenterError.invalidViewType }
+            return configurator.presenter(for: imageURL, in: advertisementItemView)
         }
     }
 
 }
 
 extension PropertiesListPresenter {
-    
-    private func itemIndex(with propertyID: PropertyID) -> Int? {
-        return items.firstIndex {
-            return ($0.value as? PropertyItem)?.id == propertyID
-        }
-    }
-    
-    private func propertyItem(with id: PropertyID) -> PropertyItem? {
-        return items.lazy.compactMap({ $0.value as? PropertyItem }).first(where: { $0.id == id })
-    }
     
     private func loadAdvertisements() {
         advertisementsGateway.loadAll { [weak self] result in
@@ -123,52 +105,14 @@ extension PropertiesListPresenter {
         }
     }
     
-    private func updateFavorites() {
-        favorites = Set(favoritesGateway.favorites.map { $0.id })
-    }
-
-    private func makePropertyItem(with property: Property) -> PropertyItem {
-        return PropertyItem(
-            property: property,
-            favorite: favorites.contains(property.id),
-            priceFormatter: priceFormatter
-        )
-    }
-    
     private func embedAdvertisements() {
         guard !(self.properties.isEmpty && self.items.isEmpty) else { return }
-        
-        let advertisements = self.advertisements.map(AdvertisementItem.init)
-        let properties = self.properties.map { makePropertyItem(with: $0) }
-        
         items = advertisementsEmbedder.embed(advertisements, into: properties)
         view?.updateView()
     }
     
     private func handleLoadingError(_ error: Error) {
         view?.displayLoadingError(error.localizedDescription)
-    }
-    
-}
-
-extension PropertiesListPresenter: FavoritesGatewayDelegate {
-    
-    func favoriteItemAdded(with id: PropertyID) {
-        favoriteStateDidUpdate(with: id)
-    }
-    
-    func favoriteItemRemoved(with id: PropertyID) {
-        favoriteStateDidUpdate(with: id)
-    }
-    
-    private func favoriteStateDidUpdate(with id: PropertyID) {
-        updateFavorites()
-        
-        guard let itemIndex = itemIndex(with: id) else { return }
-        guard let property = properties.first(where: { $0.id == id }) else { assertionFailure(); return }
-        
-        items[itemIndex] = PropertyListItemInfo(type: .property, value: makePropertyItem(with: property))
-        view?.updateItem(at: itemIndex)
     }
     
 }

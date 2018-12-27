@@ -14,6 +14,8 @@ final class AdvertisementItemCellView: UICollectionViewCell, ImageContainerView 
     
     private lazy var placeHolderImage = UIImage(named: "ImagePlaceholder")
     
+    var presenter: AdvertisementItemPresenterProtocol?
+    
     var imageLoader: ImageLoaderProtocol = DependencyContainer.shared.imageLoader
     var currentImageLoaderTask: Cancellable?
     

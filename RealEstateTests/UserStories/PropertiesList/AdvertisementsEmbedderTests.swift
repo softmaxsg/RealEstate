@@ -7,8 +7,8 @@ import XCTest
 
 final class AdvertisementsEmbedderTests: XCTestCase {
 
-    private let properties = Array(1...Int.random(in: 3...10)).map { _ in PropertyItem.random() }
-    private let advertisements = Array(1...Int.random(in: 1...10)).map { _ in AdvertisementItem.random() }
+    private let properties = Array(1...Int.random(in: 3...10)).map { _ in Property.random() }
+    private let advertisements = Array(1...Int.random(in: 1...10)).map { _ in URL(string: UUID().uuidString)! }
 
     func testCorrectAdvertisementsEmbedding() {
         let emberdder = AdvertisementsEmbedder()
@@ -17,17 +17,20 @@ final class AdvertisementsEmbedderTests: XCTestCase {
         var currentPropertyIndex = properties.startIndex
         var currentAdIndex = advertisements.startIndex
         for (index, item) in result.enumerated() {
-            if (index + 1) % 3 == 0 {
-                XCTAssertEqual(item.type, ItemType.advertisement, "Invalid item type at index \(index)")
-                XCTAssertEqual(item.value as? AdvertisementItem, advertisements[currentAdIndex])
+            let isAdvertisementIndex = (index + 1) % 3 == 0
+            switch item {
+            case .advertisement(let imageUrl):
+                XCTAssertTrue(isAdvertisementIndex, "Invalid item type at index \(index)")
+                XCTAssertEqual(imageUrl, advertisements[currentAdIndex])
                 
                 advertisements.formIndex(after: &currentAdIndex)
                 if currentAdIndex == advertisements.endIndex {
                     currentAdIndex = advertisements.startIndex
                 }
-            } else {
-                XCTAssertEqual(item.type, ItemType.property, "Invalid item type at index \(index)")
-                XCTAssertEqual(item.value as? PropertyItem, properties[currentPropertyIndex])
+
+            case .property(let property):
+                XCTAssertFalse(isAdvertisementIndex, "Invalid item type at index \(index)")
+                XCTAssertEqual(property, properties[currentPropertyIndex])
                 
                 properties.formIndex(after: &currentPropertyIndex)
             }
@@ -37,7 +40,12 @@ final class AdvertisementsEmbedderTests: XCTestCase {
     func testEmbeddingWithoutAdvertisements() {
         let emberdder = AdvertisementsEmbedder()
         let result = emberdder.embed([], into: properties)
-        let resultProperties = result.compactMap { $0.value as? PropertyItem }
+        let resultProperties: [Property] = result.compactMap {
+            switch $0 {
+            case .property(let property): return property
+            case .advertisement: return nil
+            }
+        }
         XCTAssertEqual(resultProperties, properties)
     }
     

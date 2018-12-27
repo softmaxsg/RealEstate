@@ -6,9 +6,6 @@ import UIKit
 
 protocol PropertyItemViewProtocol: PropertyListItemViewProtocol {
 
-    typealias Callback = (PropertyID) -> Void
-    
-    var favoriteButtonCallback: Callback? { get set }
     func display(item: PropertyItem)
     
 }
@@ -17,12 +14,10 @@ final class PropertyItemCellView: UICollectionViewCell, ImageContainerView {
     
     private lazy var placeHolderImage = UIImage(named: "ImagePlaceholder")
     
-    var favoriteButtonCallback: Callback?
+    var presenter: PropertyItemPresenterProtocol?
 
     var imageLoader: ImageLoaderProtocol = DependencyContainer.shared.imageLoader
     var currentImageLoaderTask: Cancellable?
-    
-    private var itemID: PropertyID?
     
     @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?
@@ -41,8 +36,7 @@ final class PropertyItemCellView: UICollectionViewCell, ImageContainerView {
     }
 
     @IBAction func favoriteButtonDidTap() {
-        guard let itemID = itemID else { assertionFailure(); return }
-        favoriteButtonCallback?(itemID)
+        presenter?.toggleFavoriteState()
     }
     
 }
@@ -55,7 +49,6 @@ extension PropertyItemCellView: PropertyItemViewProtocol {
         assert(priceLabel != nil)
         assert(favoriteButton != nil)
 
-        itemID = item.id
         titleLabel?.text = item.title
         addressLabel?.text = item.address
         priceLabel?.text = item.price
@@ -74,8 +67,6 @@ extension PropertyItemCellView {
     
     private func clear() {
         clearImageView()
-
-        itemID = nil
         titleLabel?.text = ""
         addressLabel?.text = ""
         priceLabel?.text = ""

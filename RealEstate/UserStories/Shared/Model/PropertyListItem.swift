@@ -4,4 +4,4 @@
 
 import Foundation
 
-protocol PropertyListItem { }
+protocol PropertyListItemProtocol { }

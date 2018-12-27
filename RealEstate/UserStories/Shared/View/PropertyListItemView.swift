@@ -4,10 +4,4 @@
 
 import Foundation
 
-protocol PropertyListItemViewProtocol {
-    
-    associatedtype ItemType: PropertyListItem
-    
-    func display(item: ItemType)
-    
-}
+protocol PropertyListItemViewProtocol: class { }

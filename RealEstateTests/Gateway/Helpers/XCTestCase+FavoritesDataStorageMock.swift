@@ -5,7 +5,7 @@
 import XCTest
 @testable import RealEstate
 
-extension XCTest {
+extension XCTestCase {
 
     func favoritesStorageMock(initial initialFavorites: [Property]? = nil,
                               expected expectedFavorites: [Property]? = nil,

@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct PropertyItem: PropertyListItem {
+struct PropertyItem: PropertyListItemProtocol {
     
     let id: PropertyID
     let isFavorite: Bool

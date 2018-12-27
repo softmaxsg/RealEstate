@@ -5,7 +5,7 @@
 import XCTest
 @testable import RealEstate
 
-extension XCTest {
+extension XCTestCase {
     
     func mockedSession(expectedURL: URL, resultStatusCode: Int, result: Result<Data>, expectation: XCTestExpectation, file: StaticString = #file, line: UInt = #line) -> URLSessionProtocol {
         return URLSessionMock { request, completion in
