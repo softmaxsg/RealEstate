@@ -6,7 +6,7 @@ import Foundation
 
 struct Property: Equatable {
     
-    let id: Int
+    let id: PropertyID
     let title: String
     let price: Decimal
     let location: Location
@@ -25,7 +25,7 @@ extension Property: Decodable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        id = try values.decode(Int.self, forKey: .id)
+        id = try values.decode(PropertyID.self, forKey: .id)
         title = try values.decode(String.self, forKey: .title)
         price = try values.decode(Decimal.self, forKey: .price)
         location = try values.decode(Location.self, forKey: .location)

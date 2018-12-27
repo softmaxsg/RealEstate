@@ -9,7 +9,7 @@ extension Property {
     
     static func random() -> Property {
         return Property(
-            id: Int.random(in: 1...Int.max),
+            id: PropertyID.random(in: 1...PropertyID.max),
             title: UUID().uuidString,
             price: Decimal(Int.random(in: 1...Int.max)),
             location: Location.random(),

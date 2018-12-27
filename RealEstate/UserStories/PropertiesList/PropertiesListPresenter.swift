@@ -19,7 +19,7 @@ protocol PropertiesListPresenterProtocol {
 
     func configure<ViewType>(item: ViewType, at index: Int) throws where ViewType: PropertyListItemViewProtocol
     
-    func toggleFavoriteState(with id: Int) throws
+    func toggleFavoriteState(with id: PropertyID) throws
 
 }
 
@@ -34,7 +34,7 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
 
     private var advertisements: [URL] = [] { didSet { embedAdvertisements() } }
     private var properties: [Property] = [] { didSet { embedAdvertisements() } }
-    private var favorites = Set<Int>()
+    private var favorites = Set<PropertyID>()
     private var items: [PropertyListItemInfo] = []
 
     init(view: PropertiesListViewProtocol,
@@ -70,7 +70,7 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
         itemView.display(item: item)
     }
 
-    func toggleFavoriteState(with id: Int) throws {
+    func toggleFavoriteState(with id: PropertyID) throws {
         guard let propertyItem = propertyItem(with: id) else { throw PropertiesListPresenterError.invalidID }
         if propertyItem.isFavorite {
             favoritesGateway.removeProperty(with: propertyItem.id)
@@ -84,13 +84,13 @@ final class PropertiesListPresenter: PropertiesListPresenterProtocol {
 
 extension PropertiesListPresenter {
     
-    private func itemIndex(with propertyID: Int) -> Int? {
+    private func itemIndex(with propertyID: PropertyID) -> Int? {
         return items.firstIndex {
             return ($0.value as? PropertyItem)?.id == propertyID
         }
     }
     
-    private func propertyItem(with id: Int) -> PropertyItem? {
+    private func propertyItem(with id: PropertyID) -> PropertyItem? {
         return items.lazy.compactMap({ $0.value as? PropertyItem }).first(where: { $0.id == id })
     }
     
@@ -153,15 +153,15 @@ extension PropertiesListPresenter {
 
 extension PropertiesListPresenter: FavoritesGatewayDelegate {
     
-    func favoriteItemAdded(with id: Int) {
+    func favoriteItemAdded(with id: PropertyID) {
         favoriteStateDidUpdate(with: id)
     }
     
-    func favoriteItemRemoved(with id: Int) {
+    func favoriteItemRemoved(with id: PropertyID) {
         favoriteStateDidUpdate(with: id)
     }
     
-    private func favoriteStateDidUpdate(with id: Int) {
+    private func favoriteStateDidUpdate(with id: PropertyID) {
         updateFavorites()
         
         guard let itemIndex = itemIndex(with: id) else { return }

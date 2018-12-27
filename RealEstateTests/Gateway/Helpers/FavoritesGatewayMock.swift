@@ -9,7 +9,7 @@ final class FavoritesGatewayMock: FavoritesGatewayProtocol {
     
     typealias GetFavoritesImpl = () -> [Property]
     typealias AddPropertyImpl = (Property) -> Void
-    typealias RemovePropertyImpl = (Int) -> Void
+    typealias RemovePropertyImpl = (PropertyID) -> Void
     typealias DelegateManagementImpl = (FavoritesGatewayDelegate) -> Void
 
     private let getFavoritesImpl: GetFavoritesImpl
@@ -36,7 +36,7 @@ final class FavoritesGatewayMock: FavoritesGatewayProtocol {
         addPropertyImpl(property)
     }
     
-    func removeProperty(with propertyID: Int) {
+    func removeProperty(with propertyID: PropertyID) {
         removePropertyImpl(propertyID)
     }
     

@@ -6,7 +6,7 @@ import UIKit
 
 protocol PropertyItemViewProtocol: PropertyListItemViewProtocol {
 
-    typealias Callback = (Int) -> Void
+    typealias Callback = (PropertyID) -> Void
     
     var favoriteButtonCallback: Callback? { get set }
     func display(item: PropertyItem)
@@ -22,7 +22,7 @@ final class PropertyItemCellView: UICollectionViewCell, ImageContainerView {
     var imageLoader: ImageLoaderProtocol = DependencyContainer.shared.imageLoader
     var currentImageLoaderTask: Cancellable?
     
-    private var itemID: Int?
+    private var itemID: PropertyID?
     
     @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?

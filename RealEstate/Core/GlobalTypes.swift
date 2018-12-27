@@ -4,10 +4,5 @@
 
 import Foundation
 
-struct Image: Equatable, Codable {
-    
-    let id: ImageID
-    let url: URL
-    
-}
-
+typealias PropertyID = Int
+typealias ImageID = Int

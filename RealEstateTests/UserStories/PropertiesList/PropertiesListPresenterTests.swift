@@ -150,7 +150,7 @@ final class PropertiesListPresenterTests: XCTestCase {
             advertisementsResult: .failure(MockError.some)
         )
         
-        XCTAssertThrowsError(try presenter.toggleFavoriteState(with: Int.random(in: 0...Int.max)), "Has to throw an error") { error in
+        XCTAssertThrowsError(try presenter.toggleFavoriteState(with: PropertyID.random(in: 0...PropertyID.max)), "Has to throw an error") { error in
             XCTAssertEqual(error as? PropertiesListPresenterError, PropertiesListPresenterError.invalidID)
         }
     }

@@ -148,7 +148,7 @@ extension PropertiesListCollectionViewController {
         try? presenter.configure(item: cell, at: index)
     }
     
-    private func favoriteButtonDidTap(id: Int) {
+    private func favoriteButtonDidTap(id: PropertyID) {
         do {
             guard let presenter = self.presenter else { assertionFailure(); return }
             try presenter.toggleFavoriteState(with: id)

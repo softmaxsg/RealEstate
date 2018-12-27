@@ -6,8 +6,8 @@ import Foundation
 
 protocol FavoritesGatewayDelegate: class {
     
-    func favoriteItemAdded(with id: Int)
-    func favoriteItemRemoved(with id: Int)
+    func favoriteItemAdded(with id: PropertyID)
+    func favoriteItemRemoved(with id: PropertyID)
 
 }
 
@@ -16,7 +16,7 @@ protocol FavoritesGatewayProtocol {
     var favorites: [Property] { get }
 
     func addProperty(_ property: Property)
-    func removeProperty(with propertyID: Int)
+    func removeProperty(with propertyID: PropertyID)
     
     func addDelegate(_ delegate: FavoritesGatewayDelegate)
     func removeDelegate(_ delegate: FavoritesGatewayDelegate)
@@ -47,7 +47,7 @@ final class FavoritesGateway: FavoritesGatewayProtocol {
         delegates.forEach { $0.delegate?.favoriteItemAdded(with: property.id) }
     }
     
-    func removeProperty(with propertyID: Int) {
+    func removeProperty(with propertyID: PropertyID) {
         guard let index = favorites.firstIndex(where: { $0.id == propertyID }) else { assertionFailure(); return }
         favorites.remove(at: index)
         dataStorage.saveAll(favorites)

@@ -97,7 +97,7 @@ extension FavoritesCollectionViewController {
         PropertyItemCellView.register(in: collectionView, with: ReuseIdentifier.propertyItem.rawValue)
     }
     
-    private func favoriteButtonDidTap(id: Int) {
+    private func favoriteButtonDidTap(id: PropertyID) {
         do {
             guard let presenter = self.presenter else { assertionFailure(); return }
             try presenter.unfavorite(with: id)

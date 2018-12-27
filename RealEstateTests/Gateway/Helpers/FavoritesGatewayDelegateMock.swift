@@ -7,7 +7,7 @@ import Foundation
 
 final class FavoritesGatewayDelegateMock: FavoritesGatewayDelegate {
 
-    typealias MethodImpl = (Int) -> Void
+    typealias MethodImpl = (PropertyID) -> Void
     
     private let itemAddedImpl: MethodImpl
     private let itemRemovedImpl: MethodImpl
@@ -18,11 +18,11 @@ final class FavoritesGatewayDelegateMock: FavoritesGatewayDelegate {
         self.itemRemovedImpl = itemRemovedImpl
     }
 
-    func favoriteItemAdded(with id: Int) {
+    func favoriteItemAdded(with id: PropertyID) {
         itemAddedImpl(id)
     }
     
-    func favoriteItemRemoved(with id: Int) {
+    func favoriteItemRemoved(with id: PropertyID) {
         itemRemovedImpl(id)
     }
     

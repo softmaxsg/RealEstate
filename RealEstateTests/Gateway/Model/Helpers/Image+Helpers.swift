@@ -9,7 +9,7 @@ extension Image {
     
     static func random() -> Image {
         return Image(
-            id: Int.random(in: 1...Int.max),
+            id: ImageID.random(in: 1...ImageID.max),
             url: URL(string: UUID().uuidString)!
         )
     }

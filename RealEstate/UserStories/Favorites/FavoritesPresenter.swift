@@ -17,7 +17,7 @@ protocol FavoritesPresenterProtocol {
     var itemsCount: Int { get }
     func configure<ViewType>(item itemView: ViewType, at index: Int) throws where ViewType: PropertyItemViewProtocol
     
-    func unfavorite(with id: Int) throws
+    func unfavorite(with id: PropertyID) throws
 
 }
 
@@ -51,7 +51,7 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
         itemView.display(item: item)
     }
     
-    func unfavorite(with id: Int) throws {
+    func unfavorite(with id: PropertyID) throws {
         guard let _ = items.first(where: { $0.id == id }) else { throw FavoritesPresenterError.invalidID }
         favoritesGateway.removeProperty(with: id)
     }
@@ -60,7 +60,7 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
 
 extension FavoritesPresenter {
     
-    private func itemIndex(with propertyID: Int) -> Int? {
+    private func itemIndex(with propertyID: PropertyID) -> Int? {
         return items.firstIndex { $0.id == propertyID }
     }
 
@@ -72,7 +72,7 @@ extension FavoritesPresenter {
 
 extension FavoritesPresenter: FavoritesGatewayDelegate {
     
-    func favoriteItemAdded(with id: Int) {
+    func favoriteItemAdded(with id: PropertyID) {
         updateFavorites()
         
         if let itemIndex = self.itemIndex(with: id) {
@@ -82,7 +82,7 @@ extension FavoritesPresenter: FavoritesGatewayDelegate {
         }
     }
     
-    func favoriteItemRemoved(with id: Int) {
+    func favoriteItemRemoved(with id: PropertyID) {
         let itemIndex = self.itemIndex(with: id)
         updateFavorites()
         
